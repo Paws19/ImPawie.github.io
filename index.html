@@ -1,215 +1,1156 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paw Portfolio</title>
+    <title>Paw</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Karla:wght@300;400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --bg-2: #111111;
+        --bg-3: #1a1a1a;
+        --surface: #1e1e1e;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(255, 255, 255, 0.18);
+        --text: #f0ede6;
+        --text-muted: #8a8680;
+        --text-dim: #4a4845;
+        --accent: #f0ede6;
+        --accent-inv: #0a0a0a;
+        --tag-bg: #1e1e1e;
+        --tag-text: #8a8680;
+        --btn-bg: #f0ede6;
+        --btn-text: #0a0a0a;
+        --btn-hover: #c8c4bd;
+        --card-bg: #111111;
+        --number-color: rgba(240, 237, 230, 0.06);
+        --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      }
+
+      [data-theme="light"] {
+        --bg: #f5f2eb;
+        --bg-2: #ede9e0;
+        --bg-3: #e5e0d6;
+        --surface: #ddd8cd;
+        --border: rgba(0, 0, 0, 0.08);
+        --border-strong: rgba(0, 0, 0, 0.18);
+        --text: #1a1816;
+        --text-muted: #6b6762;
+        --text-dim: #b0ada8;
+        --accent: #1a1816;
+        --accent-inv: #f5f2eb;
+        --tag-bg: #e0dbd0;
+        --tag-text: #6b6762;
+        --btn-bg: #1a1816;
+        --btn-text: #f5f2eb;
+        --btn-hover: #333028;
+        --card-bg: #ede9e0;
+        --number-color: rgba(26, 24, 22, 0.05);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        font-size: 16px;
+        line-height: 1.7;
+        transition:
+          background 0.4s ease,
+          color 0.4s ease;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: var(--grain);
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.5;
+      }
+
+      /* ---- CURSOR ---- */
+      body {
+        cursor: none;
+      }
+      #cursor {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--text);
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition:
+          transform 0.1s ease,
+          width 0.2s ease,
+          height 0.2s ease,
+          opacity 0.2s ease;
+        mix-blend-mode: difference;
+      }
+      #cursor-ring {
+        position: fixed;
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--text);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: all 0.15s ease;
+        opacity: 0.5;
+        mix-blend-mode: difference;
+      }
+
+      /* ---- LAYOUT ---- */
+      .container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ---- NAVBAR ---- */
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem 0 1.5rem;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: var(--bg);
+        z-index: 100;
+        transition: background 0.4s ease;
+      }
+
+      .logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 1.4rem;
+        letter-spacing: -0.02em;
+      }
+      .logo a {
+        text-decoration: none;
+        color: var(--text);
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 0.25rem;
+        align-items: center;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-family: "Space Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.4rem 0.75rem;
+        border: 1px solid transparent;
+        border-radius: 2rem;
+        transition: all 0.2s ease;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+        border-color: var(--border-strong);
+      }
+
+      .theme-toggle {
+        background: var(--surface);
+        border: 1px solid var(--border-strong);
+        color: var(--text-muted);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: none;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        margin-left: 0.75rem;
+      }
+      .theme-toggle:hover {
+        color: var(--text);
+        border-color: var(--border-strong);
+      }
+
+      /* ---- HERO ---- */
+      .hero {
+        padding: 7rem 0 5rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+      }
+
+      .hero::after {
+        content: "PAW";
+        position: absolute;
+        right: -2rem;
+        bottom: 2rem;
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(8rem, 18vw, 16rem);
+        color: var(--number-color);
+        line-height: 1;
+        pointer-events: none;
+        letter-spacing: -0.05em;
+        z-index: 0;
+      }
+
+      .hero-text {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: "Space Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        border: 1px solid var(--border-strong);
+        padding: 0.35rem 0.85rem;
+        border-radius: 2rem;
+        margin-bottom: 2rem;
+      }
+      .hero-badge::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #4ade80;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      .hero-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(3rem, 6vw, 5.5rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        margin-bottom: 1.5rem;
+      }
+      .hero-name em {
+        font-style: italic;
+        font-weight: 400;
+        font-family: "DM Sans", sans-serif;
+        color: var(--text-muted);
+        font-size: 0.65em;
+        display: block;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin-top: 0.3rem;
+      }
+
+      .hero-desc {
+        color: var(--text-muted);
+        font-size: 1rem;
+        max-width: 380px;
+        line-height: 1.7;
+        margin-bottom: 2.5rem;
+      }
+
+      .hero-ctas {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--btn-bg);
+        color: var(--btn-text);
+        text-decoration: none;
+        font-family: "Space Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+        cursor: none;
+      }
+      .btn-primary:hover {
+        background: var(--btn-hover);
+        transform: translateY(-1px);
+      }
+
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: transparent;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-family: "Space Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
+        border: 1px solid var(--border-strong);
+        transition: all 0.2s ease;
+        cursor: none;
+      }
+      .btn-ghost:hover {
+        color: var(--text);
+        border-color: var(--text);
+        transform: translateY(-1px);
+      }
+
+      /* ---- HERO IMAGE ---- */
+      .hero-image {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+      }
+
+      .image-wrapper {
+        position: relative;
+        width: 320px;
+        height: 380px;
+      }
+
+      .image-wrapper::before {
+        content: "";
+        position: absolute;
+        inset: -12px;
+        border: 1px solid var(--border-strong);
+        border-radius: 4px;
+        transform: rotate(2deg);
+        transition: transform 0.3s ease;
+      }
+      .image-wrapper:hover::before {
+        transform: rotate(0deg);
+      }
+
+      .image-wrapper::after {
+        content: "";
+        position: absolute;
+        inset: -24px;
+        border: 1px dashed var(--border);
+        border-radius: 6px;
+        transform: rotate(-1.5deg);
+        transition: transform 0.3s ease;
+      }
+      .image-wrapper:hover::after {
+        transform: rotate(0deg);
+      }
+
+      .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 2px;
+        filter: grayscale(100%) contrast(1.1);
+        display: block;
+        transition: filter 0.3s ease;
+      }
+      .image-wrapper:hover img {
+        filter: grayscale(80%) contrast(1.05);
+      }
+
+      .image-label {
+        position: absolute;
+        bottom: -2rem;
+        right: -1rem;
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--text-dim);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+      }
+
+      /* ---- STATS BAR ---- */
+      .stats-bar {
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 0;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 0.5rem;
+      }
+      .stat-num {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 1.8rem;
+        line-height: 1;
+        margin-bottom: 0.3rem;
+        letter-spacing: -0.03em;
+      }
+      .stat-label {
+        font-family: "Space Mono", monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* ---- SECTIONS ---- */
+      .section {
+        padding: 6rem 0;
+        border-bottom: 1px solid var(--border);
+        position: relative;
+      }
+
+      .section-tag {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .section-tag::after {
+        content: "";
+        flex: 1;
+        max-width: 40px;
+        height: 1px;
+        background: var(--border-strong);
+      }
+
+      .section-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        margin-bottom: 3rem;
+      }
+
+      .section-number {
+        position: absolute;
+        right: 0;
+        top: 4rem;
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(5rem, 12vw, 10rem);
+        color: var(--number-color);
+        line-height: 1;
+        pointer-events: none;
+        letter-spacing: -0.05em;
+      }
+
+      /* ---- ABOUT ---- */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+      }
+
+      .about-quote {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+        font-weight: 600;
+        line-height: 1.35;
+        letter-spacing: -0.02em;
+        color: var(--text);
+        margin-bottom: 1.5rem;
+      }
+
+      .about-body {
+        color: var(--text-muted);
+        line-height: 1.8;
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+      }
+
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .skill-chip {
+        font-family: "Space Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--tag-text);
+        background: var(--tag-bg);
+        border: 1px solid var(--border-strong);
+        padding: 0.4rem 0.85rem;
+        border-radius: 2rem;
+        transition: all 0.2s ease;
+      }
+      .skill-chip:hover {
+        color: var(--text);
+        border-color: var(--text);
+      }
+
+      .about-aside {
+        padding-top: 1rem;
+      }
+
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .info-label {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+      }
+      .info-value {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+
+      /* ---- PROJECTS ---- */
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .project-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        overflow: hidden;
+        transition:
+          border-color 0.2s ease,
+          transform 0.2s ease;
+        position: relative;
+      }
+      .project-card:hover {
+        border-color: var(--border-strong);
+        transform: translateY(-4px);
+      }
+
+      .project-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+        filter: grayscale(100%) contrast(1.1);
+        transition: filter 0.3s ease;
+      }
+      .project-card:hover .project-img {
+        filter: grayscale(60%) contrast(1.05);
+      }
+
+      .project-body {
+        padding: 1.5rem;
+      }
+
+      .project-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.75rem;
+      }
+
+      .project-status {
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.65rem;
+        border-radius: 2rem;
+        border: 1px solid;
+      }
+      .status-live {
+        color: #4ade80;
+        border-color: rgba(74, 222, 128, 0.3);
+        background: rgba(74, 222, 128, 0.07);
+      }
+      .status-dev {
+        color: var(--text-muted);
+        border-color: var(--border-strong);
+      }
+
+      .project-year {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--text-dim);
+        letter-spacing: 0.08em;
+      }
+
+      .project-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 1.2rem;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+      }
+
+      .project-desc {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+        line-height: 1.65;
+        margin-bottom: 1.25rem;
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: "Space Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        cursor: none;
+      }
+      .project-link:hover {
+        color: var(--text);
+      }
+      .project-link-disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      /* ---- RESUME ---- */
+      .resume-inner {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 3rem;
+        align-items: center;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 3rem;
+      }
+
+      .resume-headline {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(1.5rem, 3vw, 2.5rem);
+        letter-spacing: -0.03em;
+        margin-bottom: 0.75rem;
+      }
+
+      .resume-sub {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      /* ---- FOOTER ---- */
+      footer {
+        padding: 3rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 1.2rem;
+        letter-spacing: -0.02em;
+        color: var(--text);
+      }
+
+      .footer-copy {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 1rem;
+      }
+      .footer-links a {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--text);
+      }
+
+      /* ---- SCROLL BTN ---- */
+      #scrollBtn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 44px;
+        height: 44px;
+        background: var(--surface);
+        color: var(--text);
+        border: 1px solid var(--border-strong);
+        border-radius: 50%;
+        font-size: 1rem;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: none;
+        z-index: 200;
+        transition: all 0.2s ease;
+      }
+      #scrollBtn:hover {
+        background: var(--btn-bg);
+        color: var(--btn-text);
+      }
+      #scrollBtn.visible {
+        display: flex;
+      }
+
+      /* ---- ANIMATIONS ---- */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ---- RESPONSIVE ---- */
+      @media (max-width: 768px) {
+        .hero {
+          grid-template-columns: 1fr;
+          padding: 4rem 0 3rem;
+        }
+        .hero::after {
+          display: none;
+        }
+        .hero-image {
+          order: -1;
+        }
+        .image-wrapper {
+          width: 240px;
+          height: 280px;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+        .stats-bar {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .resume-inner {
+          grid-template-columns: 1fr;
+        }
+        footer {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+        .nav-links {
+          display: none;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- Decorative background elements -->
-    <div class="bg-decoration"></div>
-    <div class="bg-decoration-2"></div>
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
 
     <div class="container">
-      <!------NAVBAR -->
+      <!-- NAVBAR -->
       <nav class="navbar">
-        <h1 class="logo"><a href="#top">Paw</a></h1>
-        <ul class="nav-links">
-          <li>
-            <a href="#about-me" onclick="scrollToSection(event)">About</a>
-          </li>
-          <li>
-            <a href="#projects" onclick="scrollToSection(event)">Projects</a>
-          </li>
-          <li><a href="mailto:pagawpawjemoyacerenado@gmail.com">Contact</a></li>
-          <li><a href="#resume" onclick="scrollToSection(event)">Resume</a></li>
-        </ul>
+        <h1 class="logo"><a href="#top">Paw.</a></h1>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li>
+              <a href="mailto:pagawpawjemoyacerenado@gmail.com">Contact</a>
+            </li>
+            <li><a href="#resume">Resume</a></li>
+          </ul>
+          <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            ☽
+          </button>
+        </div>
       </nav>
 
-      <!------INTRODUCTION-->
-      <section class="introduction" id="top">
-        <div class="intro-content">
-          <div class="intro-text">
-            <h2 class="intro-greeting">Hello, I'm Paw!</h2>
-            <p class="intro-description">
-              Welcome to my portfolio website. Here you'll find information
-              about me and my projects.
-            </p>
-            <p class="intro-tagline">Feel free to explore and get in touch!</p>
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="hero-text fade-up">
+          <div class="hero-badge">Available for work</div>
+          <h1 class="hero-name">
+            Rogelio<br />Cerenado
+            <em> </em>
+          </h1>
+          <p class="hero-desc">
+            Building systems that connect people — from backend APIs to physical
+            network infrastructure across the Philippines.
+          </p>
+          <div class="hero-ctas">
             <a
               href="mailto:pagawpawjemoyacerenado@gmail.com"
-              class="contact-button"
+              class="btn-primary"
             >
-              Get In Touch
-              <span class="button-arrow">→</span> </a
-            ><br />
+              Get In Touch →
+            </a>
             <a
               href="https://www.linkedin.com/in/rogelio-jemoya-cerenado-019482262/"
-              class="linkedin-button"
+              class="btn-ghost"
               target="_blank"
               rel="noopener noreferrer"
             >
-              LinkedIn Profile
-              <span class="button-arrow">→</span>
+              LinkedIn ↗
             </a>
           </div>
+        </div>
+        <div class="hero-image fade-up" style="transition-delay: 0.15s">
+          <div class="image-wrapper">
+            <img src="paw_picture.png" alt="Rogelio Cerenado — Paw" />
+            <span class="image-label">Silang Cavite, PH · 2026</span>
+          </div>
+        </div>
+      </section>
 
-          <div class="paw-picture">
-            <div class="picture-frame">
-              <img src="paw_picture.png" alt="Paw's Picture" />
+      <!-- STATS -->
+      <!-- <div class="stats-bar fade-up">
+        <div class="stat-item">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Live Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">2+</div>
+          <div class="stat-label">Years Exp.</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Cables Crimped</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">PH</div>
+          <div class="stat-label">Based In</div>
+        </div>
+      </div> -->
+
+      <!-- ABOUT -->
+      <section class="section" id="about">
+        <div class="section-number">01</div>
+        <div class="section-tag">01 — Who I Am</div>
+        <h2 class="section-title fade-up">About<br />Me.</h2>
+        <div class="about-grid">
+          <div class="fade-up">
+            <p class="about-quote">
+              "You can't create a future you can't imagine." — Dan Harmon
+            </p>
+            <p class="about-body">
+              I'm Paw — a passionate backend developer, IT support specialist,
+              and network engineer. I love the physical side of tech just as
+              much as the digital: LAN crimping, router switching, building
+              infrastructure that just works.
+            </p>
+            <p class="about-body">
+              I use AI as a tool for continuous learning and development, always
+              seeking to expand my technical expertise and deliver meaningful
+              digital solutions across the Philippines.
+            </p>
+            <div class="skills-grid">
+              <span class="skill-chip">Backend Dev</span>
+              <span class="skill-chip">IT Support</span>
+              <span class="skill-chip">Networking</span>
+              <span class="skill-chip">LAN Setup</span>
+              <span class="skill-chip">Router Config</span>
+              <span class="skill-chip">Web Apps</span>
+            </div>
+          </div>
+          <div class="about-aside fade-up" style="transition-delay: 0.1s">
+            <div class="info-row">
+              <span class="info-label">Name</span>
+              <span class="info-value">Rogelio J. Cerenado Jr.</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Alias</span>
+              <span class="info-value">Paw</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Location</span>
+              <span class="info-value">Silang, Cavite</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Focus</span>
+              <span class="info-value">Backend + Networks</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Email</span>
+              <span class="info-value" style="font-size: 0.8rem"
+                >pagawpawjemoyacerenado<br />@gmail.com</span
+              >
+            </div>
+            <div class="info-row" style="border-bottom: none">
+              <span class="info-label">Status</span>
+              <span
+                class="info-value"
+                style="
+                  color: #4ade80;
+                  font-family: &quot;Space Mono&quot;, monospace;
+                  font-size: 0.75rem;
+                "
+                >● Open to work</span
+              >
             </div>
           </div>
         </div>
       </section>
 
-      <!------ABOUT ME -->
-      <section class="about-me" id="about-me">
-        <div class="section-header">
-          <span class="section-number">01</span>
-          <h2 class="section-title">Who Am I?</h2>
-        </div>
-        <div class="about-content">
-          <div class="about-text">
-            <p class="about-intro">
-              I am <strong>Rogelio J. Cerenado Jr.</strong> — a passionate
-              backend developer, IT support specialist, and network engineer.
-            </p>
-            <p class="about-details">
-              I love building solutions and solving problems. I enjoy LAN
-              crimping and router switching. Networking is truly my passion. I
-              use AI as a tool for continuous learning and development, always
-              seeking to expand my technical expertise.
-            </p>
-          </div>
-          <div class="about-skills">
-            <div class="skill-tag">Backend Development</div>
-            <div class="skill-tag">IT Support</div>
-            <div class="skill-tag">Network Engineering</div>
-            <div class="skill-tag">LAN Solutions</div>
-            <div class="skill-tag">Router Configuration</div>
-          </div>
-        </div>
-      </section>
-
-      <!------PROJECTS  -->
-      <section class="projects" id="projects">
-        <div class="section-header">
-          <span class="section-number">02</span>
-          <h2 class="section-title">My Projects</h2>
-        </div>
-        <div class="project-list">
-          <article class="project-card">
-            <div class="project-image">
-              <img src="landing_page.png" alt="Manggagawang Pinoy Project" />
-              <div class="project-overlay">
-                <span class="project-status">Live</span>
+      <!-- PROJECTS -->
+      <section class="section" id="projects">
+        <div class="section-number">02</div>
+        <div class="section-tag">02 — What I've Built</div>
+        <h2 class="section-title fade-up">My<br />Projects.</h2>
+        <div class="project-grid">
+          <article class="project-card fade-up">
+            <img
+              src="landing_page.png"
+              alt="Manggagawang Pinoy"
+              class="project-img"
+            />
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-status status-live">Live</span>
+                <span class="project-year">2025</span>
               </div>
-            </div>
-            <div class="project-info">
               <h3 class="project-title">Manggagawang Pinoy</h3>
-              <p class="project-description">
-                A web-based job-matching platform designed to help blue-collar
-                Filipino workers connect with employers, bridging opportunities
-                and talent across the Philippines.
+              <p class="project-desc">
+                A web-based job-matching platform connecting blue-collar
+                Filipino workers with employers across the Philippines.
               </p>
               <a
                 href="https://manggagawangpinoy.com/"
-                class="visit-button"
+                class="project-link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Visit Site
-                <span class="button-arrow">↗</span>
+                Visit Site ↗
               </a>
             </div>
           </article>
 
-          <article class="project-card">
-            <div class="project-image">
-              <img src="appointmentmda.png" alt="Appointment Booking Project" />
-              <div class="project-overlay">
-                <span class="project-status">Live</span>
+          <article class="project-card fade-up" style="transition-delay: 0.1s">
+            <img
+              src="appointmentmda.png"
+              alt="MDA Appointment"
+              class="project-img"
+            />
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-status status-live">Live</span>
+                <span class="project-year">2026</span>
               </div>
-            </div>
-            <div class="project-info">
-              <h3 class="project-title">MDA - Appointment Booking</h3>
-              <p class="project-description">
-                A web-based scheduling platform for Mater Dei Academy that
-                allows parents and staff to easily book and manage school
-                appointments online.
+              <h3 class="project-title">MDA Appointment Booking</h3>
+              <p class="project-desc">
+                A scheduling platform for Mater Dei Academy — parents and staff
+                can book and manage school appointments online.
               </p>
               <a
                 href="http://request-appointment-mda-ph.gt.tc/"
-                class="visit-button"
+                class="project-link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Visit Site
-                <span class="button-arrow">↗</span>
+                Visit Site ↗
               </a>
             </div>
           </article>
 
-          <article class="project-card">
-            <div class="project-image">
-              <img src="tamsakay.jpg" alt="Tamsakay Project" />
-              <div class="project-overlay">
-                <span class="project-status in-progress">In Development</span>
+          <article class="project-card fade-up" style="transition-delay: 0.2s">
+            <img src="tamsakay.jpg" alt="Tamsakay" class="project-img" />
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-status status-dev">In Dev</span>
+                <span class="project-year">2026</span>
               </div>
-            </div>
-            <div class="project-info">
               <h3 class="project-title">Tamsakay</h3>
-              <p class="project-description">
+              <p class="project-desc">
                 An innovative transportation solution connecting commuters with
-                reliable ride options, making daily travel more convenient and
-                accessible for everyone.
+                reliable rides, making daily travel more accessible for
+                everyone.
               </p>
-              <button class="visit-button" disabled>
-                Coming Soon
-                <span class="button-arrow">→</span>
-              </button>
+              <span class="project-link project-link-disabled"
+                >Coming Soon →</span
+              >
             </div>
           </article>
         </div>
       </section>
 
-      <!------RESUME SECTION  -->
-      <section class="resume-section" id="resume">
-        <div class="section-header">
-          <span class="section-number">03</span>
-          <h2 class="section-title">Resume</h2>
-        </div>
-        <div class="resume-content">
-          <p class="resume-text">
-            Interested in working together? Download my resume to learn more
-            about my experience and qualifications.
-          </p>
-          <a href="Paw's resume.pdf" download class="contact-button">
-            Download Resume
-            <span class="button-arrow">→</span>
+      <!-- RESUME -->
+      <section class="section" id="resume">
+        <div class="section-number">03</div>
+        <div class="section-tag">03 — Let's Work</div>
+        <h2 class="section-title fade-up">Resume.</h2>
+        <div class="resume-inner fade-up">
+          <div>
+            <p class="resume-headline">
+              Ready to build<br />something together?
+            </p>
+            <p class="resume-sub">
+              Download my resume to learn more about my experience, skills, and
+              qualifications.
+            </p>
+          </div>
+          <a href="Paw's resume.pdf" download class="btn-primary">
+            Download PDF →
           </a>
         </div>
       </section>
 
-      <!------FOOTER  -->
-      <footer class="footer">
-        <div class="footer-content">
-          <p class="footer-text">Designed & Built by Paw with passion</p>
-          <p class="footer-copyright">© 2026 Rogelio J. Cerenado Jr.</p>
+      <!-- FOOTER -->
+      <footer>
+        <span class="footer-logo">Paw.</span>
+        <div class="footer-links">
+          <a href="mailto:pagawpawjemoyacerenado@gmail.com">Email</a>
+          <a
+            href="https://www.linkedin.com/in/rogelio-jemoya-cerenado-019482262/"
+            target="_blank"
+            >LinkedIn</a
+          >
         </div>
+        <span class="footer-copy">© 2026 Rogelio J. Cerenado Jr.</span>
       </footer>
     </div>
 
-    <!----- Auto up scroll -->
-    <button onclick="topFunction()" id="scrollBtn" title="Go to top">↑</button>
+    <button
+      id="scrollBtn"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+      title="Back to top"
+    >
+      ↑
+    </button>
 
-    <script src="script.js"></script>
+    <script>
+      const cursor = document.getElementById("cursor");
+      const ring = document.getElementById("cursor-ring");
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+        setTimeout(() => {
+          ring.style.left = e.clientX + "px";
+          ring.style.top = e.clientY + "px";
+        }, 60);
+      });
+      document.querySelectorAll("a,button").forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          cursor.style.width = "16px";
+          cursor.style.height = "16px";
+          ring.style.width = "48px";
+          ring.style.height = "48px";
+          ring.style.opacity = "0.8";
+        });
+        el.addEventListener("mouseleave", () => {
+          cursor.style.width = "10px";
+          cursor.style.height = "10px";
+          ring.style.width = "36px";
+          ring.style.height = "36px";
+          ring.style.opacity = "0.5";
+        });
+      });
+
+      const toggle = document.getElementById("themeToggle");
+      const html = document.documentElement;
+      let dark = true;
+      toggle.addEventListener("click", () => {
+        dark = !dark;
+        html.setAttribute("data-theme", dark ? "dark" : "light");
+        toggle.textContent = dark ? "☽" : "☀";
+      });
+
+      const scrollBtn = document.getElementById("scrollBtn");
+      window.addEventListener("scroll", () => {
+        scrollBtn.classList.toggle("visible", window.scrollY > 400);
+      });
+
+      const fadeEls = document.querySelectorAll(".fade-up");
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              obs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      fadeEls.forEach((el) => obs.observe(el));
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          const id = a.getAttribute("href").slice(1);
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    </script>
   </body>
 </html>
