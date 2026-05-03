@@ -30,17 +30,24 @@
         --num-color: rgba(237, 234, 226, 0.04);
         --green: #4ade80;
         --green-bg: rgba(74, 222, 128, 0.08);
+        --amber: #fbbf24;
         --amber-bg: rgba(251, 191, 36, 0.08);
+        --blue: #60a5fa;
         --blue-bg: rgba(96, 165, 250, 0.08);
-        --r: 3px;
+        --purple: #a78bfa;
+        --purple-bg: rgba(167, 139, 250, 0.08);
+        --r: 4px;
         --line: 1px solid var(--border);
+        --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.5);
       }
       [data-theme="light"] {
         --bg: #f2efe8;
         --bg-2: #eae6dd;
         --surface: #d8d3c8;
         --border: rgba(0, 0, 0, 0.08);
-        --border-strong: rgba(0, 0, 0, 0.16);
+        --border-strong: rgba(0, 0, 0, 0.18);
         --text: #181614;
         --text-muted: #65615b;
         --text-dim: #aaa69f;
@@ -54,6 +61,10 @@
         --green-bg: rgba(22, 163, 74, 0.09);
         --amber-bg: rgba(180, 83, 9, 0.09);
         --blue-bg: rgba(37, 99, 235, 0.09);
+        --purple-bg: rgba(109, 40, 217, 0.07);
+        --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.12);
+        --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.16);
       }
 
       /* ==================== RESET ==================== */
@@ -141,15 +152,22 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1.5rem 0;
+        padding: 1.25rem 0;
         border-bottom: var(--line);
         position: sticky;
         top: 0;
         background: var(--bg);
         z-index: 500;
-        transition: background 0.4s;
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        transition:
+          background 0.4s,
+          box-shadow 0.3s;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+      .navbar.scrolled {
+        box-shadow:
+          0 1px 0 var(--border-strong),
+          0 8px 24px rgba(0, 0, 0, 0.12);
       }
       .logo {
         font-family: "Syne", sans-serif;
@@ -206,6 +224,7 @@
       }
       .nav-icon-btn:hover {
         color: var(--text);
+        border-color: var(--text);
       }
 
       /* ---- HAMBURGER ---- */
@@ -264,7 +283,6 @@
       .mobile-menu.open {
         transform: translateX(0);
       }
-
       .mobile-nav-list {
         list-style: none;
         padding: 1.5rem 2rem 1rem;
@@ -435,7 +453,7 @@
       .btn-primary:hover {
         background: var(--btn-hover);
         transform: translateY(-2px);
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        box-shadow: var(--shadow-md);
       }
       .btn-ghost {
         display: inline-flex;
@@ -518,37 +536,6 @@
         letter-spacing: 0.1em;
         text-transform: uppercase;
         writing-mode: vertical-rl;
-      }
-
-      /* ---- STATS BAR ---- */
-      .stats-bar {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        border-top: var(--line);
-        border-bottom: var(--line);
-      }
-      .stat-item {
-        padding: 1.35rem 1rem;
-        text-align: center;
-        border-right: var(--line);
-      }
-      .stat-item:last-child {
-        border-right: none;
-      }
-      .stat-num {
-        font-family: "Syne", sans-serif;
-        font-weight: 800;
-        font-size: 1.7rem;
-        line-height: 1;
-        letter-spacing: -0.04em;
-        margin-bottom: 0.2rem;
-      }
-      .stat-label {
-        font-family: "Space Mono", monospace;
-        font-size: 0.56rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--text-dim);
       }
 
       /* ==================== SECTIONS ==================== */
@@ -689,7 +676,7 @@
       .project-card:hover {
         border-color: var(--border-strong);
         transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        box-shadow: var(--shadow-md);
       }
       .project-img {
         width: 100%;
@@ -879,128 +866,386 @@
         line-height: 1.6;
       }
 
-      /* ==================== CERTIFICATIONS ==================== */
-      .cert-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 1.1rem;
-      }
-      .cert-card {
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: var(--r);
-        padding: 1.3rem;
+      /* ==================== CERTIFICATIONS — REDESIGNED ==================== */
+      .cert-section-header {
         display: flex;
-        flex-direction: column;
-        gap: 0.8rem;
-        transition:
-          border-color 0.22s,
-          transform 0.22s,
-          box-shadow 0.22s;
-        position: relative;
-        overflow: hidden;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 2.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
       }
-      .cert-card::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1.5px;
-        background: linear-gradient(90deg, var(--border-strong), transparent);
-        transition: background 0.3s;
-      }
-      .cert-card:hover {
-        border-color: var(--border-strong);
-        transform: translateY(-3px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-      }
-      .cert-card:hover::after {
-        background: linear-gradient(90deg, var(--text-muted), transparent 60%);
-      }
-      .cert-placeholder-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.28rem;
+      .cert-count-pill {
         font-family: "Space Mono", monospace;
-        font-size: 0.56rem;
+        font-size: 0.58rem;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--text-dim);
-        border: 1px dashed var(--border-strong);
-        padding: 0.15rem 0.5rem;
-        border-radius: 2rem;
-        width: fit-content;
-      }
-      .cert-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 8px;
-        background: var(--surface);
         border: 1px solid var(--border-strong);
+        padding: 0.28rem 0.7rem;
+        border-radius: 2rem;
+        margin-bottom: 0.25rem;
+      }
+
+      /* Grid layout for certs */
+      .cert-grid-new {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      /* Individual cert card */
+      .cert-card-new {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0;
+        overflow: hidden;
+        transition:
+          border-color 0.25s,
+          transform 0.25s,
+          box-shadow 0.25s;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+      .cert-card-new:hover {
+        border-color: var(--border-strong);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Accent stripe at top */
+      .cert-stripe {
+        height: 3px;
+        width: 100%;
+        flex-shrink: 0;
+      }
+      .cert-stripe.tesda {
+        background: linear-gradient(90deg, #fbbf24, #f59e0b);
+      }
+      .cert-stripe.cisco {
+        background: linear-gradient(90deg, #60a5fa, #3b82f6);
+      }
+      .cert-stripe.fit-1 {
+        background: linear-gradient(90deg, #a78bfa, #8b5cf6);
+      }
+      .cert-stripe.fit-2 {
+        background: linear-gradient(90deg, #34d399, #10b981);
+      }
+
+      .cert-card-inner {
+        padding: 1.4rem 1.4rem 1.2rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 0;
+      }
+
+      /* Header row: icon + issuer */
+      .cert-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+      .cert-icon-wrap {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.25rem;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+        border: 1px solid var(--border-strong);
+        background: var(--surface);
       }
-      .cert-issuer {
+      .cert-badge-status {
         font-family: "Space Mono", monospace;
-        font-size: 0.56rem;
+        font-size: 0.52rem;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: var(--text-dim);
-        margin-bottom: 0.16rem;
+        padding: 0.18rem 0.5rem;
+        border-radius: 2rem;
+        border: 1px solid rgba(74, 222, 128, 0.3);
+        color: var(--green);
+        background: var(--green-bg);
+        white-space: nowrap;
       }
-      .cert-name {
+
+      /* Cert name */
+      .cert-name-new {
         font-family: "Syne", sans-serif;
         font-weight: 700;
-        font-size: 0.92rem;
-        letter-spacing: -0.01em;
-        line-height: 1.3;
+        font-size: 1rem;
+        letter-spacing: -0.02em;
+        line-height: 1.28;
+        margin-bottom: 0.55rem;
+        color: var(--text);
       }
-      .cert-date {
+
+      /* Issuer label */
+      .cert-issuer-new {
+        font-family: "Space Mono", monospace;
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .cert-issuer-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--text-dim);
+        flex-shrink: 0;
+      }
+
+      /* Footer meta */
+      .cert-footer-new {
+        margin-top: auto;
+        padding-top: 0.85rem;
+        border-top: var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .cert-date-new {
         font-family: "Space Mono", monospace;
         font-size: 0.56rem;
         letter-spacing: 0.08em;
+        text-transform: uppercase;
         color: var(--text-dim);
-        margin-top: auto;
-        padding-top: 0.65rem;
-        border-top: var(--line);
       }
-      .cert-empty {
-        border: 1px dashed var(--border-strong);
-        border-radius: var(--r);
-        padding: 1.3rem;
+      .cert-id-new {
+        font-family: "Space Mono", monospace;
+        font-size: 0.52rem;
+        letter-spacing: 0.06em;
+        color: var(--text-dim);
+        opacity: 0.7;
+        max-width: 160px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      /* Image inside cert card (hidden behind, decorative) */
+      .cert-preview-strip {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 80px;
+        height: 80px;
+        opacity: 0.04;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .cert-preview-strip img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: grayscale(100%);
+      }
+
+      /* ==================== CERT MODAL ==================== */
+      /* Clickable hint on card */
+      .cert-card-new {
+        cursor: none;
+      }
+      .cert-view-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-family: "Space Mono", monospace;
+        font-size: 0.52rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-top: 0.6rem;
+        transition: color 0.2s;
+      }
+      .cert-card-new:hover .cert-view-hint {
+        color: var(--text-muted);
+      }
+      .cert-view-hint svg {
+        width: 10px;
+        height: 10px;
+        flex-shrink: 0;
+      }
+
+      /* Overlay backdrop */
+      #certModal {
+        position: fixed;
+        inset: 0;
+        z-index: 9000;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 0.45rem;
-        min-height: 150px;
-        opacity: 0.38;
-        transition: opacity 0.2s;
+        padding: 1.5rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.28s ease;
       }
-      .cert-empty:hover {
-        opacity: 0.65;
+      #certModal.open {
+        opacity: 1;
+        pointer-events: all;
       }
-      .cert-empty-icon {
-        width: 32px;
-        height: 32px;
-        border: 1px dashed var(--border-strong);
+      .cert-modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        cursor: none;
+      }
+      [data-theme="light"] .cert-modal-backdrop {
+        background: rgba(0, 0, 0, 0.6);
+      }
+
+      /* Modal box */
+      .cert-modal-box {
+        position: relative;
+        z-index: 1;
+        background: var(--card-bg);
+        border: 1px solid var(--border-strong);
+        border-radius: 8px;
+        max-width: 780px;
+        width: 100%;
+        max-height: 90vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--shadow-lg);
+        transform: translateY(18px) scale(0.97);
+        transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1);
+      }
+      #certModal.open .cert-modal-box {
+        transform: translateY(0) scale(1);
+      }
+
+      /* Modal header bar */
+      .cert-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.4rem;
+        border-bottom: var(--line);
+        flex-shrink: 0;
+      }
+      .cert-modal-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: -0.02em;
+      }
+      .cert-modal-meta {
+        font-family: "Space Mono", monospace;
+        font-size: 0.56rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-top: 0.18rem;
+      }
+      .cert-modal-close {
+        width: 34px;
+        height: 34px;
+        background: var(--surface);
+        border: 1px solid var(--border-strong);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.95rem;
-        color: var(--text-dim);
+        font-size: 1rem;
+        color: var(--text-muted);
+        cursor: none;
+        transition: all 0.18s;
+        flex-shrink: 0;
       }
-      .cert-empty-label {
+      .cert-modal-close:hover {
+        color: var(--text);
+        border-color: var(--text);
+      }
+
+      /* Image area */
+      .cert-modal-img-wrap {
+        flex: 1;
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.8rem;
+        background: var(--bg-2);
+        min-height: 300px;
+      }
+      .cert-modal-img-wrap img {
+        max-width: 100%;
+        max-height: 60vh;
+        object-fit: contain;
+        border-radius: 4px;
+        box-shadow: var(--shadow-md);
+        display: block;
+      }
+      .cert-modal-img-wrap .cert-modal-no-img {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+        color: var(--text-dim);
         font-family: "Space Mono", monospace;
-        font-size: 0.56rem;
+        font-size: 0.62rem;
         letter-spacing: 0.1em;
         text-transform: uppercase;
+      }
+      .cert-modal-no-img-icon {
+        font-size: 2.5rem;
+        opacity: 0.3;
+      }
+
+      /* Nav arrows inside modal */
+      .cert-modal-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.85rem 1.4rem;
+        border-top: var(--line);
+        flex-shrink: 0;
+      }
+      .cert-modal-arrow {
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        background: transparent;
+        border: 1px solid var(--border-strong);
+        padding: 0.4rem 0.9rem;
+        border-radius: 2rem;
+        cursor: none;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .cert-modal-arrow:hover {
+        color: var(--text);
+        border-color: var(--text);
+      }
+      .cert-modal-arrow:disabled {
+        opacity: 0.25;
+        pointer-events: none;
+      }
+      .cert-modal-counter {
+        font-family: "Space Mono", monospace;
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
         color: var(--text-dim);
-        text-align: center;
       }
 
       /* ==================== RESUME ==================== */
@@ -1114,19 +1359,6 @@
           grid-template-columns: 1fr;
           gap: 2.5rem;
         }
-        .stats-bar {
-          grid-template-columns: repeat(2, 1fr);
-        }
-        .stats-bar .stat-item:nth-child(2) {
-          border-right: none;
-        }
-        .stats-bar .stat-item:nth-child(3) {
-          border-top: var(--line);
-        }
-        .stats-bar .stat-item:nth-child(4) {
-          border-top: var(--line);
-          border-right: none;
-        }
         .resume-inner {
           grid-template-columns: 1fr;
         }
@@ -1136,6 +1368,7 @@
           text-align: center;
         }
       }
+
       @media (max-width: 768px) {
         .wrap {
           padding: 0 1.25rem;
@@ -1168,17 +1401,36 @@
         .ach-cols {
           grid-template-columns: 1fr;
         }
+        .cert-grid-new {
+          grid-template-columns: 1fr;
+        }
       }
+
       @media (max-width: 480px) {
         .hero-name {
           font-size: 2.6rem;
         }
-        .cert-grid {
-          grid-template-columns: 1fr;
-        }
         .project-grid {
           grid-template-columns: 1fr;
         }
+        .cert-grid-new {
+          grid-template-columns: 1fr;
+        }
+        .cert-name-new {
+          font-size: 0.92rem;
+        }
+      }
+
+      /* ==================== NAV PROGRESS ==================== */
+      .nav-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        background: var(--text-muted);
+        width: 0%;
+        transition: width 0.1s linear;
+        opacity: 0.4;
       }
     </style>
 
@@ -1193,7 +1445,7 @@
     <div id="cursor"></div>
     <div id="cursor-ring"></div>
 
-    <!-- ==================== MOBILE MENU ==================== -->
+    <!-- MOBILE MENU -->
     <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
       <ul class="mobile-nav-list">
         <li>
@@ -1239,8 +1491,8 @@
     </nav>
 
     <div class="wrap">
-      <!-- ==================== NAVBAR ==================== -->
-      <nav class="navbar">
+      <!-- NAVBAR -->
+      <nav class="navbar" id="navbar">
         <h1 class="logo"><a href="#top">Paw.</a></h1>
         <div class="nav-right">
           <ul class="nav-links">
@@ -1265,9 +1517,10 @@
             <span></span><span></span><span></span>
           </button>
         </div>
+        <div class="nav-progress" id="navProgress"></div>
       </nav>
 
-      <!-- ==================== HERO ==================== -->
+      <!-- HERO -->
       <section class="hero" id="top">
         <div class="hero-bg-word" aria-hidden="true">PAW</div>
         <div class="hero-text fade-up">
@@ -1275,8 +1528,7 @@
             <span class="badge-dot"></span>Available for work
           </div>
           <h1 class="hero-name">
-            Rogelio<br />
-            <span class="g">Cerenado</span>
+            Rogelio<br /><span class="g">Cerenado</span>
           </h1>
           <p class="hero-sub">IT Support · Networking · Web Dev</p>
           <p class="hero-desc">
@@ -1306,9 +1558,7 @@
         </div>
       </section>
 
-      <!-- STATS -->
-
-      <!-- ==================== ABOUT ==================== -->
+      <!-- ABOUT -->
       <section class="section" id="about">
         <div class="section-num" aria-hidden="true">01</div>
         <div class="section-tag">01 — Who I Am</div>
@@ -1376,8 +1626,8 @@
               >
             </div>
             <div class="info-row" style="border-bottom: none">
-              <span class="info-label">Status</span>
-              <span
+              <span class="info-label">Status</span
+              ><span
                 class="info-value"
                 style="
                   color: var(--green);
@@ -1391,7 +1641,7 @@
         </div>
       </section>
 
-      <!-- ==================== PROJECTS ==================== -->
+      <!-- PROJECTS -->
       <section class="section" id="projects">
         <div class="section-num" aria-hidden="true">02</div>
         <div class="section-tag">02 — What I've Built</div>
@@ -1489,7 +1739,7 @@
         </div>
       </section>
 
-      <!-- ==================== INTERNSHIP ==================== -->
+      <!-- INTERNSHIP -->
       <section class="section" id="internship">
         <div class="section-num" aria-hidden="true">03</div>
         <div class="section-tag">03 — Experience</div>
@@ -1608,47 +1858,190 @@
         </div>
       </section>
 
-      <!-- ==================== CERTIFICATIONS ==================== -->
-      <!-- <section class="section" id="certifications">
+      <!-- ==================== CERTIFICATIONS — REDESIGNED ==================== -->
+      <section class="section" id="certifications">
         <div class="section-num" aria-hidden="true">04</div>
         <div class="section-tag">04 — Credentials</div>
-        <h2 class="section-title fade-up">Certifi-<br />cations.</h2>
-        <div class="cert-grid">
-          <div class="cert-card fade-up">
-            <div class="cert-placeholder-pill">· · · Placeholder</div>
-            <div class="cert-icon">🏅</div>
-            <div>
-              <p class="cert-issuer">Issuing Organization</p>
-              <p class="cert-name">Certification Name Here</p>
+
+        <div class="cert-section-header">
+          <h2 class="section-title fade-up" style="margin-bottom: 0">
+            Certifi-<br />cations.
+          </h2>
+          <span class="cert-count-pill">4 credentials</span>
+        </div>
+
+        <div class="cert-grid-new">
+          <!-- TESDA -->
+          <div
+            class="cert-card-new fade-up"
+            data-cert-index="0"
+            role="button"
+            tabindex="0"
+            aria-label="View TESDA Visual Graphic Design certificate"
+          >
+            <div class="cert-stripe tesda"></div>
+            <div class="cert-card-inner">
+              <div class="cert-head">
+                <div class="cert-icon-wrap">🏅</div>
+                <span class="cert-badge-status">Certified</span>
+              </div>
+              <p class="cert-issuer-new">
+                <span class="cert-issuer-dot"></span>TESDA
+              </p>
+              <p class="cert-name-new">Visual Graphic Design</p>
+              <div class="cert-footer-new">
+                <span class="cert-date-new">December 2023</span>
+                <span class="cert-id-new">Credential ID: —</span>
+              </div>
+              <span class="cert-view-hint">
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <circle cx="8" cy="8" r="3" />
+                  <path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5z" />
+                </svg>
+                View certificate
+              </span>
             </div>
-            <p class="cert-date">Date Earned · Credential ID: —</p>
-          </div>
-          <div class="cert-card fade-up" style="transition-delay: 0.08s">
-            <div class="cert-placeholder-pill">· · · Placeholder</div>
-            <div class="cert-icon">🎓</div>
-            <div>
-              <p class="cert-issuer">Issuing Organization</p>
-              <p class="cert-name">Certification Name Here</p>
+            <div class="cert-preview-strip">
+              <img src="tesda_cert.png" alt="" aria-hidden="true" />
             </div>
-            <p class="cert-date">Date Earned · Credential ID: —</p>
           </div>
-          <div class="cert-card fade-up" style="transition-delay: 0.16s">
-            <div class="cert-placeholder-pill">· · · Placeholder</div>
-            <div class="cert-icon">📜</div>
-            <div>
-              <p class="cert-issuer">Issuing Organization</p>
-              <p class="cert-name">Certification Name Here</p>
+
+          <!-- Cisco -->
+          <div
+            class="cert-card-new fade-up"
+            style="transition-delay: 0.08s"
+            data-cert-index="1"
+            role="button"
+            tabindex="0"
+            aria-label="View Cisco Network Support and Security certificate"
+          >
+            <div class="cert-stripe cisco"></div>
+            <div class="cert-card-inner">
+              <div class="cert-head">
+                <div class="cert-icon-wrap">🎓</div>
+                <span class="cert-badge-status">Certified</span>
+              </div>
+              <p class="cert-issuer-new">
+                <span class="cert-issuer-dot"></span>Cisco Networking Academy
+              </p>
+              <p class="cert-name-new">Network Support and Security Course</p>
+              <div class="cert-footer-new">
+                <span class="cert-date-new">March 2026</span>
+                <span class="cert-id-new">Credential ID: —</span>
+              </div>
+              <span class="cert-view-hint">
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <circle cx="8" cy="8" r="3" />
+                  <path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5z" />
+                </svg>
+                View certificate
+              </span>
             </div>
-            <p class="cert-date">Date Earned · Credential ID: —</p>
+            <div class="cert-preview-strip">
+              <img src="cisco_1.png" alt="" aria-hidden="true" />
+            </div>
           </div>
-          <div class="cert-empty fade-up" style="transition-delay: 0.24s">
-            <div class="cert-empty-icon">+</div>
-            <p class="cert-empty-label">Add your next cert here</p>
+
+          <!-- FIT 1 -->
+          <div
+            class="cert-card-new fade-up"
+            style="transition-delay: 0.16s"
+            data-cert-index="2"
+            role="button"
+            tabindex="0"
+            aria-label="View Fit Academy Operations Management certificate"
+          >
+            <div class="cert-stripe fit-1"></div>
+            <div class="cert-card-inner">
+              <div class="cert-head">
+                <div class="cert-icon-wrap">📜</div>
+                <span class="cert-badge-status">Certified</span>
+              </div>
+              <p class="cert-issuer-new">
+                <span class="cert-issuer-dot"></span>Fit Academy
+              </p>
+              <p class="cert-name-new">
+                Smartbooks & Power BI — Operations Management with Analytics
+              </p>
+              <div class="cert-footer-new">
+                <span class="cert-date-new">June 2024</span>
+                <span class="cert-id-new">FIT-SM2025021111976</span>
+              </div>
+              <span class="cert-view-hint">
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <circle cx="8" cy="8" r="3" />
+                  <path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5z" />
+                </svg>
+                View certificate
+              </span>
+            </div>
+            <div class="cert-preview-strip">
+              <img src="cert_fit.png" alt="" aria-hidden="true" />
+            </div>
+          </div>
+
+          <!-- FIT 2 -->
+          <div
+            class="cert-card-new fade-up"
+            style="transition-delay: 0.24s"
+            data-cert-index="3"
+            role="button"
+            tabindex="0"
+            aria-label="View Fit Academy Accounting certificate"
+          >
+            <div class="cert-stripe fit-2"></div>
+            <div class="cert-card-inner">
+              <div class="cert-head">
+                <div class="cert-icon-wrap">📜</div>
+                <span class="cert-badge-status">Certified</span>
+              </div>
+              <p class="cert-issuer-new">
+                <span class="cert-issuer-dot"></span>Fit Academy
+              </p>
+              <p class="cert-name-new">
+                Smartbooks & Power BI — Fundamentals of Accounting with
+                Analytics
+              </p>
+              <div class="cert-footer-new">
+                <span class="cert-date-new">December 2024</span>
+                <span class="cert-id-new">FIT-SM2025021011904</span>
+              </div>
+              <span class="cert-view-hint">
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <circle cx="8" cy="8" r="3" />
+                  <path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5z" />
+                </svg>
+                View certificate
+              </span>
+            </div>
+            <div class="cert-preview-strip">
+              <img src="cert_fit_@.png" alt="" aria-hidden="true" />
+            </div>
           </div>
         </div>
-      </section> -->
+      </section>
 
-      <!-- ==================== RESUME ==================== -->
+      <!-- RESUME -->
       <section class="section" id="resume">
         <div class="section-num" aria-hidden="true">05</div>
         <div class="section-tag">05 — Let's Work</div>
@@ -1669,7 +2062,7 @@
         </div>
       </section>
 
-      <!-- ==================== FOOTER ==================== -->
+      <!-- FOOTER -->
       <footer>
         <span class="footer-logo">Paw.</span>
         <div class="footer-links">
@@ -1682,6 +2075,39 @@
         </div>
         <span class="footer-copy">© 2026 Rogelio J. Cerenado Jr.</span>
       </footer>
+    </div>
+
+    <!-- ==================== CERT MODAL ==================== -->
+    <div
+      id="certModal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Certificate viewer"
+    >
+      <div class="cert-modal-backdrop" id="certModalBackdrop"></div>
+      <div class="cert-modal-box">
+        <div class="cert-modal-header">
+          <div>
+            <p class="cert-modal-title" id="certModalTitle">Certificate</p>
+            <p class="cert-modal-meta" id="certModalMeta"></p>
+          </div>
+          <button
+            class="cert-modal-close"
+            id="certModalClose"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="cert-modal-img-wrap" id="certModalImgWrap">
+          <!-- image injected by JS -->
+        </div>
+        <div class="cert-modal-nav">
+          <button class="cert-modal-arrow" id="certModalPrev">← Prev</button>
+          <span class="cert-modal-counter" id="certModalCounter">1 / 4</span>
+          <button class="cert-modal-arrow" id="certModalNext">Next →</button>
+        </div>
+      </div>
     </div>
 
     <button
@@ -1737,7 +2163,6 @@
       const hbg = document.getElementById("hamburger");
       const menu = document.getElementById("mobileMenu");
       let open = false;
-
       function setMenu(state) {
         open = state;
         hbg.classList.toggle("open", state);
@@ -1747,17 +2172,23 @@
         hbg.setAttribute("aria-label", state ? "Close menu" : "Open menu");
         document.body.style.overflow = state ? "hidden" : "";
       }
-
       hbg.addEventListener("click", () => setMenu(!open));
       document
         .querySelectorAll(".m-link")
         .forEach((a) => a.addEventListener("click", () => setMenu(false)));
 
-      /* SCROLL BTN */
+      /* SCROLL BTN + NAVBAR SCROLL STATE + PROGRESS */
       const scrollBtn = document.getElementById("scrollBtn");
-      window.addEventListener("scroll", () =>
-        scrollBtn.classList.toggle("visible", scrollY > 400),
-      );
+      const navbar = document.getElementById("navbar");
+      const navProgress = document.getElementById("navProgress");
+      window.addEventListener("scroll", () => {
+        scrollBtn.classList.toggle("visible", scrollY > 400);
+        navbar.classList.toggle("scrolled", scrollY > 20);
+        // progress bar
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docH > 0 ? (scrollY / docH) * 100 : 0;
+        navProgress.style.width = pct + "%";
+      });
 
       /* FADE IN */
       const io = new IntersectionObserver(
@@ -1783,6 +2214,106 @@
             el.scrollIntoView({ behavior: "smooth" });
           }
         });
+      });
+      /* ==================== CERT MODAL ==================== */
+      const certs = [
+        {
+          title: "Visual Graphic Design",
+          meta: "TESDA · December 2023",
+          img: "tesda_cert.png",
+        },
+        {
+          title: "Network Support and Security Course",
+          meta: "Cisco Networking Academy · March 2026",
+          img: "cisco_1.png",
+        },
+        {
+          title: "Smartbooks & Power BI — Operations Management with Analytics",
+          meta: "Fit Academy · June 2024 · FIT-SM2025021111976",
+          img: "cert_fit.png",
+        },
+        {
+          title:
+            "Smartbooks & Power BI — Fundamentals of Accounting with Analytics",
+          meta: "Fit Academy · December 2024 · FIT-SM2025021011904",
+          img: "cert_fit_@.png",
+        },
+      ];
+
+      const modal = document.getElementById("certModal");
+      const backdrop = document.getElementById("certModalBackdrop");
+      const closeBtn = document.getElementById("certModalClose");
+      const imgWrap = document.getElementById("certModalImgWrap");
+      const modalTitle = document.getElementById("certModalTitle");
+      const modalMeta = document.getElementById("certModalMeta");
+      const modalPrev = document.getElementById("certModalPrev");
+      const modalNext = document.getElementById("certModalNext");
+      const modalCtr = document.getElementById("certModalCounter");
+
+      let currentIdx = 0;
+
+      function renderModal(idx) {
+        const c = certs[idx];
+        modalTitle.textContent = c.title;
+        modalMeta.textContent = c.meta;
+        modalCtr.textContent = `${idx + 1} / ${certs.length}`;
+        modalPrev.disabled = idx === 0;
+        modalNext.disabled = idx === certs.length - 1;
+        imgWrap.innerHTML = `<img src="${c.img}" alt="${c.title}" onerror="this.parentNode.innerHTML='<div class=\\'cert-modal-no-img\\'><div class=\\'cert-modal-no-img-icon\\'>🏅</div><span>Image not available</span></div>'" />`;
+      }
+
+      function openModal(idx) {
+        currentIdx = idx;
+        renderModal(idx);
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      // Card clicks
+      document
+        .querySelectorAll(".cert-card-new[data-cert-index]")
+        .forEach((card) => {
+          card.addEventListener("click", () =>
+            openModal(+card.dataset.certIndex),
+          );
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ")
+              openModal(+card.dataset.certIndex);
+          });
+        });
+
+      closeBtn.addEventListener("click", closeModal);
+      backdrop.addEventListener("click", closeModal);
+      modalPrev.addEventListener("click", () => {
+        if (currentIdx > 0) {
+          currentIdx--;
+          renderModal(currentIdx);
+        }
+      });
+      modalNext.addEventListener("click", () => {
+        if (currentIdx < certs.length - 1) {
+          currentIdx++;
+          renderModal(currentIdx);
+        }
+      });
+
+      // Keyboard nav
+      document.addEventListener("keydown", (e) => {
+        if (!modal.classList.contains("open")) return;
+        if (e.key === "Escape") closeModal();
+        if (e.key === "ArrowLeft" && currentIdx > 0) {
+          currentIdx--;
+          renderModal(currentIdx);
+        }
+        if (e.key === "ArrowRight" && currentIdx < certs.length - 1) {
+          currentIdx++;
+          renderModal(currentIdx);
+        }
       });
     </script>
   </body>
