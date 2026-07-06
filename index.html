@@ -142,6 +142,146 @@
       }
 
       /* ============================================
+         PAGE LOADER — interactive splash screen
+      ============================================ */
+      .page-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: var(--paper);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.6s ease,
+          visibility 0.6s ease;
+      }
+      .page-loader.hide {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .loader-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.55rem;
+        text-align: center;
+        padding: 2rem;
+      }
+      .loader-mark {
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        background: var(--matcha-wash);
+        border: 1px solid var(--matcha-pale);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 0.4rem;
+      }
+      .loader-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--matcha);
+        animation: loaderWave 1.2s ease-in-out infinite;
+      }
+      .loader-dot:nth-child(1) {
+        background: var(--matcha);
+        animation-delay: 0s;
+      }
+      .loader-dot:nth-child(2) {
+        background: var(--gold);
+        animation-delay: 0.15s;
+      }
+      .loader-dot:nth-child(3) {
+        background: var(--clay);
+        animation-delay: 0.3s;
+      }
+      @keyframes loaderWave {
+        0%,
+        60%,
+        100% {
+          transform: translateY(0) scale(1);
+          opacity: 0.55;
+        }
+        30% {
+          transform: translateY(-9px) scale(1.15);
+          opacity: 1;
+        }
+      }
+      .loader-name {
+        font-family: "Fraunces", serif;
+        font-weight: 700;
+        font-style: italic;
+        font-size: 1.7rem;
+        color: var(--ink);
+        letter-spacing: -0.01em;
+      }
+      .loader-tag {
+        font-family: "Inter", sans-serif;
+        font-size: 0.78rem;
+        color: var(--ink-muted);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+      .loader-bar {
+        width: 180px;
+        height: 3px;
+        background: var(--border-strong);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .loader-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--matcha);
+        border-radius: 3px;
+        transition: width 0.25s ease;
+      }
+      .loader-pct {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--ink-dim);
+        margin-top: 0.15rem;
+      }
+      .loader-enter {
+        margin-top: 0.7rem;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 0.82rem;
+        color: var(--btn-text);
+        background: var(--btn-bg);
+        border: none;
+        padding: 0.65rem 1.5rem;
+        border-radius: 2rem;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(6px);
+        pointer-events: none;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease,
+          background 0.2s;
+      }
+      .loader-enter.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+      }
+      .loader-enter:hover {
+        background: var(--btn-hover);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .loader-dot {
+          animation: none;
+          opacity: 0.85;
+        }
+      }
+
+      /* ============================================
          AMBIENT TEXTURE — soft floating leaf shapes
       ============================================ */
       .ambient-blob {
@@ -1703,6 +1843,23 @@
     </style>
   </head>
   <body>
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+      <div class="loader-inner">
+        <div class="loader-mark">
+          <span class="loader-dot"></span><span class="loader-dot"></span
+          ><span class="loader-dot"></span>
+        </div>
+        <p class="loader-name">&ensp;Paw</p>
+        <p class="loader-tag">IT Support · Networking · Web Dev</p>
+        <div class="loader-bar">
+          <div class="loader-bar-fill" id="loaderBarFill"></div>
+        </div>
+        <p class="loader-pct" id="loaderPct">0%</p>
+        <button class="loader-enter" id="loaderEnterBtn">Enter site →</button>
+      </div>
+    </div>
+
     <div class="ambient-blob blob-1" aria-hidden="true"></div>
     <div class="ambient-blob blob-2" aria-hidden="true"></div>
 
@@ -2345,13 +2502,13 @@
           </div>
           <div class="resume-ctas">
             <a
-              href="resume.pdf"
+              href="resume..pdf"
               target="_blank"
               rel="noopener noreferrer"
               class="btn-primary"
               >View resume →</a
             >
-            <a href="resume.pdf" download class="resume-download-link"
+            <a href="resume..pdf" download class="resume-download-link"
               >Download PDF</a
             >
           </div>
@@ -2414,6 +2571,43 @@
     </button>
 
     <script>
+      /* ===== PAGE LOADER ===== */
+      (function () {
+        document.body.style.overflow = "hidden";
+        window.scrollTo(0, 0);
+
+        const loader = document.getElementById("pageLoader");
+        const fill = document.getElementById("loaderBarFill");
+        const pct = document.getElementById("loaderPct");
+        const enterBtn = document.getElementById("loaderEnterBtn");
+        let progress = 0;
+        let ready = false;
+
+        const tick = setInterval(() => {
+          progress += Math.random() * 16 + 4;
+          if (progress >= 100) {
+            progress = 100;
+            clearInterval(tick);
+            ready = true;
+            enterBtn.classList.add("show");
+            // stays on screen until the user clicks "Enter site" — no auto-dismiss
+          }
+          fill.style.width = progress + "%";
+          pct.textContent = Math.round(progress) + "%";
+        }, 150);
+
+        function dismiss() {
+          loader.classList.add("hide");
+          document.body.style.overflow = "";
+          window.scrollTo({ top: 0, behavior: "auto" });
+          setTimeout(() => loader.remove(), 650);
+        }
+
+        // Only the "Enter site" button dismisses the loader — it waits
+        // here indefinitely if the user doesn't click it.
+        enterBtn.addEventListener("click", dismiss);
+      })();
+
       /* ===== THEME ===== */
       const allThemeBtns = document.querySelectorAll("[data-theme-btn]");
       function setTheme(t) {
@@ -2578,7 +2772,6 @@
           )
           .join("");
 
-        galTrack.querySelectorAll(".gallery-slide").forEach((el, i) => {});
         document
           .querySelectorAll("[data-dot]")
           .forEach((d) =>
@@ -2591,7 +2784,10 @@
           );
       }
 
-      function renderGallery() {
+      /* NOTE: `skipScroll` prevents the initial render from calling
+         scrollIntoView on the active thumbnail, which was the cause of
+         the page auto-jumping to the Gallery section on load. */
+      function renderGallery(skipScroll) {
         galTrack.style.transform = `translateX(-${galIndex * 100}%)`;
         galCounter.textContent = `${galIndex + 1} / ${galleryPhotos.length}`;
         document
@@ -2599,7 +2795,7 @@
           .forEach((d, i) => d.classList.toggle("active", i === galIndex));
         document.querySelectorAll("[data-thumb]").forEach((t, i) => {
           t.classList.toggle("active", i === galIndex);
-          if (i === galIndex)
+          if (i === galIndex && !skipScroll)
             t.scrollIntoView({
               behavior: "smooth",
               inline: "center",
@@ -2656,7 +2852,7 @@
       });
 
       buildGallery();
-      renderGallery();
+      renderGallery(true); // initial render — skip the auto-scroll-into-view
 
       /* ===== CERT MODAL ===== */
       const certs = [
