@@ -529,6 +529,12 @@
         position: relative;
         z-index: 1;
       }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
       .hero-badge {
         display: inline-flex;
         align-items: center;
@@ -541,7 +547,11 @@
         border: 1px solid var(--matcha-pale);
         padding: 0.4rem 1rem;
         border-radius: 2rem;
-        margin-bottom: 2rem;
+      }
+      .hero-badge.student {
+        color: var(--clay);
+        background: var(--clay-wash);
+        border-color: rgba(168, 100, 58, 0.22);
       }
       .badge-dot {
         width: 7px;
@@ -584,6 +594,7 @@
         display: flex;
         align-items: center;
         gap: 0.6rem;
+        flex-wrap: wrap;
       }
       .hero-sub-dot {
         color: var(--clay);
@@ -680,10 +691,27 @@
         box-shadow: var(--shadow-lg);
       }
       .blob-photo img {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transform: rotate(2deg);
+        transform: rotate(2deg) scale(1.01);
+        transition: opacity 0.35s ease;
+      }
+      .blob-photo .profile-gif {
+        opacity: 0;
+      }
+      .blob-frame:hover .profile-static,
+      .blob-frame.tap-active .profile-static {
+        opacity: 0;
+      }
+      .blob-frame:hover .profile-gif,
+      .blob-frame.tap-active .profile-gif {
+        opacity: 1;
+      }
+      .blob-frame {
+        cursor: pointer;
       }
       .img-label {
         position: absolute;
@@ -1761,16 +1789,19 @@
         }
         .hero {
           grid-template-columns: 1fr;
-          padding: 2.5rem 0 3.5rem;
-          gap: 3rem;
+          padding: 2.5rem 0 3rem;
+          gap: 2.25rem;
           min-height: auto;
         }
         .hero-image {
           order: -1;
         }
         .blob-frame {
-          width: 240px;
-          height: 290px;
+          width: 220px;
+          height: 264px;
+        }
+        .hero-desc {
+          max-width: none;
         }
         .nav-links,
         .nav-right .theme-group {
@@ -1780,10 +1811,16 @@
           display: flex;
         }
         .section {
-          padding: 3.5rem 0;
+          padding: 3rem 0;
+        }
+        .section-lede {
+          margin-bottom: 2.2rem;
         }
         .ach-cols {
           grid-template-columns: 1fr;
+        }
+        .ach-cols {
+          gap: 2rem;
         }
         .cert-grid-new {
           grid-template-columns: 1fr;
@@ -1801,10 +1838,28 @@
         .gallery-slide-caption {
           padding: 1.6rem 1.2rem 1.1rem;
         }
+        .hero-ctas {
+          width: 100%;
+        }
+        .hero-ctas a {
+          flex: 1 1 auto;
+          justify-content: center;
+        }
       }
       @media (max-width: 480px) {
         .hero-name {
-          font-size: 2.3rem;
+          font-size: 2.1rem;
+        }
+        .hero-badges {
+          gap: 0.4rem;
+        }
+        .hero-badge {
+          font-size: 0.72rem;
+          padding: 0.35rem 0.8rem;
+        }
+        .blob-frame {
+          width: 180px;
+          height: 216px;
         }
         .project-grid,
         .cert-grid-new {
@@ -1817,13 +1872,24 @@
           height: 40px;
         }
         .resume-inner {
-          padding: 2rem 1.5rem;
+          padding: 1.75rem 1.25rem;
+        }
+        .resume-ctas {
+          width: 100%;
+        }
+        .resume-ctas .btn-primary {
+          width: 100%;
+          justify-content: center;
         }
         .gallery-controls-bar {
           padding: 1rem;
         }
         .gallery-thumbs {
           padding: 1rem 1rem 1.2rem;
+        }
+        .gallery-thumb {
+          width: 62px;
+          height: 44px;
         }
         .info-row {
           flex-direction: column;
@@ -1839,6 +1905,24 @@
         .cert-id-new {
           max-width: 120px;
         }
+        .about-quote {
+          padding: 1.4rem 1.5rem;
+        }
+        .intern-duration {
+          padding-top: 0;
+        }
+      }
+      @media (max-width: 360px) {
+        .wrap {
+          padding: 0 1rem;
+        }
+        .hero-name {
+          font-size: 1.85rem;
+        }
+        .blob-frame {
+          width: 160px;
+          height: 192px;
+        }
       }
     </style>
   </head>
@@ -1851,7 +1935,7 @@
           ><span class="loader-dot"></span>
         </div>
         <p class="loader-name">&ensp;Paw</p>
-        <p class="loader-tag">IT Support · Networking · Web Dev</p>
+        <p class="loader-tag">IT Student · Support · Networking</p>
         <div class="loader-bar">
           <div class="loader-bar-fill" id="loaderBarFill"></div>
         </div>
@@ -1942,8 +2026,11 @@
       <!-- HERO -->
       <section class="hero" id="top">
         <div class="hero-text fade-up">
-          <div class="hero-badge">
-            <span class="badge-dot"></span>Available for work
+          <div class="hero-badges">
+            <div class="hero-badge">
+              <span class="badge-dot"></span>Available for work
+            </div>
+            <div class="hero-badge student">🎓 IT Student</div>
           </div>
           <h1 class="hero-name">
             Rogelio<br /><span class="accent">Cerenado</span>
@@ -1953,8 +2040,8 @@
             <span class="hero-sub-dot">·</span> Web Dev
           </p>
           <p class="hero-desc">
-            I build, troubleshoot, and maintain computer systems and networks
-            that just work — from the cable to the cloud.
+            IT student turning hands-on internship experience into real systems
+            — networks, tools, and websites that just work.
           </p>
           <div class="hero-ctas">
             <a
@@ -1975,7 +2062,18 @@
           <div class="blob-frame">
             <div class="blob-shape"></div>
             <div class="blob-photo">
-              <img src="gradpic2.png" alt="Rogelio Cerenado — Paw" />
+              <img
+                src="gradpic2.png"
+                alt="Rogelio Cerenado — Paw"
+                class="profile-static"
+              />
+              <img
+                src="hello.gif"
+                alt=""
+                class="profile-gif"
+                aria-hidden="true"
+                loading="lazy"
+              />
             </div>
             <span class="img-label">Silang, Cavite · PH</span>
           </div>
@@ -1993,20 +2091,14 @@
               your goal. — Monkey D. Luffy
             </p>
             <p class="about-body">
-              I'm Paw — an IT support specialist, IT associate, and aspiring
-              network engineer. My experience is hands-on: LAN cabling, router
-              and modem setup, system installation, and hardware
-              troubleshooting.
+              I'm Paw — an IT student and support specialist with a growing
+              track record: LAN cabling, router setup, system installs, and
+              hardware troubleshooting, all learned hands-on.
             </p>
             <p class="about-body">
-              I've set up computer systems for daily operations, configured
-              networks for stable connectivity, and kept devices running
-              smoothly. I also handle data encoding and records management.
-            </p>
-            <p class="about-body">
-              I'm passionate about building reliable systems, on and offline,
-              and I keep learning new technologies to solve real-world IT
-              problems.
+              Through my internship I've configured networks, deployed real web
+              systems, and kept records straight — building the kind of
+              reliability that doesn't wait for a diploma to matter.
             </p>
             <div class="skills-grid">
               <span class="skill-chip">IT Support</span>
@@ -2035,8 +2127,7 @@
             <div class="info-row">
               <span class="info-label">Focus</span
               ><span class="info-value"
-                >IT Support · Networking · Aspiring Data Analyst · Network
-                Engineer</span
+                >IT Student · Support &amp; Networking</span
               >
             </div>
             <div class="info-row">
@@ -2062,8 +2153,7 @@
         <span class="section-tag">What I've built</span>
         <h2 class="section-title fade-up">My<br /><em>projects.</em></h2>
         <p class="section-lede fade-up">
-          A mix of live tools used by real people, and a few still cooking in
-          development.
+          Live tools used by real people, plus a few still in progress.
         </p>
         <div class="project-grid">
           <article class="project-card fade-up">
@@ -2081,8 +2171,8 @@
               </div>
               <h3 class="project-title">Manggagawang Pinoy</h3>
               <p class="project-desc">
-                A job-matching platform connecting Filipino blue-collar workers
-                with employers nationwide.
+                Job-matching platform connecting Filipino blue-collar workers
+                with employers.
               </p>
               <a
                 href="https://manggagawangpinoy.com/"
@@ -2108,8 +2198,7 @@
               </div>
               <h3 class="project-title">MDA Appointment Booking</h3>
               <p class="project-desc">
-                A scheduling platform for Mater Dei Academy parents and staff to
-                book appointments online.
+                Online scheduling for Mater Dei Academy parents and staff.
               </p>
               <a
                 href="http://request-appointment-mda-ph.gt.tc/"
@@ -2135,8 +2224,8 @@
               </div>
               <h3 class="project-title">Inventory Management MDA</h3>
               <p class="project-desc">
-                A web-based inventory system for Mater Dei Academy staff to
-                track school assets and supplies.
+                Web-based inventory system for tracking school assets and
+                supplies.
               </p>
               <span class="project-link project-link-disabled"
                 >Coming soon →</span
@@ -2154,8 +2243,8 @@
               </div>
               <h3 class="project-title">Tamsakay</h3>
               <p class="project-desc">
-                A transportation platform connecting commuters with reliable,
-                accessible rides.
+                Transportation platform connecting commuters with reliable
+                rides.
               </p>
               <span class="project-link project-link-disabled"
                 >Coming soon →</span
@@ -2173,8 +2262,7 @@
               </div>
               <h3 class="project-title">StayHub Rental</h3>
               <p class="project-desc">
-                A rental management system for landlords to list properties and
-                tenants to search and apply.
+                Rental management system for landlords and tenants.
               </p>
               <span class="project-link project-link-disabled"
                 >Coming soon →</span
@@ -2211,8 +2299,8 @@
                 <div>
                   <p class="ach-title">LAN Cable Crimping &amp; Setup</p>
                   <p class="ach-desc">
-                    Crimped and terminated LAN cables using the T-568B standard
-                    across multiple rooms.
+                    Crimped and terminated LAN cables (T-568B) across multiple
+                    rooms.
                   </p>
                 </div>
               </li>
@@ -2221,8 +2309,8 @@
                 <div>
                   <p class="ach-title">Network Configuration</p>
                   <p class="ach-desc">
-                    Configured routers and modems for stable internet and
-                    resolved connectivity issues.
+                    Configured routers and modems for stable, reliable
+                    connectivity.
                   </p>
                 </div>
               </li>
@@ -2231,8 +2319,8 @@
                 <div>
                   <p class="ach-title">System Installation &amp; Setup</p>
                   <p class="ach-desc">
-                    Set up workstations, including OS installation, drivers, and
-                    software for daily use.
+                    Set up workstations — OS, drivers, and software for daily
+                    use.
                   </p>
                 </div>
               </li>
@@ -2241,8 +2329,8 @@
                 <div>
                   <p class="ach-title">Hardware Troubleshooting</p>
                   <p class="ach-desc">
-                    Diagnosed and fixed issues on printers, computers, and
-                    peripherals to reduce downtime.
+                    Diagnosed and fixed printer, PC, and peripheral issues to
+                    cut downtime.
                   </p>
                 </div>
               </li>
@@ -2251,8 +2339,8 @@
                 <div>
                   <p class="ach-title">Web Systems Deployment</p>
                   <p class="ach-desc">
-                    Built and deployed the school's appointment booking and
-                    inventory systems.
+                    Built and deployed the school's booking and inventory
+                    systems.
                   </p>
                 </div>
               </li>
@@ -2266,8 +2354,7 @@
                 <div>
                   <p class="ach-title">Data Encoding &amp; Records</p>
                   <p class="ach-desc">
-                    Encoded and organized school data, student records, and
-                    inventory logs.
+                    Encoded and organized student records and inventory logs.
                   </p>
                 </div>
               </li>
@@ -2276,8 +2363,8 @@
                 <div>
                   <p class="ach-title">System Organization</p>
                   <p class="ach-desc">
-                    Maintained file systems and records with consistent naming
-                    and data integrity.
+                    Maintained file systems with consistent naming and data
+                    integrity.
                   </p>
                 </div>
               </li>
@@ -2286,18 +2373,8 @@
                 <div>
                   <p class="ach-title">Documentation</p>
                   <p class="ach-desc">
-                    Documented troubleshooting steps, network configs, and
-                    equipment inventory.
-                  </p>
-                </div>
-              </li>
-              <li class="ach-item">
-                <div class="ach-ico admin">🤝</div>
-                <div>
-                  <p class="ach-title">Cross-Department Coordination</p>
-                  <p class="ach-desc">
-                    Coordinated with staff and teachers to schedule setups
-                    without disrupting classes.
+                    Documented troubleshooting steps, configs, and equipment
+                    inventory.
                   </p>
                 </div>
               </li>
@@ -2386,6 +2463,7 @@
               >
             </div>
           </div>
+
           <div
             class="cert-card-new fade-up"
             style="transition-delay: 0.08s"
@@ -2393,6 +2471,40 @@
             role="button"
             tabindex="0"
             aria-label="View Cisco certificate"
+          >
+            <div class="cert-card-inner">
+              <div class="cert-head">
+                <div class="cert-icon-wrap cisco">🎓</div>
+                <span class="cert-badge-status">Certified</span>
+              </div>
+              <p class="cert-issuer-new">TESDA</p>
+              <p class="cert-name-new">
+                Computer System Servicing NCII (Certificate for Competency)
+              </p>
+              <div class="cert-footer-new">
+                <span class="cert-date-new">March 2026</span
+                ><span class="cert-id-new">ID: —</span>
+              </div>
+              <span class="cert-view-hint"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <circle cx="8" cy="8" r="3" />
+                  <path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5z" /></svg
+                >View certificate</span
+              >
+            </div>
+          </div>
+          <div
+            class="cert-card-new fade-up"
+            style="transition-delay: 0.08s"
+            data-cert-index="1"
+            role="button"
+            tabindex="0"
+            aria-label="View TESDA certificate"
           >
             <div class="cert-card-inner">
               <div class="cert-head">
@@ -2496,10 +2608,9 @@
         <h2 class="section-title fade-up">Resume.</h2>
         <div class="resume-inner fade-up" style="margin-top: 2.4rem">
           <div>
-            <p class="resume-headline">Ready to build something together?</p>
+            <p class="resume-headline">Let's build something together.</p>
             <p class="resume-sub">
-              View my full experience, skills, and qualifications — or save a
-              copy for later.
+              Full experience, skills, and qualifications — one click away.
             </p>
           </div>
           <div class="resume-ctas">
@@ -2529,7 +2640,9 @@
             >LinkedIn</a
           >
         </div>
-        <span class="footer-copy">© 2026 Rogelio J. Cerenado Jr.</span>
+        <span class="footer-copy"
+          >© 2026 Rogelio J. Cerenado Jr. · Student portfolio</span
+        >
       </footer>
     </div>
 
@@ -2660,6 +2773,16 @@
         { threshold: 0.08 },
       );
       document.querySelectorAll(".fade-up").forEach((el) => io.observe(el));
+
+      /* ===== TAP-TO-TOGGLE GIF ON TOUCH DEVICES ===== */
+      /* Hover doesn't exist on phones, so a tap on the profile photo
+         toggles the gif the same way a hover does on desktop. */
+      const blobFrame = document.querySelector(".blob-frame");
+      if (blobFrame && window.matchMedia("(hover: none)").matches) {
+        blobFrame.addEventListener("click", () => {
+          blobFrame.classList.toggle("tap-active");
+        });
+      }
 
       /* ===== SMOOTH SCROLL ===== */
       document.querySelectorAll('a[href^="#"]').forEach((a) => {
@@ -2862,6 +2985,11 @@
           title: "Visual Graphic Design",
           meta: "TESDA · December 2023",
           img: "tesda_cert.png",
+        },
+        {
+          title: "Computer System Servicing NCII (Certificate for Competency)",
+          meta: "TESDA · December 2026",
+          img: "tesda2.png",
         },
         {
           title: "Network Support and Security Course",
