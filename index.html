@@ -1881,6 +1881,271 @@
         color: var(--matcha-deep);
         text-decoration-color: var(--matcha);
       }
+
+      /* ===== GITHUB SECTION ===== */
+      .gh-panel {
+        margin-top: 2.4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+      }
+      .gh-top-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 1.8rem 2rem;
+        box-shadow: var(--shadow-sm);
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 1.6rem;
+        align-items: center;
+      }
+      .gh-avatar-wrap {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid var(--border-strong);
+        flex-shrink: 0;
+        background: var(--surface-2);
+      }
+      .gh-avatar-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .gh-id {
+        min-width: 0;
+      }
+      .gh-name-row {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        flex-wrap: wrap;
+      }
+      .gh-name {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: 1.2rem;
+        letter-spacing: -0.01em;
+      }
+      .gh-handle {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.82rem;
+        color: var(--ink-dim);
+      }
+      .gh-bio {
+        color: var(--ink-muted);
+        font-size: 0.88rem;
+        margin-top: 0.35rem;
+        line-height: 1.6;
+        max-width: 480px;
+        overflow-wrap: anywhere;
+      }
+      .gh-stat-pills {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .gh-stat-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 0.76rem;
+        color: var(--ink-muted);
+        background: var(--surface);
+        border: 1px solid var(--border-strong);
+        padding: 0.32rem 0.8rem;
+        border-radius: 2rem;
+      }
+      .gh-stat-pill strong {
+        color: var(--ink);
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 600;
+      }
+      .gh-profile-cta {
+        flex-shrink: 0;
+      }
+      .gh-graph-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 1.6rem 1.8rem 1.8rem;
+        box-shadow: var(--shadow-sm);
+      }
+      .gh-graph-head,
+      .gh-repos-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.1rem;
+        flex-wrap: wrap;
+      }
+      .gh-graph-title {
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: var(--ink);
+      }
+      .gh-graph-sub {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.74rem;
+        color: var(--ink-dim);
+      }
+      .gh-graph-scroll {
+        overflow-x: auto;
+        padding-bottom: 0.3rem;
+        scrollbar-width: thin;
+        border-radius: 10px;
+      }
+      .gh-graph-scroll img {
+        min-width: 640px;
+        width: 100%;
+        display: block;
+        filter: saturate(1.05);
+      }
+      [data-theme="dark"] .gh-graph-scroll img {
+        filter: saturate(1.1) brightness(1.35);
+        opacity: 0.94;
+      }
+      .gh-repos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1rem;
+      }
+      .gh-repo-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--r-sm);
+        padding: 1.1rem 1.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+        transition:
+          border-color 0.2s,
+          transform 0.22s,
+          box-shadow 0.22s;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: var(--shadow-sm);
+      }
+      .gh-repo-card:hover {
+        border-color: var(--matcha);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+      }
+      .gh-repo-name-row {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+      .gh-repo-icon {
+        width: 15px;
+        height: 15px;
+        color: var(--matcha-deep);
+        flex-shrink: 0;
+      }
+      .gh-repo-name {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--matcha-deep);
+        overflow-wrap: anywhere;
+      }
+      .gh-repo-visibility {
+        font-family: "Inter", sans-serif;
+        font-size: 0.62rem;
+        font-weight: 600;
+        color: var(--ink-dim);
+        border: 1px solid var(--border-strong);
+        border-radius: 2rem;
+        padding: 0.05rem 0.5rem;
+        flex-shrink: 0;
+        margin-left: auto;
+      }
+      .gh-repo-desc {
+        font-size: 0.8rem;
+        color: var(--ink-muted);
+        line-height: 1.55;
+        flex: 1;
+        overflow-wrap: anywhere;
+      }
+      .gh-repo-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        flex-wrap: wrap;
+        font-family: "Inter", sans-serif;
+        font-size: 0.74rem;
+        color: var(--ink-dim);
+      }
+      .gh-repo-meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .gh-lang-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+      }
+      .gh-skeleton {
+        position: relative;
+        overflow: hidden;
+        background: var(--surface-2);
+        border-radius: 8px;
+      }
+      .gh-skeleton::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.35),
+          transparent
+        );
+        transform: translateX(-100%);
+        animation: ghShimmer 1.3s infinite;
+      }
+      [data-theme="dark"] .gh-skeleton::after {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.08),
+          transparent
+        );
+      }
+      @keyframes ghShimmer {
+        to {
+          transform: translateX(100%);
+        }
+      }
+      .gh-skel-line {
+        height: 0.8rem;
+        border-radius: 6px;
+      }
+      .gh-error-note {
+        color: var(--ink-dim);
+        font-size: 0.82rem;
+        font-family: "Inter", sans-serif;
+        padding: 0.5rem 0;
+      }
+      .gh-error-note a {
+        text-decoration: underline;
+        text-decoration-color: var(--matcha-pale);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .gh-skeleton::after {
+          animation: none;
+        }
+      }
       footer {
         padding: 2.8rem 0 3rem;
         display: flex;
@@ -2051,6 +2316,27 @@
           flex: 1 1 auto;
           justify-content: center;
         }
+        .gh-top-card {
+          grid-template-columns: 1fr;
+          text-align: left;
+          padding: 1.5rem 1.4rem;
+        }
+        .gh-profile-cta {
+          width: 100%;
+        }
+        .gh-profile-cta a {
+          width: 100%;
+          justify-content: center;
+        }
+        .gh-graph-card {
+          padding: 1.3rem 1.2rem 1.5rem;
+        }
+        .gh-repos-grid {
+          grid-template-columns: 1fr;
+        }
+        .gh-graph-scroll img {
+          min-width: 540px;
+        }
       }
       @media (max-width: 480px) {
         .hero-name {
@@ -2116,6 +2402,16 @@
         }
         .intern-duration {
           padding-top: 0;
+        }
+        .gh-avatar-wrap {
+          width: 60px;
+          height: 60px;
+        }
+        .gh-name {
+          font-size: 1.05rem;
+        }
+        .gh-graph-scroll img {
+          min-width: 460px;
         }
       }
       @media (max-width: 360px) {
@@ -2258,6 +2554,7 @@
         <li><a href="#about" class="m-link">About</a></li>
         <li><a href="#projects" class="m-link">Projects</a></li>
         <li><a href="#internship" class="m-link">Internship</a></li>
+        <li><a href="#github" class="m-link">GitHub</a></li>
         <li><a href="#gallery" class="m-link">Gallery</a></li>
         <li><a href="#certifications" class="m-link">Certs</a></li>
         <li><a href="#resume" class="m-link">Resume</a></li>
@@ -2274,6 +2571,12 @@
           target="_blank"
           rel="noopener noreferrer"
           >LinkedIn</a
+        >
+        <a
+          href="https://github.com/Paws19"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub</a
         >
         <a href="resume.pdf" target="_blank" rel="noopener noreferrer"
           >View Resume</a
@@ -2300,6 +2603,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#internship">Internship</a></li>
+            <li><a href="#github">GitHub</a></li>
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#certifications">Certs</a></li>
             <li>
@@ -2688,6 +2992,107 @@
 
       <div class="wrap"><div class="section-divider"></div></div>
 
+      <!-- GITHUB -->
+      <section class="section" id="github">
+        <span class="section-tag">🐙 On GitHub</span>
+        <h2 class="section-title fade-up">
+          Code &amp;<br /><em>contributions.</em>
+        </h2>
+        <p class="section-lede fade-up">
+          Live activity pulled straight from
+          <a
+            href="https://github.com/Paws19"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="
+              color: var(--matcha-deep);
+              font-weight: 600;
+              text-decoration: underline;
+              text-decoration-color: var(--matcha-pale);
+            "
+            >github.com/Paws19</a
+          >.
+        </p>
+
+        <div class="gh-panel">
+          <!-- profile card -->
+          <div class="gh-top-card fade-up" id="ghProfileCard">
+            <div class="gh-avatar-wrap">
+              <img
+                id="ghAvatar"
+                src="https://github.com/Paws19.png?size=160"
+                alt="Paws19 GitHub avatar"
+                loading="lazy"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="gh-id">
+              <div class="gh-name-row">
+                <span class="gh-name" id="ghName">Rogelio Cerenado</span>
+                <span class="gh-handle">@Paws19</span>
+              </div>
+              <p class="gh-bio" id="ghBio">
+                IT student building networks, support tools, and web systems —
+                one commit at a time.
+              </p>
+              <div class="gh-stat-pills" id="ghStatPills">
+                <span class="gh-stat-pill gh-skeleton"
+                  ><span class="gh-skel-line" style="width: 64px"></span
+                ></span>
+                <span class="gh-stat-pill gh-skeleton"
+                  ><span class="gh-skel-line" style="width: 64px"></span
+                ></span>
+                <span class="gh-stat-pill gh-skeleton"
+                  ><span class="gh-skel-line" style="width: 64px"></span
+                ></span>
+              </div>
+            </div>
+            <div class="gh-profile-cta">
+              <a
+                href="https://github.com/Paws19"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-ghost"
+                >View profile ↗</a
+              >
+            </div>
+          </div>
+
+          <!-- contribution graph -->
+          <div class="gh-graph-card fade-up" style="transition-delay: 0.06s">
+            <div class="gh-graph-head">
+              <span class="gh-graph-title">📅 Contribution activity</span>
+              <span class="gh-graph-sub">last 12 months</span>
+            </div>
+            <div class="gh-graph-scroll">
+              <img
+                id="ghGraphImg"
+                src="https://ghchart.rshah.org/55805a/Paws19"
+                alt="Paws19 GitHub contribution graph"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <!-- repos -->
+          <div class="gh-graph-card fade-up" style="transition-delay: 0.12s">
+            <div class="gh-repos-head">
+              <span class="gh-graph-title">📦 Recent repositories</span>
+              <span class="gh-graph-sub" id="ghReposSub"
+                >sorted by last updated</span
+              >
+            </div>
+            <div class="gh-repos-grid" id="ghReposGrid">
+              <div class="gh-repo-card gh-skeleton" style="height: 128px"></div>
+              <div class="gh-repo-card gh-skeleton" style="height: 128px"></div>
+              <div class="gh-repo-card gh-skeleton" style="height: 128px"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap"><div class="section-divider"></div></div>
+
       <!-- GALLERY -->
       <section class="section" id="gallery">
         <span class="section-tag">A look inside</span>
@@ -2942,6 +3347,12 @@
             rel="noopener noreferrer"
             >LinkedIn</a
           >
+          <a
+            href="https://github.com/Paws19"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
         </div>
         <span class="footer-copy"
           >© 2026 Rogelio J. Cerenado Jr. · Student portfolio</span
@@ -3079,6 +3490,132 @@
       );
       document.querySelectorAll(".fade-up").forEach((el) => io.observe(el));
 
+      /* ===== GITHUB LIVE DATA ===== */
+      (function () {
+        const GH_USER = "Paws19";
+        const nameEl = document.getElementById("ghName");
+        const bioEl = document.getElementById("ghBio");
+        const avatarEl = document.getElementById("ghAvatar");
+        const pillsEl = document.getElementById("ghStatPills");
+        const reposGrid = document.getElementById("ghReposGrid");
+        const reposSub = document.getElementById("ghReposSub");
+        if (!reposGrid) return; // section not present
+
+        const graphImg = document.getElementById("ghGraphImg");
+        if (graphImg) {
+          graphImg.addEventListener("error", () => {
+            const scroll = graphImg
+              .closest(".gh-graph-card")
+              .querySelector(".gh-graph-scroll");
+            scroll.innerHTML =
+              '<p class="gh-error-note">Contribution graph is unavailable right now — it will load next time.</p>';
+          });
+        }
+
+        const langColors = {
+          JavaScript: "#f1e05a",
+          TypeScript: "#3178c6",
+          Python: "#3572A5",
+          HTML: "#e34c26",
+          CSS: "#563d7c",
+          PHP: "#4F5D95",
+          Java: "#b07219",
+          "C++": "#f34b7d",
+          C: "#555555",
+          "C#": "#178600",
+          Shell: "#89e051",
+          Vue: "#41b883",
+          Go: "#00ADD8",
+          Ruby: "#701516",
+          Dart: "#00B4AB",
+          Kotlin: "#A97BFF",
+          Swift: "#F05138",
+          "Jupyter Notebook": "#DA5B0B",
+          Dockerfile: "#384d54",
+          EJS: "#a91e50",
+        };
+
+        function timeAgo(dateStr) {
+          const diff = Date.now() - new Date(dateStr).getTime();
+          const days = Math.floor(diff / 86400000);
+          if (days < 1) return "today";
+          if (days === 1) return "1 day ago";
+          if (days < 30) return days + " days ago";
+          const months = Math.floor(days / 30);
+          if (months < 12)
+            return months + (months === 1 ? " month ago" : " months ago");
+          const years = Math.floor(months / 12);
+          return years + (years === 1 ? " year ago" : " years ago");
+        }
+
+        function escapeHtml(str) {
+          const d = document.createElement("div");
+          d.textContent = str == null ? "" : str;
+          return d.innerHTML;
+        }
+
+        function repoCard(r) {
+          const lang = r.language;
+          const dotColor =
+            lang && langColors[lang] ? langColors[lang] : "var(--ink-dim)";
+          const desc = r.description
+            ? escapeHtml(r.description)
+            : "No description yet.";
+          return `
+          <a class="gh-repo-card" href="${r.html_url}" target="_blank" rel="noopener noreferrer">
+            <div class="gh-repo-name-row">
+              <svg class="gh-repo-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+              <span class="gh-repo-name">${escapeHtml(r.name)}</span>
+              <span class="gh-repo-visibility">${r.fork ? "Fork" : "Public"}</span>
+            </div>
+            <p class="gh-repo-desc">${desc}</p>
+            <div class="gh-repo-meta">
+              ${lang ? `<span><span class="gh-lang-dot" style="background:${dotColor}"></span>${escapeHtml(lang)}</span>` : ""}
+              <span>★ ${r.stargazers_count}</span>
+              <span>⑂ ${r.forks_count}</span>
+              <span>Updated ${timeAgo(r.pushed_at)}</span>
+            </div>
+          </a>`;
+        }
+
+        fetch(`https://api.github.com/users/${GH_USER}`)
+          .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+          .then((data) => {
+            if (data.name) nameEl.textContent = data.name;
+            if (data.bio) bioEl.textContent = data.bio;
+            if (data.avatar_url) avatarEl.src = data.avatar_url;
+            const bits = [
+              `<span class="gh-stat-pill"><strong>${data.public_repos ?? 0}</strong>&nbsp;repos</span>`,
+              `<span class="gh-stat-pill"><strong>${data.followers ?? 0}</strong>&nbsp;followers</span>`,
+              `<span class="gh-stat-pill"><strong>${data.following ?? 0}</strong>&nbsp;following</span>`,
+            ];
+            if (data.location)
+              bits.push(
+                `<span class="gh-stat-pill">📍 ${escapeHtml(data.location)}</span>`,
+              );
+            pillsEl.innerHTML = bits.join("");
+          })
+          .catch(() => {
+            pillsEl.innerHTML = `<span class="gh-stat-pill">Live stats unavailable — <a href="https://github.com/${GH_USER}" target="_blank" rel="noopener noreferrer" style="color:var(--matcha-deep);">view on GitHub ↗</a></span>`;
+          });
+
+        fetch(
+          `https://api.github.com/users/${GH_USER}/repos?sort=updated&per_page=6`,
+        )
+          .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+          .then((repos) => {
+            if (!Array.isArray(repos) || repos.length === 0) {
+              reposGrid.innerHTML = `<p class="gh-error-note">No public repositories yet — check back soon.</p>`;
+              return;
+            }
+            reposSub.textContent = `${repos.length} shown · sorted by last updated`;
+            reposGrid.innerHTML = repos.map(repoCard).join("");
+          })
+          .catch(() => {
+            reposGrid.innerHTML = `<p class="gh-error-note">Couldn't load live repos right now — <a href="https://github.com/${GH_USER}?tab=repositories" target="_blank" rel="noopener noreferrer" style="color:var(--matcha-deep); font-weight:600;">browse them on GitHub ↗</a></p>`;
+          });
+      })();
+
       /* ===== TAP-TO-TOGGLE GIF ON TOUCH DEVICES ===== */
       /* Hover doesn't exist on phones, so a tap on the profile photo
          toggles the gif the same way a hover does on desktop. */
@@ -3167,14 +3704,14 @@
         },
         {
           img: "2..jpg",
-          tag: "GRADUATION",
+          tag: "AWARD",
           title: "Parents",
         },
 
         {
           img: "grad.mp4",
           tag: "GRADUATION",
-          title: "Graduation day — full video",
+          title: "Graduation day — Short clip of the video",
         },
       ];
 
