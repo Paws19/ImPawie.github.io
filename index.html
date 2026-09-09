@@ -7,16 +7,16 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>
-      Rogelio "Paw" Cerenado — Freelance IT Support &amp; Web Systems
+      Rogelio "Paw" Cerenado — Fresh Graduate · Aspiring IT Support Specialist
     </title>
     <meta
       name="description"
-      content="Freelance IT support, networking, and Laravel web systems by Rogelio 'Paw' Cerenado, based in Silang, Cavite, Philippines."
+      content="Rogelio 'Paw' Cerenado — fresh graduate and aspiring IT Support Specialist, open to work and freelance. Networking, troubleshooting, and Laravel web systems. Based in Silang, Cavite, Philippines."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Sora:wght@600;700&display=swap"
       rel="stylesheet"
     />
     <script
@@ -117,8 +117,57 @@
         font-family: "JetBrains Mono", monospace;
       }
       .head {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      /* brand treatment for the word “Paw” — Outfit + soft accent gradient */
+      .paw-mark {
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        background: linear-gradient(
+          125deg,
+          var(--accent) 0%,
+          color-mix(in srgb, var(--accent) 65%, var(--accent-2)) 55%,
+          var(--accent-2) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+        position: relative;
+      }
+      .paw-mark::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0.05em;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--accent),
+          color-mix(in srgb, var(--accent) 40%, transparent)
+        );
+        border-radius: 2px;
+        opacity: 0.55;
+        transform: scaleX(0.92);
+        transform-origin: left center;
+      }
+      .nav-id-name .paw-mark::after {
+        display: none;
+      }
+      /* badge is a light paper surface — use solid accent for readability */
+      .badge-name .paw-mark {
+        background: none;
+        -webkit-background-clip: unset;
+        background-clip: unset;
+        color: var(--accent-dark);
+      }
+      .badge-name .paw-mark::after {
+        background: var(--accent-dark);
+        opacity: 0.35;
       }
 
       .grid-bg {
@@ -139,6 +188,61 @@
             transparent 1px
           );
         background-size: 34px 34px;
+      }
+
+      /* Floating paw prints background */
+      .paw-field {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .float-paw {
+        position: absolute;
+        color: var(--accent);
+        opacity: 0;
+        animation: floatPaw var(--dur, 14s) ease-in-out infinite;
+        animation-delay: var(--delay, 0s);
+        will-change: transform, opacity;
+      }
+      .float-paw svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(
+          0 0 6px color-mix(in srgb, var(--accent) 40%, transparent)
+        );
+      }
+      @keyframes floatPaw {
+        0% {
+          opacity: 0;
+          transform: translateY(20px) rotate(var(--rot, 0deg)) scale(0.6);
+        }
+        12% {
+          opacity: var(--op, 0.18);
+        }
+        50% {
+          opacity: var(--op, 0.22);
+          transform: translateY(-40vh) rotate(calc(var(--rot, 0deg) + 12deg))
+            scale(1);
+        }
+        88% {
+          opacity: var(--op, 0.12);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-85vh) rotate(calc(var(--rot, 0deg) + 28deg))
+            scale(0.75);
+        }
+      }
+      [data-theme="light"] .float-paw {
+        color: var(--accent-dark);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .float-paw {
+          animation: none;
+          opacity: 0;
+        }
       }
 
       .wrap {
@@ -220,13 +324,30 @@
         justify-content: center;
         color: var(--accent);
         flex-shrink: 0;
+        transition: transform 0.35s var(--ease);
+      }
+      .nav-id:hover .nav-id-chip {
+        transform: rotate(-8deg) scale(1.08);
+        animation: logoWiggle 0.6s ease;
+      }
+      @keyframes logoWiggle {
+        0%,
+        100% {
+          transform: rotate(-8deg) scale(1.08);
+        }
+        33% {
+          transform: rotate(6deg) scale(1.12);
+        }
+        66% {
+          transform: rotate(-4deg) scale(1.06);
+        }
       }
       .nav-id-chip svg {
         width: 100%;
         height: 100%;
       }
       .nav-id-name {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: 0.95rem;
       }
@@ -372,7 +493,7 @@
         transform: translateY(0);
       }
       .mobile-nav a {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: clamp(1.8rem, 9vw, 2.4rem);
         border-bottom: 1px solid var(--line-soft);
@@ -409,9 +530,10 @@
         border-radius: 50%;
         background: var(--go);
         box-shadow: 0 0 6px var(--go);
+        animation: statusPulse 2.2s ease-out infinite;
       }
       .hero-title {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: clamp(2.3rem, 5.4vw, 3.7rem);
         line-height: 1.08;
@@ -450,7 +572,12 @@
       }
       .btn-copper:hover {
         background: #c3dd8f;
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px
+          color-mix(in srgb, var(--accent) 35%, transparent);
+      }
+      .btn-copper:active {
+        transform: translateY(0);
       }
       .btn-line {
         display: inline-flex;
@@ -477,7 +604,7 @@
         flex-wrap: wrap;
       }
       .hero-stat-num {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: 1.5rem;
         color: var(--accent);
@@ -497,6 +624,392 @@
         flex-direction: column;
         align-items: center;
         perspective: 1400px;
+        position: relative;
+      }
+
+      /* dog “hello” bubble on profile hover */
+      .dog-hello {
+        position: absolute;
+        right: -10%;
+        top: 14%;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(14px) scale(0.8) rotate(-4deg);
+        transition:
+          opacity 0.4s var(--ease),
+          transform 0.45s var(--ease),
+          visibility 0.4s;
+      }
+      .badge-stage:hover .dog-hello,
+      .badge-stage:focus-within .dog-hello,
+      .dog-hello.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+      .dog-hello.show {
+        animation: dogHelloPop 0.5s var(--ease);
+      }
+      @keyframes dogHelloPop {
+        0% {
+          opacity: 0;
+          transform: translateY(18px) scale(0.5) rotate(-8deg);
+        }
+        55% {
+          opacity: 1;
+          transform: translateY(-6px) scale(1.12) rotate(3deg);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1) rotate(0deg);
+        }
+      }
+      /* celebration when user clicks the profile photo / dog */
+      .dog-hello.clicked .dog-hello-pup {
+        animation: dogClickCelebrate 0.9s cubic-bezier(0.34, 1.45, 0.64, 1);
+      }
+      .dog-hello.clicked .dog-hello-bubble {
+        animation: bubbleClickPop 0.75s var(--ease);
+      }
+      .dog-hello.clicked .dog-hello-pup .paw-wave {
+        animation: dogWaveFast 0.32s ease-in-out 5;
+      }
+      .dog-hello.clicked .dog-hello-pup .tail {
+        animation: dogTailFast 0.26s ease-in-out 6;
+      }
+      .dog-hello.clicked .sparkle {
+        animation: sparklePop 0.4s ease-in-out 3;
+      }
+      @keyframes dogClickCelebrate {
+        0% {
+          transform: translateY(0) scale(1) rotate(0deg);
+        }
+        20% {
+          transform: translateY(-20px) scale(1.22) rotate(-10deg);
+        }
+        45% {
+          transform: translateY(-2px) scale(1.05) rotate(8deg);
+        }
+        65% {
+          transform: translateY(-14px) scale(1.16) rotate(-5deg);
+        }
+        100% {
+          transform: translateY(0) scale(1) rotate(0deg);
+        }
+      }
+      @keyframes bubbleClickPop {
+        0% {
+          transform: scale(1);
+        }
+        35% {
+          transform: scale(1.2) translateY(-8px);
+        }
+        100% {
+          transform: scale(1) translateY(0);
+        }
+      }
+      @keyframes dogWaveFast {
+        0%,
+        100% {
+          transform: rotate(8deg);
+        }
+        50% {
+          transform: rotate(-50deg);
+        }
+      }
+      @keyframes dogTailFast {
+        0%,
+        100% {
+          transform: rotate(-25deg);
+        }
+        50% {
+          transform: rotate(40deg);
+        }
+      }
+      .badge-photo {
+        cursor: pointer;
+      }
+      .badge-photo::after {
+        content: "Tap for hello 🐶";
+        position: absolute;
+        left: 50%;
+        bottom: 8px;
+        transform: translateX(-50%);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.55rem;
+        letter-spacing: 0.04em;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.55);
+        padding: 0.25rem 0.5rem;
+        border-radius: 999px;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+        z-index: 5;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .badge-card:hover .badge-photo::after {
+        opacity: 1;
+      }
+
+      /* GIF popup when profile photo is clicked */
+      #dogGifModal {
+        position: fixed;
+        inset: 0;
+        z-index: 9500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      #dogGifModal.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .dog-gif-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.78);
+        backdrop-filter: blur(8px);
+        cursor: pointer;
+      }
+      .dog-gif-box {
+        position: relative;
+        z-index: 1;
+        background: var(--panel);
+        border: 1.5px solid var(--accent);
+        border-radius: 18px;
+        padding: 1.1rem 1.1rem 1.25rem;
+        max-width: 340px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+        transform: translateY(18px) scale(0.92);
+        transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+      }
+      #dogGifModal.open .dog-gif-box {
+        transform: translateY(0) scale(1);
+      }
+      .dog-gif-title {
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 800;
+        font-size: 1.05rem;
+        margin-bottom: 0.75rem;
+        color: var(--paper);
+      }
+      .dog-gif-title span {
+        color: var(--accent);
+      }
+      .dog-gif-frame {
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--bg-soft);
+        border: 1px solid var(--line);
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .dog-gif-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .dog-gif-caption {
+        margin-top: 0.75rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--faint);
+      }
+      .dog-gif-close {
+        position: absolute;
+        top: 0.6rem;
+        right: 0.6rem;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: var(--bg-soft);
+        color: var(--dim);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+      }
+      .dog-gif-close:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      .dog-hello-bubble {
+        background: var(--panel);
+        border: 1.5px solid var(--accent);
+        color: var(--paper);
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+        padding: 0.5rem 0.9rem;
+        border-radius: 16px 16px 16px 4px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        white-space: normal;
+        max-width: 200px;
+        text-align: center;
+        line-height: 1.35;
+        position: relative;
+        animation: bubbleBob 1.6s ease-in-out infinite;
+      }
+      .dog-hello-bubble::after {
+        content: "";
+        position: absolute;
+        left: 14px;
+        bottom: -7px;
+        width: 12px;
+        height: 12px;
+        background: var(--panel);
+        border-right: 1.5px solid var(--accent);
+        border-bottom: 1.5px solid var(--accent);
+        transform: rotate(45deg);
+      }
+      @keyframes bubbleBob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+      }
+      .dog-hello-pup {
+        width: 96px;
+        height: 96px;
+        filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.28));
+        animation: dogBounce 1.05s ease-in-out infinite;
+      }
+      .dog-hello-pup svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .dog-hello-pup .tail {
+        transform-origin: 78px 58px;
+        animation: dogTail 0.42s ease-in-out infinite;
+      }
+      .dog-hello-pup .paw-wave {
+        transform-origin: 18px 62px;
+        animation: dogWave 0.5s ease-in-out infinite;
+      }
+      .dog-hello-pup .ear-l {
+        transform-origin: 28px 22px;
+        animation: earWiggle 1.15s ease-in-out infinite;
+      }
+      .dog-hello-pup .ear-r {
+        transform-origin: 72px 22px;
+        animation: earWiggle 1.15s ease-in-out infinite 0.14s;
+      }
+      .dog-hello-pup .head-group {
+        transform-origin: 50px 38px;
+        animation: headTilt 1.8s ease-in-out infinite;
+      }
+      .dog-hello-pup .sparkle {
+        animation: sparklePop 1.4s ease-in-out infinite;
+      }
+      .dog-hello-pup .sparkle.s2 {
+        animation-delay: 0.35s;
+      }
+      @keyframes dogBounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-7px);
+        }
+      }
+      @keyframes headTilt {
+        0%,
+        100% {
+          transform: rotate(-2deg);
+        }
+        50% {
+          transform: rotate(3deg);
+        }
+      }
+      @keyframes dogTail {
+        0%,
+        100% {
+          transform: rotate(-25deg);
+        }
+        50% {
+          transform: rotate(32deg);
+        }
+      }
+      @keyframes dogWave {
+        0%,
+        100% {
+          transform: rotate(8deg);
+        }
+        50% {
+          transform: rotate(-42deg);
+        }
+      }
+      @keyframes earWiggle {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(-12deg);
+        }
+      }
+      @keyframes sparklePop {
+        0%,
+        100% {
+          opacity: 0.2;
+          transform: scale(0.7);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.15);
+        }
+      }
+      @media (max-width: 900px) {
+        .dog-hello {
+          right: auto;
+          left: 50%;
+          top: -6%;
+          transform: translate(-50%, 12px) scale(0.85);
+        }
+        .badge-stage:hover .dog-hello,
+        .badge-stage:focus-within .dog-hello,
+        .dog-hello.show {
+          transform: translate(-50%, 0) scale(1);
+        }
+        .dog-hello-pup {
+          width: 72px;
+          height: 72px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .dog-hello-bubble,
+        .dog-hello-pup,
+        .dog-hello-pup .tail,
+        .dog-hello-pup .paw-wave,
+        .dog-hello-pup .ear-l,
+        .dog-hello-pup .ear-r,
+        .dog-hello-pup .head-group,
+        .dog-hello-pup .sparkle,
+        .dog-hello.clicked .dog-hello-pup,
+        .dog-hello.clicked .dog-hello-bubble {
+          animation: none;
+        }
       }
       .badge-swing {
         transform-origin: top center;
@@ -512,80 +1025,172 @@
         }
       }
       .badge-clip {
-        width: 46px;
-        height: 20px;
-        background: linear-gradient(180deg, #cfd6d2, #8f9791);
-        border-radius: 6px 6px 3px 3px;
+        width: 52px;
+        height: 22px;
+        background: linear-gradient(180deg, #d4dbd6, #7a847e);
+        border-radius: 7px 7px 3px 3px;
         margin: 0 auto;
         position: relative;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+        box-shadow:
+          0 2px 8px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      }
+      .badge-clip::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 4px;
+        width: 18px;
+        height: 6px;
+        background: linear-gradient(180deg, #9aa39d, #5c6560);
+        border-radius: 2px;
+        transform: translateX(-50%);
       }
       .badge-clip::after {
         content: "";
         position: absolute;
         left: 50%;
-        top: 14px;
-        width: 6px;
-        height: 6px;
+        top: 15px;
+        width: 7px;
+        height: 7px;
         background: var(--bg);
         border-radius: 50%;
         transform: translateX(-50%);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
       }
       .badge-strap {
-        width: 3px;
-        height: 34px;
-        background: var(--line);
+        width: 4px;
+        height: 38px;
+        background: linear-gradient(90deg, #2a3424, #3d4a34, #2a3424);
         margin: 0 auto;
+        position: relative;
+        border-radius: 1px;
+      }
+      .badge-strap::before,
+      .badge-strap::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        border: 1.5px solid var(--accent);
+        border-radius: 50%;
+        transform: translateX(-50%);
+        opacity: 0.55;
+      }
+      .badge-strap::before {
+        top: 6px;
+      }
+      .badge-strap::after {
+        bottom: 4px;
       }
       .badge-card {
         position: relative;
-        width: min(280px, 78vw);
-        height: 400px;
+        width: min(300px, 82vw);
+        height: 430px;
         transform-style: preserve-3d;
-        transition: transform 0.7s var(--ease);
+        transition: transform 0.75s cubic-bezier(0.34, 1.25, 0.64, 1);
         cursor: pointer;
         display: block;
       }
       .badge-card.flipped {
         transform: rotateY(180deg);
       }
+      .badge-card:hover:not(.flipped) {
+        transform: rotateY(-6deg) rotateX(3deg) scale(1.02);
+      }
+      .badge-card.flipped:hover {
+        transform: rotateY(180deg) scale(1.02);
+      }
       .badge-face {
         position: absolute;
         inset: 0;
         backface-visibility: hidden;
-        border-radius: 12px;
-        background: #f2ede9;
+        border-radius: 14px;
+        background: linear-gradient(165deg, #f7f2ed 0%, #ebe4dc 100%);
         color: #170c10;
         overflow: hidden;
-        box-shadow: 0 22px 46px rgba(0, 0, 0, 0.45);
+        box-shadow:
+          0 24px 50px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(0, 0, 0, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
         display: flex;
         flex-direction: column;
+      }
+      .badge-face::before {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border: 1px solid rgba(95, 127, 52, 0.22);
+        border-radius: 10px;
+        pointer-events: none;
+        z-index: 2;
       }
       .badge-face::after {
         content: "";
         position: absolute;
         inset: 0;
         background: linear-gradient(
-          120deg,
-          rgba(255, 255, 255, 0.5),
-          transparent 45%
+          125deg,
+          rgba(255, 255, 255, 0.55),
+          transparent 42%,
+          transparent 58%,
+          rgba(159, 193, 87, 0.08)
         );
         pointer-events: none;
-        opacity: 0.5;
+        opacity: 0.7;
+        z-index: 1;
+      }
+      /* decorative corner paws on badge */
+      .badge-corner-paw {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        color: rgba(95, 127, 52, 0.28);
+        z-index: 3;
+        pointer-events: none;
+      }
+      .badge-corner-paw svg {
+        width: 100%;
+        height: 100%;
+      }
+      .badge-corner-paw.tl {
+        top: 14px;
+        left: 14px;
+      }
+      .badge-corner-paw.tr {
+        top: 14px;
+        right: 14px;
+        transform: scaleX(-1);
+      }
+      .badge-corner-paw.bl {
+        bottom: 14px;
+        left: 14px;
+        transform: scaleY(-1);
+      }
+      .badge-corner-paw.br {
+        bottom: 14px;
+        right: 14px;
+        transform: scale(-1);
       }
       .badge-front {
-        padding: 1.1rem 1.2rem 1.3rem;
+        padding: 1.25rem 1.3rem 1.4rem;
       }
       .badge-topline {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        position: relative;
+        z-index: 4;
       }
       .badge-org {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
-        font-size: 0.82rem;
+        font-size: 0.86rem;
         letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
       }
       .badge-org span {
         color: var(--accent-dark);
@@ -594,21 +1199,48 @@
         font-family: "JetBrains Mono", monospace;
         font-size: 0.62rem;
         color: #6b7a72;
+        background: rgba(95, 127, 52, 0.08);
+        padding: 0.2rem 0.45rem;
+        border-radius: 3px;
+        border: 1px solid rgba(95, 127, 52, 0.18);
       }
       .badge-photo {
-        margin-top: 0.9rem;
+        margin-top: 0.95rem;
         width: 100%;
-        aspect-ratio: 1/1.05;
-        border-radius: 8px;
-        background: #dfe6e0;
-        border: 1px solid #c8d0c9;
+        /* taller frame so face + body show (not face-only crop) */
+        aspect-ratio: 3 / 4;
+        border-radius: 10px;
+        background: linear-gradient(145deg, #d8e0d9, #c5cec7);
+        border: 2px solid #c0c9c1;
         overflow: hidden;
         position: relative;
+        z-index: 4;
+        box-shadow:
+          inset 0 2px 6px rgba(0, 0, 0, 0.08),
+          0 2px 0 rgba(255, 255, 255, 0.5);
+        min-height: 200px;
+        /* older Safari / Chrome fallback */
+        height: auto;
       }
       .badge-photo img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 140%;
+        height: 100%;
+        max-width: none;
+        /* show more of the body, not just a tight face crop */
         object-fit: cover;
+        object-position: center 18%;
+        display: block;
+        transition: transform 0.5s var(--ease);
+        image-rendering: auto;
+        -webkit-user-select: none;
+        user-select: none;
+        pointer-events: none;
+      }
+      .badge-card:hover .badge-photo img {
+        transform: scale(1.03);
       }
       .badge-photo .avatar-fallback {
         position: absolute;
@@ -617,63 +1249,139 @@
         align-items: center;
         justify-content: center;
         color: #8a958e;
+        background: linear-gradient(145deg, #d8e0d9, #c5cec7);
+      }
+      /* soft dog silhouette watermark over photo */
+      .badge-photo-dog {
+        position: absolute;
+        right: 6px;
+        bottom: 4px;
+        width: 38px;
+        height: 38px;
+        opacity: 0.22;
+        color: #2a3424;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .badge-photo-dog svg {
+        width: 100%;
+        height: 100%;
       }
       .badge-name {
-        margin-top: 0.85rem;
-        font-family: "Sora", sans-serif;
+        margin-top: 0.9rem;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
-        font-size: 1.12rem;
+        font-size: 1.14rem;
         line-height: 1.15;
+        position: relative;
+        z-index: 4;
       }
       .badge-role {
-        margin-top: 0.2rem;
+        margin-top: 0.22rem;
         font-family: "JetBrains Mono", monospace;
         font-size: 0.68rem;
         color: #556058;
         text-transform: uppercase;
         letter-spacing: 0.04em;
+        position: relative;
+        z-index: 4;
       }
       .badge-status {
-        margin-top: 0.7rem;
+        margin-top: 0.75rem;
         display: inline-flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.45rem;
         font-family: "JetBrains Mono", monospace;
         font-size: 0.62rem;
         font-weight: 700;
         color: #1c8a4e;
         text-transform: uppercase;
         letter-spacing: 0.04em;
+        background: rgba(28, 138, 78, 0.1);
+        padding: 0.3rem 0.65rem;
+        border-radius: 999px;
+        border: 1px solid rgba(28, 138, 78, 0.22);
+        position: relative;
+        z-index: 4;
       }
       .badge-status .go-dot {
-        width: 6px;
-        height: 6px;
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
         background: #1c8a4e;
+        box-shadow: 0 0 0 0 rgba(28, 138, 78, 0.5);
+        animation: statusPulse 2s ease-out infinite;
+      }
+      @keyframes statusPulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(28, 138, 78, 0.45);
+        }
+        70% {
+          box-shadow: 0 0 0 8px rgba(28, 138, 78, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(28, 138, 78, 0);
+        }
       }
       .badge-barcode {
         margin-top: auto;
-        padding-top: 0.9rem;
+        padding-top: 0.95rem;
         display: flex;
         align-items: flex-end;
         gap: 2px;
-        height: 30px;
+        height: 28px;
+        position: relative;
+        z-index: 4;
       }
       .badge-barcode span {
         display: inline-block;
         width: 2px;
         background: #3a4640;
+        border-radius: 1px;
+        animation: barWiggle 3.2s ease-in-out infinite;
+        animation-delay: calc(var(--i, 0) * 0.08s);
+      }
+      @keyframes barWiggle {
+        0%,
+        100% {
+          transform: scaleY(1);
+        }
+        50% {
+          transform: scaleY(0.85);
+        }
       }
       .badge-hint {
-        margin-top: 0.5rem;
+        margin-top: 0.55rem;
         font-family: "JetBrains Mono", monospace;
         font-size: 0.6rem;
         color: #8a958e;
         text-align: center;
+        position: relative;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+      }
+      .badge-hint .hint-paw {
+        width: 12px;
+        height: 12px;
+        color: var(--accent-dark);
+        opacity: 0.7;
+        animation: hintBounce 1.6s ease-in-out infinite;
+      }
+      @keyframes hintBounce {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(3px);
+        }
       }
       .badge-back {
         transform: rotateY(180deg);
-        padding: 1.3rem 1.3rem;
+        padding: 1.35rem 1.35rem;
         justify-content: space-between;
       }
       .badge-back-head {
@@ -683,6 +1391,15 @@
         letter-spacing: 0.04em;
         border-bottom: 1px dashed #c8d0c9;
         padding-bottom: 0.6rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .badge-back-head .head-paw {
+        width: 14px;
+        height: 14px;
+        color: var(--accent-dark);
+        opacity: 0.7;
       }
       .badge-back-list {
         list-style: none;
@@ -703,7 +1420,7 @@
         letter-spacing: 0.05em;
       }
       .badge-back-list .val {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 600;
         font-size: 0.9rem;
         overflow-wrap: anywhere;
@@ -712,7 +1429,7 @@
         color: var(--accent-dark);
       }
       .badge-stripe {
-        height: 34px;
+        height: 36px;
         background: repeating-linear-gradient(
           135deg,
           #2b2b2b,
@@ -720,16 +1437,49 @@
           #1c1c1c 4px,
           #1c1c1c 8px
         );
-        border-radius: 4px;
+        border-radius: 5px;
         margin-top: 0.9rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .badge-stripe::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(159, 193, 87, 0.15),
+          transparent
+        );
+        animation: stripeShine 4s ease-in-out infinite;
+      }
+      @keyframes stripeShine {
+        0%,
+        100% {
+          transform: translateX(-100%);
+        }
+        50% {
+          transform: translateX(100%);
+        }
       }
       .badge-signoff {
-        margin-top: 0.7rem;
-        font-family: "Sora", sans-serif;
+        margin-top: 0.75rem;
+        font-family: "Outfit", "Sora", sans-serif;
         font-style: italic;
         font-size: 0.78rem;
         color: #6b7a72;
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+      }
+      .badge-signoff .sign-paw {
+        width: 14px;
+        height: 14px;
+        color: var(--accent-dark);
+        opacity: 0.65;
       }
       @media (prefers-reduced-motion: reduce) {
         .badge-swing {
@@ -737,6 +1487,12 @@
         }
         .badge-card {
           transition: none;
+        }
+        .badge-status .go-dot,
+        .badge-barcode span,
+        .badge-hint .hint-paw,
+        .badge-stripe::after {
+          animation: none;
         }
       }
 
@@ -754,7 +1510,7 @@
         margin-bottom: clamp(2rem, 4vw, 3rem);
       }
       .sec-title {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: clamp(1.7rem, 3.6vw, 2.4rem);
       }
@@ -774,6 +1530,39 @@
       .service-card {
         background: var(--bg);
         padding: 1.8rem 1.6rem;
+        transition:
+          transform 0.35s var(--ease),
+          background-color 0.25s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .service-card::after {
+        content: "";
+        position: absolute;
+        right: -8px;
+        bottom: -10px;
+        width: 56px;
+        height: 56px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239fc157'%3E%3Cellipse cx='12' cy='16.2' rx='6.1' ry='4.9'/%3E%3Ccircle cx='5.1' cy='8.6' r='2.35'/%3E%3Ccircle cx='9.7' cy='4.6' r='2.05'/%3E%3Ccircle cx='14.3' cy='4.6' r='2.05'/%3E%3Ccircle cx='18.9' cy='8.6' r='2.35'/%3E%3C/svg%3E")
+          no-repeat center / contain;
+        opacity: 0;
+        transform: scale(0.6) rotate(-12deg);
+        transition:
+          opacity 0.35s ease,
+          transform 0.4s var(--ease);
+        pointer-events: none;
+      }
+      .service-card:hover {
+        transform: translateY(-4px);
+        background: var(--bg-soft);
+      }
+      .service-card:hover::after {
+        opacity: 0.14;
+        transform: scale(1) rotate(0deg);
+      }
+      [data-theme="light"] .service-card::after {
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236b8f3a'%3E%3Cellipse cx='12' cy='16.2' rx='6.1' ry='4.9'/%3E%3Ccircle cx='5.1' cy='8.6' r='2.35'/%3E%3Ccircle cx='9.7' cy='4.6' r='2.05'/%3E%3Ccircle cx='14.3' cy='4.6' r='2.05'/%3E%3Ccircle cx='18.9' cy='8.6' r='2.35'/%3E%3C/svg%3E")
+          no-repeat center / contain;
       }
       .service-num {
         font-family: "JetBrains Mono", monospace;
@@ -797,7 +1586,7 @@
       }
       .service-title {
         margin-top: 1rem;
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: 1.08rem;
       }
@@ -825,7 +1614,7 @@
       }
       .process-step-title {
         margin-top: 0.5rem;
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: 1rem;
       }
@@ -836,61 +1625,279 @@
         line-height: 1.6;
       }
 
-      /* ============ WORK ============ */
+      /* ============ WORK / PROJECT CARDS ============ */
       .work-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.25rem;
+      }
+      .work-card {
         display: flex;
         flex-direction: column;
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        background: var(--panel);
+        overflow: hidden;
+        transition:
+          transform 0.3s var(--ease),
+          border-color 0.25s ease,
+          box-shadow 0.3s ease;
+        text-decoration: none;
+        color: inherit;
       }
-      .work-row {
-        display: grid;
-        grid-template-columns: 3rem 1fr auto auto;
+      .work-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--accent);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+      }
+      .work-card.disabled {
+        cursor: default;
+        opacity: 0.85;
+      }
+      .work-card.disabled:hover {
+        transform: none;
+        border-color: var(--line);
+        box-shadow: none;
+      }
+      .work-preview {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        background: var(--bg-soft);
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+      }
+      .work-slides {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .work-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.35s ease,
+          visibility 0.35s ease;
+      }
+      .work-slide.active {
+        opacity: 1;
+        visibility: visible;
+        z-index: 1;
+      }
+      .work-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.45s var(--ease);
+      }
+      .work-card:hover .work-slide.active img {
+        transform: scale(1.04);
+      }
+      .work-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 5;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: rgba(0, 0, 0, 0.45);
+        color: #fff;
+        display: flex;
         align-items: center;
-        gap: 1.2rem;
-        padding: 1.5rem 0;
-        border-top: 1px solid var(--line-soft);
-        transition: padding-left 0.25s var(--ease);
+        justify-content: center;
+        font-size: 1rem;
+        line-height: 1;
+        opacity: 0;
+        transition:
+          opacity 0.25s ease,
+          background 0.2s ease;
+        cursor: pointer;
       }
-      .work-list .work-row:last-child {
-        border-bottom: 1px solid var(--line-soft);
+      .work-preview:hover .work-nav,
+      .work-preview:focus-within .work-nav {
+        opacity: 1;
       }
-      .work-row:hover {
-        padding-left: 0.6rem;
+      .work-nav:hover {
+        background: var(--accent);
+        color: #170c10;
+        border-color: var(--accent);
       }
-      .work-num {
+      .work-nav.prev {
+        left: 0.55rem;
+      }
+      .work-nav.next {
+        right: 0.55rem;
+      }
+      .work-dots {
+        position: absolute;
+        left: 50%;
+        bottom: 0.55rem;
+        transform: translateX(-50%);
+        z-index: 5;
+        display: flex;
+        gap: 0.35rem;
+      }
+      .work-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .work-dot.active {
+        background: var(--accent);
+        width: 14px;
+        border-radius: 3px;
+      }
+      .work-slide-count {
+        position: absolute;
+        bottom: 0.55rem;
+        right: 0.55rem;
+        z-index: 5;
         font-family: "JetBrains Mono", monospace;
+        font-size: 0.62rem;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 0.15rem 0.4rem;
+        border-radius: 3px;
+        backdrop-filter: blur(4px);
+      }
+      /* template placeholder when no screenshot yet */
+      .work-preview-fallback {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        background: linear-gradient(
+          145deg,
+          color-mix(in srgb, var(--accent) 12%, var(--bg-soft)) 0%,
+          var(--bg-soft) 55%,
+          color-mix(in srgb, var(--accent-2) 8%, var(--bg-soft)) 100%
+        );
+        background-size: 24px 24px;
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(159, 193, 87, 0.07) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(159, 193, 87, 0.07) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            145deg,
+            color-mix(in srgb, var(--accent) 14%, var(--bg-soft)),
+            var(--bg-soft)
+          );
+      }
+      .work-preview-fallback .tpl-icon {
+        width: 42px;
+        height: 42px;
+        color: var(--accent);
+        opacity: 0.85;
+      }
+      .work-preview-fallback .tpl-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+      .work-preview-fallback .tpl-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
         color: var(--faint);
-        font-size: 0.82rem;
+        text-transform: uppercase;
+      }
+      .work-preview-badge {
+        position: absolute;
+        top: 0.7rem;
+        left: 0.7rem;
+        z-index: 2;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.62rem;
+        font-weight: 700;
+        padding: 0.28rem 0.55rem;
+        border-radius: 4px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .work-preview-badge.live {
+        background: rgba(28, 138, 78, 0.9);
+        color: #e8ffe8;
+      }
+      .work-preview-badge.dev {
+        background: rgba(159, 193, 87, 0.9);
+        color: #170c10;
+      }
+      .work-preview-num {
+        position: absolute;
+        top: 0.7rem;
+        right: 0.7rem;
+        z-index: 2;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.68rem;
+        color: var(--faint);
+        background: color-mix(in srgb, var(--bg) 75%, transparent);
+        padding: 0.2rem 0.45rem;
+        border-radius: 3px;
+        backdrop-filter: blur(6px);
+      }
+      .work-card-body {
+        padding: 1.15rem 1.2rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 0.45rem;
       }
       .work-name {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
-        font-size: clamp(1.1rem, 2.6vw, 1.5rem);
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        flex-wrap: wrap;
+        font-size: 1.08rem;
+        line-height: 1.25;
         transition: color 0.2s;
       }
-      .work-row:hover .work-name {
+      .work-card:hover .work-name {
         color: var(--accent);
       }
+      .work-card.disabled:hover .work-name {
+        color: inherit;
+      }
       .work-desc {
-        margin-top: 0.35rem;
         color: var(--dim);
-        font-size: 0.87rem;
-        max-width: 52ch;
+        font-size: 0.86rem;
+        line-height: 1.55;
+        flex: 1;
+      }
+      .work-card-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-top: 0.55rem;
+        padding-top: 0.75rem;
+        border-top: 1px dashed var(--line-soft);
       }
       .work-tags {
-        margin-top: 0.5rem;
         display: flex;
-        gap: 0.5rem;
+        gap: 0.4rem;
         flex-wrap: wrap;
       }
       .tag {
         font-family: "JetBrains Mono", monospace;
-        font-size: 0.64rem;
+        font-size: 0.62rem;
         font-weight: 600;
-        padding: 0.25rem 0.55rem;
+        padding: 0.22rem 0.5rem;
         border-radius: 3px;
         border: 1px solid var(--line);
         color: var(--faint);
@@ -905,51 +1912,30 @@
       }
       .work-year {
         font-family: "JetBrains Mono", monospace;
-        font-size: 0.76rem;
+        font-size: 0.72rem;
         color: var(--faint);
+        white-space: nowrap;
       }
-      .work-arrow {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border: 1px solid var(--line);
-        display: flex;
+      .work-card-cta {
+        display: inline-flex;
         align-items: center;
-        justify-content: center;
+        gap: 0.35rem;
+        margin-top: 0.65rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 0.03em;
+      }
+      .work-card:hover .work-card-cta {
+        gap: 0.55rem;
+      }
+      .work-card.disabled .work-card-cta {
         color: var(--faint);
-        transition: all 0.25s var(--ease);
       }
-      .work-row:hover .work-arrow {
-        background: var(--accent);
-        border-color: var(--accent);
-        color: #170c10;
-        transform: rotate(45deg);
-      }
-      .work-row.disabled .work-name {
-        color: var(--dim);
-      }
-      .work-row.disabled:hover {
-        padding-left: 0;
-      }
-      .work-row.disabled:hover .work-name {
-        color: var(--dim);
-      }
-      .work-row.disabled .work-arrow {
-        opacity: 0.35;
-      }
-      .work-row.disabled:hover .work-arrow {
-        background: none;
-        border-color: var(--line);
-        color: var(--faint);
-        transform: none;
-      }
-      @media (max-width: 720px) {
-        .work-row {
-          grid-template-columns: 1.6rem 1fr auto;
-        }
-        .work-year {
-          display: none;
-        }
+      /* keep old class hooks harmless if any remain */
+      .work-row {
+        display: contents;
       }
 
       /* ============ ABOUT ============ */
@@ -960,7 +1946,7 @@
         align-items: start;
       }
       .about-quote {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 600;
         font-style: italic;
         font-size: clamp(1.05rem, 2.1vw, 1.3rem);
@@ -1078,7 +2064,7 @@
         padding: 0.9rem 0.85rem;
       }
       .stat-num {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: 1.5rem;
         color: var(--accent);
@@ -1103,7 +2089,7 @@
         animation: marquee 28s linear infinite;
       }
       .marquee-track span {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: clamp(1.1rem, 2.6vw, 1.7rem);
         color: transparent;
@@ -1167,7 +2153,7 @@
         min-width: 0;
       }
       .cred-title {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: 0.98rem;
       }
@@ -1232,7 +2218,7 @@
         margin-bottom: 0.3rem;
       }
       .mile-title {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: 1.05rem;
       }
@@ -1311,7 +2297,7 @@
 
       /* ============ CONTACT ============ */
       .cta-title {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: clamp(2rem, 6.5vw, 3.6rem);
         max-width: 16ch;
@@ -1342,7 +2328,7 @@
         border-right: none;
       }
       .cta-link-label {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: clamp(0.95rem, 2.2vw, 1.15rem);
       }
@@ -1367,6 +2353,337 @@
         }
       }
 
+      /* contact form → Gmail via FormSubmit API */
+      .contact-form-wrap {
+        margin-top: clamp(2rem, 4vw, 2.8rem);
+        padding: 1.4rem 1.5rem 1.5rem;
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        background: var(--panel);
+        max-width: 560px;
+      }
+      .contact-form-wrap h3 {
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+        margin-bottom: 0.35rem;
+      }
+      .contact-form-wrap .form-hint {
+        font-size: 0.82rem;
+        color: var(--dim);
+        margin-bottom: 1.1rem;
+      }
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+      .contact-form label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.04em;
+        color: var(--faint);
+        text-transform: uppercase;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        font-family: "Manrope", sans-serif;
+        font-size: 0.92rem;
+        color: var(--paper);
+        background: var(--bg-soft);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0.7rem 0.85rem;
+        outline: none;
+        transition: border-color 0.2s ease;
+        width: 100%;
+      }
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        border-color: var(--accent);
+      }
+      .contact-form textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .contact-form .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.85rem;
+      }
+      @media (max-width: 560px) {
+        .contact-form .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+      .contact-form button[type="submit"] {
+        align-self: flex-start;
+        margin-top: 0.25rem;
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 0.7rem 1.25rem;
+        border-radius: 999px;
+        border: none;
+        background: var(--accent);
+        color: #170c10;
+        cursor: pointer;
+        transition:
+          transform 0.2s var(--ease),
+          background 0.2s ease;
+      }
+      .contact-form button[type="submit"]:hover {
+        background: #c3dd8f;
+        transform: translateY(-2px);
+      }
+      .contact-form button[type="submit"]:disabled {
+        opacity: 0.65;
+        cursor: wait;
+        transform: none;
+      }
+      .form-status {
+        font-size: 0.85rem;
+        min-height: 1.3em;
+        color: var(--dim);
+      }
+      .form-status.ok {
+        color: var(--go);
+      }
+      .form-status.err {
+        color: #f08080;
+      }
+
+      /* thank-you popup after form submit */
+      #thanksModal {
+        position: fixed;
+        inset: 0;
+        z-index: 12000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.2rem;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity 0.35s ease,
+          visibility 0.35s ease;
+      }
+      #thanksModal.open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+      .thanks-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(8, 12, 6, 0.78);
+        backdrop-filter: blur(6px);
+      }
+      .thanks-box {
+        position: relative;
+        z-index: 1;
+        width: min(420px, 100%);
+        padding: 1.75rem 1.5rem 1.5rem;
+        border-radius: 20px;
+        border: 1.5px solid var(--accent);
+        background: var(--panel);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        transform: translateY(18px) scale(0.92);
+        transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1);
+      }
+      #thanksModal.open .thanks-box {
+        transform: translateY(0) scale(1);
+      }
+      .thanks-close {
+        position: absolute;
+        top: 0.7rem;
+        right: 0.75rem;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: var(--bg-soft);
+        color: var(--paper);
+        cursor: pointer;
+        font-size: 0.95rem;
+        line-height: 1;
+      }
+      .thanks-dog-wrap {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        margin: 0.2rem auto 1rem;
+      }
+      .thanks-dog {
+        width: 180px;
+        height: 180px;
+        filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.35));
+        animation: thanksDogIn 0.7s cubic-bezier(0.34, 1.45, 0.64, 1);
+      }
+      .thanks-dog svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      /* kiss: lean in + bigger tongue/lips */
+      #thanksModal.open .thanks-dog .head-group {
+        animation: dogKissLean 1.1s ease-in-out infinite;
+        transform-origin: 50px 38px;
+      }
+      #thanksModal.open .thanks-dog .kiss-lips {
+        transform-origin: 50px 55px;
+        animation: dogKissPucker 1.1s ease-in-out infinite;
+      }
+      #thanksModal.open .thanks-dog .tail {
+        animation: dogTail 0.35s ease-in-out infinite;
+      }
+      .thanks-hearts {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: visible;
+      }
+      .thanks-hearts span {
+        position: absolute;
+        font-size: 1.1rem;
+        opacity: 0;
+        animation: heartFloat 1.6s ease-out infinite;
+      }
+      .thanks-hearts span:nth-child(1) {
+        left: 12%;
+        top: 28%;
+        animation-delay: 0.1s;
+      }
+      .thanks-hearts span:nth-child(2) {
+        right: 10%;
+        top: 18%;
+        animation-delay: 0.45s;
+        font-size: 0.95rem;
+      }
+      .thanks-hearts span:nth-child(3) {
+        left: 42%;
+        top: 8%;
+        animation-delay: 0.8s;
+        font-size: 1.25rem;
+      }
+      @keyframes thanksDogIn {
+        from {
+          opacity: 0;
+          transform: scale(0.5) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      @keyframes dogKissLean {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg) scale(1);
+        }
+        40% {
+          transform: translateY(4px) rotate(-2deg) scale(1.06);
+        }
+        55% {
+          transform: translateY(6px) rotate(0deg) scale(1.1);
+        }
+      }
+      @keyframes dogKissPucker {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        45% {
+          transform: scale(1.45) translateY(2px);
+          opacity: 1;
+        }
+        60% {
+          transform: scale(1.6) translateY(3px);
+        }
+      }
+      @keyframes heartFloat {
+        0% {
+          opacity: 0;
+          transform: translateY(8px) scale(0.6);
+        }
+        25% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-36px) scale(1.15);
+        }
+      }
+      .thanks-kicker {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.35rem;
+      }
+      .thanks-title {
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 800;
+        font-size: clamp(1.3rem, 4vw, 1.65rem);
+        color: var(--paper);
+        margin-bottom: 0.5rem;
+        line-height: 1.25;
+      }
+      .thanks-title span {
+        color: var(--accent);
+      }
+      .thanks-msg {
+        font-size: 0.92rem;
+        color: var(--dim);
+        line-height: 1.6;
+        max-width: 36ch;
+        margin: 0 auto 0.85rem;
+      }
+      .thanks-note {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.68rem;
+        color: var(--faint);
+        margin-bottom: 1.15rem;
+      }
+      .thanks-bubble {
+        display: inline-block;
+        background: color-mix(in srgb, var(--accent) 16%, var(--bg-soft));
+        border: 1.5px solid var(--accent);
+        color: var(--paper);
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 0.55rem 1rem;
+        border-radius: 16px 16px 16px 4px;
+        margin-bottom: 0.35rem;
+        animation: bubbleBob 1.6s ease-in-out infinite;
+      }
+      .thanks-ok {
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 0.7rem 1.4rem;
+        border-radius: 999px;
+        border: none;
+        background: var(--accent);
+        color: #170c10;
+        cursor: pointer;
+        transition:
+          transform 0.2s var(--ease),
+          background 0.2s ease;
+      }
+      .thanks-ok:hover {
+        background: #c3dd8f;
+        transform: translateY(-2px);
+      }
+
       footer {
         padding: 2rem 0 2.4rem;
         display: flex;
@@ -1385,20 +2702,332 @@
       #scrollBtn {
         position: fixed;
         bottom: 1.6rem;
-        right: 1.6rem;
-        width: 42px;
-        height: 42px;
+        left: 1.6rem;
+        width: 48px;
+        height: 48px;
         background: var(--accent);
         color: #170c10;
         border-radius: 50%;
         display: none;
         align-items: center;
         justify-content: center;
-        z-index: 300;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+        z-index: 400;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+        border: 2px solid color-mix(in srgb, var(--accent) 60%, #fff);
+        transition:
+          transform 0.25s var(--ease),
+          background 0.2s ease,
+          box-shadow 0.25s ease;
+      }
+      #scrollBtn svg {
+        width: 22px;
+        height: 22px;
+        display: block;
       }
       #scrollBtn.visible {
         display: flex;
+        animation: scrollBtnIn 0.35s var(--ease);
+      }
+      #scrollBtn:hover {
+        transform: translateY(-4px) scale(1.06);
+        background: #c3dd8f;
+        box-shadow: 0 12px 28px
+          color-mix(in srgb, var(--accent) 40%, transparent);
+      }
+      #scrollBtn:active {
+        transform: translateY(0) scale(0.96);
+      }
+      @keyframes scrollBtnIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px) scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* always-visible sound enable / mute button */
+      #soundBtn {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 4.6rem;
+        z-index: 450;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.28rem;
+        padding: 0.38rem 0.65rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--accent);
+        background: var(--panel);
+        color: var(--paper);
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 0.68rem;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition:
+          transform 0.2s var(--ease),
+          background 0.2s ease,
+          border-color 0.2s ease;
+      }
+      #soundBtn:hover {
+        transform: translateY(-2px);
+        background: color-mix(in srgb, var(--accent) 18%, var(--panel));
+      }
+      #soundBtn.on {
+        background: var(--accent);
+        color: #170c10;
+      }
+      #soundBtn .sound-ico {
+        font-size: 0.78rem;
+        line-height: 1;
+      }
+      @media (max-width: 560px) {
+        #soundBtn {
+          left: 1rem;
+          bottom: 4.4rem;
+          font-size: 0.65rem;
+          padding: 0.35rem 0.55rem;
+        }
+      }
+
+      /* ============ LOADING SCREEN ============ */
+      #pawLoader {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.1rem;
+        background: #10160d;
+        transition:
+          opacity 0.55s ease,
+          visibility 0.55s ease;
+      }
+      #pawLoader.hide {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .paw-loader-pup {
+        width: 140px;
+        height: 140px;
+        filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.35));
+      }
+      .paw-loader-pup svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow: visible;
+      }
+      /* reuse same motion as hover dog */
+      .paw-loader-pup.dog-hello-pup {
+        animation: dogBounce 1.05s ease-in-out infinite;
+      }
+      .paw-loader-pup .tail {
+        transform-origin: 78px 58px;
+        animation: dogTail 0.42s ease-in-out infinite;
+      }
+      .paw-loader-pup .paw-wave {
+        transform-origin: 18px 62px;
+        animation: dogWave 0.5s ease-in-out infinite;
+      }
+      .paw-loader-pup .ear-l {
+        transform-origin: 28px 22px;
+        animation: earWiggle 1.15s ease-in-out infinite;
+      }
+      .paw-loader-pup .ear-r {
+        transform-origin: 72px 22px;
+        animation: earWiggle 1.15s ease-in-out infinite 0.14s;
+      }
+      .paw-loader-pup .head-group {
+        transform-origin: 50px 38px;
+        animation: headTilt 1.8s ease-in-out infinite;
+      }
+      .paw-loader-pup .sparkle {
+        animation: sparklePop 1.4s ease-in-out infinite;
+      }
+      .paw-loader-pup .sparkle.s2 {
+        animation-delay: 0.35s;
+      }
+      .paw-loader-text {
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: #9fc157;
+        letter-spacing: 0.04em;
+      }
+      .paw-loader-bar {
+        width: 120px;
+        height: 4px;
+        border-radius: 999px;
+        background: #2e3a26;
+        overflow: hidden;
+      }
+      .paw-loader-bar span {
+        display: block;
+        height: 100%;
+        width: 40%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #5f7f34, #9fc157, #c3dd8f);
+        animation: loaderBar 1s ease-in-out infinite;
+      }
+      .paw-loader-paws {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .paw-loader-paws i {
+        position: absolute;
+        font-style: normal;
+        font-size: 1.1rem;
+        opacity: 0.18;
+        color: #9fc157;
+        animation: loaderFloat 4s ease-in-out infinite;
+      }
+      @keyframes loaderBob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes loaderTail {
+        from {
+          transform: rotate(-18deg);
+        }
+        to {
+          transform: rotate(22deg);
+        }
+      }
+      @keyframes loaderBar {
+        0% {
+          transform: translateX(-120%);
+        }
+        100% {
+          transform: translateX(320%);
+        }
+      }
+      @keyframes loaderFloat {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-16px) rotate(12deg);
+        }
+      }
+
+      /* ============ TUQLAS CHATBOT — paw / dog theme ============ */
+      #tuqlas-btn {
+        background: var(--accent) !important;
+        box-shadow:
+          0 8px 24px color-mix(in srgb, var(--accent) 45%, transparent),
+          0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent) !important;
+        border: 2px solid color-mix(in srgb, var(--accent) 50%, #fff) !important;
+        transition:
+          transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.25s ease !important;
+      }
+      #tuqlas-btn:hover {
+        transform: scale(1.1) !important;
+        background: #c3dd8f !important;
+      }
+      #tuqlas-btn > svg,
+      #tuqlas-btn > img {
+        display: none !important;
+      }
+      #tuqlas-btn .dog-launcher-icon {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+      #tuqlas-btn .dog-launcher-icon svg {
+        display: block !important;
+        width: 28px;
+        height: 28px;
+      }
+      #tuqlas-win {
+        border: 1.5px solid var(--accent) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45) !important;
+        overflow: hidden !important;
+        font-family: "Manrope", sans-serif !important;
+      }
+      #tuqlas-header {
+        background: linear-gradient(
+          135deg,
+          #5f7f34 0%,
+          #9fc157 100%
+        ) !important;
+        border-bottom: none !important;
+      }
+      #tuqlas-header-title {
+        font-family: "Outfit", "Sora", sans-serif !important;
+        font-weight: 700 !important;
+        color: #170c10 !important;
+      }
+      #tuqlas-dot {
+        background: #170c10 !important;
+        box-shadow: 0 0 0 3px rgba(23, 12, 16, 0.2) !important;
+      }
+      #tuqlas-msgs {
+        background: var(--bg) !important;
+        font-family: "Manrope", sans-serif !important;
+      }
+      #tuqlas-footer {
+        border-top: 1px solid var(--line) !important;
+        background: var(--panel) !important;
+      }
+      #tuqlas-input {
+        border-radius: 10px !important;
+        border: 1px solid var(--line) !important;
+        font-family: "Manrope", sans-serif !important;
+      }
+      #tuqlas-send {
+        background: var(--accent) !important;
+        color: #170c10 !important;
+        border-radius: 10px !important;
+      }
+      #tuqlas-send:hover {
+        background: #c3dd8f !important;
+      }
+      .tql-bot {
+        background: var(--panel) !important;
+        border: 1px solid var(--line) !important;
+        color: var(--paper) !important;
+        border-radius: 12px 12px 12px 4px !important;
+      }
+      .tql-user {
+        background: var(--accent) !important;
+        color: #170c10 !important;
+        border-radius: 12px 12px 4px 12px !important;
+      }
+      .tql-chip {
+        border: 1px solid var(--accent) !important;
+        color: var(--accent) !important;
+        border-radius: 999px !important;
+        font-family: "JetBrains Mono", monospace !important;
+        font-size: 0.72rem !important;
+      }
+      .tql-chip:hover {
+        background: color-mix(
+          in srgb,
+          var(--accent) 18%,
+          transparent
+        ) !important;
+      }
+      #tuqlas-brand a {
+        color: var(--faint) !important;
       }
 
       .skel {
@@ -1426,9 +3055,9 @@
         }
       }
       .repo-skel-row {
-        height: 56px;
-        border-radius: 6px;
-        margin-bottom: 0.65rem;
+        height: 88px;
+        border-radius: 12px;
+        margin-bottom: 0.75rem;
       }
       .error-note {
         color: var(--faint);
@@ -1438,6 +3067,138 @@
       .error-note a {
         color: var(--accent-2);
         text-decoration: underline;
+      }
+
+      /* GitHub repos + contributions (paw themed) */
+      .gh-panel {
+        display: grid;
+        gap: 1.25rem;
+      }
+      .gh-contrib-card {
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        background: var(--panel);
+        padding: 1.15rem 1.25rem 1.25rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .gh-contrib-card::before {
+        content: "🐾";
+        position: absolute;
+        right: 0.9rem;
+        top: 0.7rem;
+        opacity: 0.18;
+        font-size: 1.4rem;
+      }
+      .gh-contrib-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 0.85rem;
+        flex-wrap: wrap;
+      }
+      .gh-contrib-head h3 {
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .gh-contrib-head a {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--accent);
+      }
+      .gh-contrib-chart {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .gh-contrib-chart img {
+        display: block;
+        width: 100%;
+        min-width: 520px;
+        height: auto;
+        border-radius: 8px;
+        background: #0d1117;
+      }
+      .gh-contrib-fallback {
+        font-size: 0.82rem;
+        color: var(--dim);
+        padding: 0.5rem 0;
+      }
+      .gh-repo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 0.9rem;
+      }
+      .gh-repo-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+        padding: 1.05rem 1.1rem 1.1rem;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--panel);
+        text-decoration: none;
+        color: inherit;
+        transition:
+          transform 0.25s var(--ease),
+          border-color 0.2s ease,
+          box-shadow 0.25s ease;
+        position: relative;
+      }
+      .gh-repo-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+      }
+      .gh-repo-card .gh-repo-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+      .gh-repo-card .gh-repo-name {
+        font-family: "Outfit", "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 0.98rem;
+        color: var(--paper);
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .gh-repo-card:hover .gh-repo-name {
+        color: var(--accent);
+      }
+      .gh-repo-card .gh-paw {
+        font-size: 0.85rem;
+        opacity: 0.7;
+      }
+      .gh-repo-card .gh-repo-desc {
+        font-size: 0.82rem;
+        color: var(--dim);
+        line-height: 1.45;
+        flex: 1;
+      }
+      .gh-repo-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 0.2rem;
+      }
+      .gh-repo-meta .tag {
+        font-size: 0.6rem;
+      }
+      .gh-repo-arrow {
+        font-size: 0.85rem;
+        color: var(--faint);
+        flex-shrink: 0;
+      }
+      .gh-repo-card:hover .gh-repo-arrow {
+        color: var(--accent);
       }
 
       /* ============ CERT MODAL ============ */
@@ -1491,7 +3252,7 @@
         gap: 1rem;
       }
       .cert-modal-title {
-        font-family: "Sora", sans-serif;
+        font-family: "Outfit", "Sora", sans-serif;
         font-weight: 700;
         font-size: 0.95rem;
       }
@@ -1635,63 +3396,57 @@
         }
       }
 
-      /* ============ CUSTOM CURSOR ============ */
-      .cursor-dot,
-      .cursor-ring {
-        position: fixed;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        border-radius: 50%;
-        z-index: 9998;
-        transform: translate3d(-50%, -50%, 0);
-        will-change: transform;
-      }
+      /* ============ CUSTOM CURSOR (paw only — no lagging ring) ============ */
       .cursor-dot {
-        width: 10px;
-        height: 10px;
-        background: var(--accent);
-        box-shadow: 0 0 10px var(--accent);
-        transition: background-color 0.2s ease;
-      }
-      .cursor-ring {
-        width: 40px;
-        height: 40px;
-        border: 1.5px dashed var(--accent);
-        opacity: 0;
-        transition:
-          width 0.22s var(--ease),
-          height 0.22s var(--ease),
-          opacity 0.22s ease,
-          border-color 0.2s ease,
-          background-color 0.2s ease;
-      }
-      .cursor-ring.is-hover {
-        width: 68px;
-        height: 68px;
-        opacity: 0.85;
-        background: color-mix(in srgb, var(--accent) 10%, transparent);
-        animation: cursorSpin 6s linear infinite;
-      }
-      .cursor-ring.is-down {
-        width: 28px;
-        height: 28px;
-      }
-      @keyframes cursorSpin {
-        to {
-          transform: translate3d(-50%, -50%, 0) rotate(360deg);
-        }
-      }
-      .cursor-paw {
         position: fixed;
         top: 0;
         left: 0;
         width: 24px;
         height: 24px;
         pointer-events: none;
+        z-index: 9999;
+        color: var(--accent);
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0);
+        will-change: transform;
+        filter: drop-shadow(
+          0 0 7px color-mix(in srgb, var(--accent) 60%, transparent)
+        );
+        transition:
+          color 0.2s ease,
+          filter 0.2s ease,
+          width 0.18s var(--ease),
+          height 0.18s var(--ease);
+      }
+      .cursor-dot svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .cursor-dot.is-hover {
+        width: 28px;
+        height: 28px;
+        filter: drop-shadow(
+          0 0 10px color-mix(in srgb, var(--accent) 75%, transparent)
+        );
+      }
+      .cursor-dot.is-down {
+        width: 20px;
+        height: 20px;
+        filter: drop-shadow(
+          0 0 4px color-mix(in srgb, var(--accent) 50%, transparent)
+        );
+      }
+      .cursor-paw {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        pointer-events: none;
         z-index: 9997;
         color: var(--accent);
-        opacity: 0.7;
+        opacity: 0.5;
         transform-origin: center;
         animation: pawFade 0.65s ease-out forwards;
       }
@@ -1699,18 +3454,18 @@
         width: 100%;
         height: 100%;
         filter: drop-shadow(
-          0 0 3px color-mix(in srgb, var(--accent) 55%, transparent)
+          0 0 3px color-mix(in srgb, var(--accent) 40%, transparent)
         );
       }
       @keyframes pawFade {
         from {
-          opacity: 0.6;
+          opacity: 0.48;
           transform: translate3d(-50%, -50%, 0) scale(1)
             rotate(var(--rot, 0deg));
         }
         to {
           opacity: 0;
-          transform: translate3d(-50%, -50%, 0) scale(0.5)
+          transform: translate3d(-50%, -50%, 0) scale(0.4)
             rotate(var(--rot, 0deg));
         }
       }
@@ -1722,17 +3477,189 @@
       }
       @media (pointer: coarse), (prefers-reduced-motion: reduce) {
         .cursor-dot,
-        .cursor-ring,
         .cursor-paw {
-          display: none;
+          display: none !important;
+        }
+        body.custom-cursor-on,
+        body.custom-cursor-on a,
+        body.custom-cursor-on button,
+        body.custom-cursor-on [role="button"] {
+          cursor: auto;
         }
       }
     </style>
   </head>
   <body>
+    <!-- PAW LOADING SCREEN -->
+    <div
+      id="pawLoader"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading portfolio"
+    >
+      <div class="paw-loader-paws" aria-hidden="true">
+        <i style="top: 12%; left: 10%">🐾</i>
+        <i style="top: 22%; right: 14%; animation-delay: 0.4s">🐾</i>
+        <i style="top: 58%; left: 18%; animation-delay: 0.8s">🐾</i>
+        <i style="top: 70%; right: 12%; animation-delay: 1.1s">🐾</i>
+        <i style="top: 40%; left: 48%; animation-delay: 0.6s">🐾</i>
+      </div>
+      <div class="paw-loader-pup dog-hello-pup" aria-hidden="true">
+        <svg viewBox="0 0 100 100" fill="none">
+          <ellipse
+            cx="50"
+            cy="92"
+            rx="22"
+            ry="4.5"
+            fill="#000"
+            opacity="0.12"
+          />
+          <g class="tail">
+            <ellipse
+              cx="82"
+              cy="58"
+              rx="12"
+              ry="7"
+              fill="#E8C59A"
+              transform="rotate(-20 82 58)"
+            />
+            <ellipse
+              cx="86"
+              cy="56"
+              rx="7"
+              ry="4.5"
+              fill="#F5D9B0"
+              transform="rotate(-20 86 56)"
+            />
+          </g>
+          <ellipse cx="52" cy="68" rx="24" ry="20" fill="#F0D0A8" />
+          <ellipse cx="52" cy="72" rx="16" ry="12" fill="#F8E4C8" />
+          <ellipse cx="64" cy="84" rx="7" ry="9" fill="#E8C59A" />
+          <ellipse cx="64" cy="90" rx="8" ry="4" fill="#DDB888" />
+          <ellipse cx="40" cy="84" rx="7" ry="9" fill="#E8C59A" />
+          <ellipse cx="40" cy="90" rx="8" ry="4" fill="#DDB888" />
+          <g class="head-group">
+            <g class="ear-l">
+              <ellipse
+                cx="28"
+                cy="22"
+                rx="10"
+                ry="16"
+                fill="#D4A574"
+                transform="rotate(-18 28 22)"
+              />
+              <ellipse
+                cx="29"
+                cy="24"
+                rx="5.5"
+                ry="10"
+                fill="#F2B8A0"
+                transform="rotate(-18 29 24)"
+              />
+            </g>
+            <g class="ear-r">
+              <ellipse
+                cx="72"
+                cy="22"
+                rx="10"
+                ry="16"
+                fill="#D4A574"
+                transform="rotate(18 72 22)"
+              />
+              <ellipse
+                cx="71"
+                cy="24"
+                rx="5.5"
+                ry="10"
+                fill="#F2B8A0"
+                transform="rotate(18 71 24)"
+              />
+            </g>
+            <circle cx="50" cy="38" r="22" fill="#F0D0A8" />
+            <ellipse cx="50" cy="24" rx="10" ry="7" fill="#F8E4C8" />
+            <ellipse cx="50" cy="46" rx="12" ry="10" fill="#F8E4C8" />
+            <ellipse cx="50" cy="43" rx="4.2" ry="3.2" fill="#3A2A22" />
+            <ellipse
+              cx="48.8"
+              cy="42"
+              rx="1.2"
+              ry="0.9"
+              fill="#fff"
+              opacity="0.55"
+            />
+            <path
+              d="M50 46.5 v5"
+              stroke="#3A2A22"
+              stroke-width="1.3"
+              stroke-linecap="round"
+            />
+            <path
+              d="M43 50 Q50 56 57 50"
+              fill="none"
+              stroke="#3A2A22"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+            <ellipse cx="50" cy="55.5" rx="3.2" ry="2.4" fill="#F08080" />
+            <circle cx="34" cy="44" r="5" fill="#F2B8A0" opacity="0.7" />
+            <circle cx="66" cy="44" r="5" fill="#F2B8A0" opacity="0.7" />
+            <ellipse cx="40" cy="36" rx="5.2" ry="5.8" fill="#2A1F18" />
+            <ellipse cx="60" cy="36" rx="5.2" ry="5.8" fill="#2A1F18" />
+            <circle cx="42" cy="34" r="2" fill="#fff" />
+            <circle cx="62" cy="34" r="2" fill="#fff" />
+            <circle cx="38.5" cy="37.5" r="0.9" fill="#fff" opacity="0.7" />
+            <circle cx="58.5" cy="37.5" r="0.9" fill="#fff" opacity="0.7" />
+            <path
+              d="M34 29 Q40 26 45 29"
+              fill="none"
+              stroke="#C4956A"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M55 29 Q60 26 66 29"
+              fill="none"
+              stroke="#C4956A"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </g>
+          <g class="paw-wave">
+            <ellipse cx="16" cy="62" rx="9" ry="7" fill="#F0D0A8" />
+            <circle cx="11" cy="57" r="3" fill="#F0D0A8" />
+            <circle cx="16" cy="55.5" r="2.8" fill="#F0D0A8" />
+            <circle cx="21" cy="57.5" r="2.8" fill="#F0D0A8" />
+            <ellipse cx="16" cy="64" rx="5" ry="3.5" fill="#E8C59A" />
+          </g>
+          <g class="sparkle" transform="translate(12 18)">
+            <path
+              d="M0 -4 L1 -1 L4 0 L1 1 L0 4 L-1 1 L-4 0 L-1 -1 Z"
+              fill="#9fc157"
+            />
+          </g>
+          <g class="sparkle s2" transform="translate(88 30)">
+            <path
+              d="M0 -3 L0.7 -0.7 L3 0 L0.7 0.7 L0 3 L-0.7 0.7 L-3 0 L-0.7 -0.7 Z"
+              fill="#d7a94c"
+            />
+          </g>
+        </svg>
+      </div>
+      <p class="paw-loader-text">Paw is waking up…</p>
+      <div class="paw-loader-bar" aria-hidden="true"><span></span></div>
+    </div>
+
     <div class="grid-bg" aria-hidden="true"></div>
-    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
-    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+    <div class="paw-field" id="pawField" aria-hidden="true"></div>
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <ellipse cx="12" cy="16.2" rx="6.1" ry="4.9" />
+        <circle cx="5.1" cy="8.6" r="2.35" />
+        <circle cx="9.7" cy="4.6" r="2.05" />
+        <circle cx="14.3" cy="4.6" r="2.05" />
+        <circle cx="18.9" cy="8.6" r="2.35" />
+      </svg>
+    </div>
 
     <!-- NAV -->
     <nav class="navbar" id="navbar">
@@ -1758,7 +3685,9 @@
               <circle cx="20.6" cy="10.4" r="1.95" fill="currentColor" />
             </svg>
           </span>
-          <span class="nav-id-name">Paw Cerenado</span>
+          <span class="nav-id-name"
+            ><span class="paw-mark">Paw</span> Cerenado</span
+          >
         </a>
         <div class="nav-links">
           <a href="#services">Services</a>
@@ -1863,20 +3792,22 @@
       <div class="hero-grid">
         <div>
           <p class="hero-eyebrow">
-            <span class="go-dot"></span> AVAILABLE FOR FREELANCE PROJECTS ·
-            SILANG, CAVITE, PH
+            <span class="go-dot"></span> FRESH GRADUATE · OPEN TO WORK &amp;
+            FREELANCE · SILANG, CAVITE, PH
           </p>
           <h1 class="hero-title head">
-            IT support and web systems, <em>built to keep running.</em>
+            Fresh graduate building toward
+            <em>IT support &amp; web systems.</em>
           </h1>
           <p class="hero-sub">
-            I help small businesses and schools with hands-on IT support,
-            network setup, and Laravel web applications — from a single router
-            fix to a full booking system, deployed and documented.
+            I'm a fresh graduate training to become an IT Support Specialist —
+            hands-on with networking, troubleshooting, and Laravel web
+            applications through school projects and internship experience. Open
+            to full-time, entry-level roles, and freelance work.
           </p>
           <div class="hero-actions">
-            <a href="#contact" class="btn-copper">Get a quote</a>
-            <a href="#work" class="btn-line">See the work</a>
+            <a href="#contact" class="btn-copper">Get in touch</a>
+            <a href="#work" class="btn-line">See my projects</a>
           </div>
           <div class="hero-stats">
             <div>
@@ -1895,6 +3826,194 @@
         </div>
 
         <div class="badge-stage">
+          <!-- friendly dog hello on profile hover -->
+          <div class="dog-hello" aria-hidden="true">
+            <div class="dog-hello-bubble">Hi there! 🐾</div>
+            <div class="dog-hello-pup">
+              <svg viewBox="0 0 100 100" fill="none">
+                <!-- soft ground shadow -->
+                <ellipse
+                  cx="50"
+                  cy="92"
+                  rx="22"
+                  ry="4.5"
+                  fill="#000"
+                  opacity="0.12"
+                />
+
+                <!-- fluffy tail -->
+                <g class="tail">
+                  <ellipse
+                    cx="82"
+                    cy="58"
+                    rx="12"
+                    ry="7"
+                    fill="#E8C59A"
+                    transform="rotate(-20 82 58)"
+                  />
+                  <ellipse
+                    cx="86"
+                    cy="56"
+                    rx="7"
+                    ry="4.5"
+                    fill="#F5D9B0"
+                    transform="rotate(-20 86 56)"
+                  />
+                </g>
+
+                <!-- body -->
+                <ellipse cx="52" cy="68" rx="24" ry="20" fill="#F0D0A8" />
+                <ellipse cx="52" cy="72" rx="16" ry="12" fill="#F8E4C8" />
+
+                <!-- back leg -->
+                <ellipse cx="64" cy="84" rx="7" ry="9" fill="#E8C59A" />
+                <ellipse cx="64" cy="90" rx="8" ry="4" fill="#DDB888" />
+
+                <!-- front leg -->
+                <ellipse cx="40" cy="84" rx="7" ry="9" fill="#E8C59A" />
+                <ellipse cx="40" cy="90" rx="8" ry="4" fill="#DDB888" />
+
+                <!-- head group (tilts) -->
+                <g class="head-group">
+                  <!-- ears -->
+                  <g class="ear-l">
+                    <ellipse
+                      cx="28"
+                      cy="22"
+                      rx="10"
+                      ry="16"
+                      fill="#D4A574"
+                      transform="rotate(-18 28 22)"
+                    />
+                    <ellipse
+                      cx="29"
+                      cy="24"
+                      rx="5.5"
+                      ry="10"
+                      fill="#F2B8A0"
+                      transform="rotate(-18 29 24)"
+                    />
+                  </g>
+                  <g class="ear-r">
+                    <ellipse
+                      cx="72"
+                      cy="22"
+                      rx="10"
+                      ry="16"
+                      fill="#D4A574"
+                      transform="rotate(18 72 22)"
+                    />
+                    <ellipse
+                      cx="71"
+                      cy="24"
+                      rx="5.5"
+                      ry="10"
+                      fill="#F2B8A0"
+                      transform="rotate(18 71 24)"
+                    />
+                  </g>
+
+                  <!-- head -->
+                  <circle cx="50" cy="38" r="22" fill="#F0D0A8" />
+                  <!-- forehead fluff -->
+                  <ellipse cx="50" cy="24" rx="10" ry="7" fill="#F8E4C8" />
+
+                  <!-- snout -->
+                  <ellipse cx="50" cy="46" rx="12" ry="10" fill="#F8E4C8" />
+                  <!-- nose -->
+                  <ellipse cx="50" cy="43" rx="4.2" ry="3.2" fill="#3A2A22" />
+                  <ellipse
+                    cx="48.8"
+                    cy="42"
+                    rx="1.2"
+                    ry="0.9"
+                    fill="#fff"
+                    opacity="0.55"
+                  />
+                  <!-- mouth -->
+                  <path
+                    d="M50 46.5 v5"
+                    stroke="#3A2A22"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M43 50 Q50 56 57 50"
+                    fill="none"
+                    stroke="#3A2A22"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                  <!-- tongue -->
+                  <ellipse cx="50" cy="55.5" rx="3.2" ry="2.4" fill="#F08080" />
+
+                  <!-- cheeks -->
+                  <circle cx="34" cy="44" r="5" fill="#F2B8A0" opacity="0.7" />
+                  <circle cx="66" cy="44" r="5" fill="#F2B8A0" opacity="0.7" />
+
+                  <!-- eyes -->
+                  <ellipse cx="40" cy="36" rx="5.2" ry="5.8" fill="#2A1F18" />
+                  <ellipse cx="60" cy="36" rx="5.2" ry="5.8" fill="#2A1F18" />
+                  <!-- eye shine -->
+                  <circle cx="42" cy="34" r="2" fill="#fff" />
+                  <circle cx="62" cy="34" r="2" fill="#fff" />
+                  <circle
+                    cx="38.5"
+                    cy="37.5"
+                    r="0.9"
+                    fill="#fff"
+                    opacity="0.7"
+                  />
+                  <circle
+                    cx="58.5"
+                    cy="37.5"
+                    r="0.9"
+                    fill="#fff"
+                    opacity="0.7"
+                  />
+
+                  <!-- eyebrows (happy) -->
+                  <path
+                    d="M34 29 Q40 26 45 29"
+                    fill="none"
+                    stroke="#C4956A"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M55 29 Q60 26 66 29"
+                    fill="none"
+                    stroke="#C4956A"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </g>
+
+                <!-- waving paw -->
+                <g class="paw-wave">
+                  <ellipse cx="16" cy="62" rx="9" ry="7" fill="#F0D0A8" />
+                  <circle cx="11" cy="57" r="3" fill="#F0D0A8" />
+                  <circle cx="16" cy="55.5" r="2.8" fill="#F0D0A8" />
+                  <circle cx="21" cy="57.5" r="2.8" fill="#F0D0A8" />
+                  <ellipse cx="16" cy="64" rx="5" ry="3.5" fill="#E8C59A" />
+                </g>
+
+                <!-- little sparkles -->
+                <g class="sparkle" transform="translate(12 18)">
+                  <path
+                    d="M0 -4 L1 -1 L4 0 L1 1 L0 4 L-1 1 L-4 0 L-1 -1 Z"
+                    fill="#9fc157"
+                  />
+                </g>
+                <g class="sparkle s2" transform="translate(88 30)">
+                  <path
+                    d="M0 -3 L0.7 -0.7 L3 0 L0.7 0.7 L0 3 L-0.7 0.7 L-3 0 L-0.7 -0.7 Z"
+                    fill="#d7a94c"
+                  />
+                </g>
+              </svg>
+            </div>
+          </div>
           <div class="badge-swing">
             <div class="badge-clip"></div>
             <div class="badge-strap"></div>
@@ -1905,18 +4024,33 @@
               aria-label="Flip badge to view contact details"
             >
               <div class="badge-face badge-front">
+                <!-- corner paw decorations -->
+                <span class="badge-corner-paw tl" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <ellipse cx="12" cy="16.2" rx="6.1" ry="4.9" />
+                    <circle cx="5.1" cy="8.6" r="2.35" />
+                    <circle cx="9.7" cy="4.6" r="2.05" />
+                    <circle cx="14.3" cy="4.6" r="2.05" />
+                    <circle cx="18.9" cy="8.6" r="2.35" />
+                  </svg>
+                </span>
+                <span class="badge-corner-paw tr" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <ellipse cx="12" cy="16.2" rx="6.1" ry="4.9" />
+                    <circle cx="5.1" cy="8.6" r="2.35" />
+                    <circle cx="9.7" cy="4.6" r="2.05" />
+                    <circle cx="14.3" cy="4.6" r="2.05" />
+                    <circle cx="18.9" cy="8.6" r="2.35" />
+                  </svg>
+                </span>
                 <div class="badge-topline">
                   <span class="badge-org">
                     <svg
                       viewBox="0 0 32 32"
                       fill="none"
-                      width="15"
-                      height="15"
-                      style="
-                        vertical-align: -2px;
-                        margin-right: 0.3rem;
-                        color: var(--accent-dark);
-                      "
+                      width="16"
+                      height="16"
+                      style="color: var(--accent-dark)"
                     >
                       <polygon
                         points="16,2.5 27.5,9.2 27.5,22.6 16,29.4 4.5,22.6 4.5,9.2"
@@ -1946,14 +4080,21 @@
                 </div>
                 <div class="badge-photo">
                   <img
+                    id="badgeProfileImg"
                     src="gradpic2.png"
                     alt="Portrait of Rogelio 'Paw' Cerenado"
-                    onerror="
-                      this.style.display = 'none';
-                      this.nextElementSibling.style.display = 'flex';
-                    "
+                    width="400"
+                    height="530"
+                    decoding="async"
+                    loading="eager"
+                    fetchpriority="high"
+                    style="object-fit: cover; object-position: center 18%"
                   />
-                  <div class="avatar-fallback" style="display: none">
+                  <div
+                    class="avatar-fallback"
+                    id="badgeAvatarFallback"
+                    style="display: none"
+                  >
                     <svg
                       viewBox="0 0 24 24"
                       width="48"
@@ -1966,31 +4107,91 @@
                       <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" />
                     </svg>
                   </div>
+                  <!-- soft dog watermark -->
+                  <span class="badge-photo-dog" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" fill="currentColor">
+                      <ellipse cx="32" cy="42" rx="18" ry="14" />
+                      <circle cx="22" cy="28" r="9" />
+                      <circle cx="42" cy="28" r="9" />
+                      <ellipse cx="18" cy="18" rx="5" ry="7" />
+                      <ellipse cx="46" cy="18" rx="5" ry="7" />
+                      <circle cx="26" cy="26" r="2.2" fill="#f2ede9" />
+                      <circle cx="38" cy="26" r="2.2" fill="#f2ede9" />
+                      <ellipse cx="32" cy="34" rx="3.5" ry="2.5" />
+                    </svg>
+                  </span>
                 </div>
-                <p class="badge-name">Rogelio "Paw" Cerenado</p>
-                <p class="badge-role">IT Support &amp; Web Systems</p>
+                <p class="badge-name">
+                  Rogelio "<span class="paw-mark">Paw</span>" Cerenado
+                </p>
+                <p class="badge-role">
+                  Fresh Graduate · Aspiring IT Support Specialist
+                </p>
                 <span class="badge-status"
-                  ><span class="go-dot"></span>Active — open for hire</span
+                  ><span class="go-dot"></span>Open to work &amp;
+                  freelance</span
                 >
                 <div class="badge-barcode" aria-hidden="true">
-                  <span style="height: 60%"></span>
-                  <span style="height: 100%"></span>
-                  <span style="height: 40%"></span>
-                  <span style="height: 80%"></span>
-                  <span style="height: 55%"></span>
-                  <span style="height: 90%"></span>
-                  <span style="height: 30%"></span>
-                  <span style="height: 70%"></span>
-                  <span style="height: 100%"></span>
-                  <span style="height: 45%"></span>
-                  <span style="height: 65%"></span>
-                  <span style="height: 85%"></span>
+                  <span style="height: 60%; --i: 0"></span>
+                  <span style="height: 100%; --i: 1"></span>
+                  <span style="height: 40%; --i: 2"></span>
+                  <span style="height: 80%; --i: 3"></span>
+                  <span style="height: 55%; --i: 4"></span>
+                  <span style="height: 90%; --i: 5"></span>
+                  <span style="height: 30%; --i: 6"></span>
+                  <span style="height: 70%; --i: 7"></span>
+                  <span style="height: 100%; --i: 8"></span>
+                  <span style="height: 45%; --i: 9"></span>
+                  <span style="height: 65%; --i: 10"></span>
+                  <span style="height: 85%; --i: 11"></span>
+                  <span style="height: 50%; --i: 12"></span>
+                  <span style="height: 75%; --i: 13"></span>
                 </div>
-                <p class="badge-hint">Tap to flip →</p>
+                <p class="badge-hint">
+                  <span>Tap to flip</span>
+                  <svg class="hint-paw" viewBox="0 0 24 24" fill="currentColor">
+                    <ellipse cx="12" cy="16.2" rx="6.1" ry="4.9" />
+                    <circle cx="5.1" cy="8.6" r="2.35" />
+                    <circle cx="9.7" cy="4.6" r="2.05" />
+                    <circle cx="14.3" cy="4.6" r="2.05" />
+                    <circle cx="18.9" cy="8.6" r="2.35" />
+                  </svg>
+                </p>
               </div>
               <div class="badge-face badge-back">
+                <span class="badge-corner-paw bl" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <ellipse cx="12" cy="16.2" rx="6.1" ry="4.9" />
+                    <circle cx="5.1" cy="8.6" r="2.35" />
+                    <circle cx="9.7" cy="4.6" r="2.05" />
+                    <circle cx="14.3" cy="4.6" r="2.05" />
+                    <circle cx="18.9" cy="8.6" r="2.35" />
+                  </svg>
+                </span>
+                <span class="badge-corner-paw br" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <ellipse cx="12" cy="16.2" rx="6.1" ry="4.9" />
+                    <circle cx="5.1" cy="8.6" r="2.35" />
+                    <circle cx="9.7" cy="4.6" r="2.05" />
+                    <circle cx="14.3" cy="4.6" r="2.05" />
+                    <circle cx="18.9" cy="8.6" r="2.35" />
+                  </svg>
+                </span>
                 <div>
-                  <p class="badge-back-head">Contact — access granted</p>
+                  <p class="badge-back-head">
+                    <svg
+                      class="head-paw"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <ellipse cx="12" cy="16.2" rx="6.1" ry="4.9" />
+                      <circle cx="5.1" cy="8.6" r="2.35" />
+                      <circle cx="9.7" cy="4.6" r="2.05" />
+                      <circle cx="14.3" cy="4.6" r="2.05" />
+                      <circle cx="18.9" cy="8.6" r="2.35" />
+                    </svg>
+                    Contact — access granted
+                  </p>
                   <ul class="badge-back-list" style="margin-top: 0.9rem">
                     <li>
                       <span class="lbl">Email</span>
@@ -2028,7 +4229,20 @@
                 </div>
                 <div>
                   <div class="badge-stripe" aria-hidden="true"></div>
-                  <p class="badge-signoff">Usually replies within a day</p>
+                  <p class="badge-signoff">
+                    <svg
+                      class="sign-paw"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <ellipse cx="12" cy="16.2" rx="6.1" ry="4.9" />
+                      <circle cx="5.1" cy="8.6" r="2.35" />
+                      <circle cx="9.7" cy="4.6" r="2.05" />
+                      <circle cx="14.3" cy="4.6" r="2.05" />
+                      <circle cx="18.9" cy="8.6" r="2.35" />
+                    </svg>
+                    Usually replies within a day
+                  </p>
                 </div>
               </div>
             </button>
@@ -2042,7 +4256,7 @@
       <div class="wrap">
         <div class="sec-head fade-up">
           <h2 class="sec-title head">
-            What I can <em>take off your plate</em>
+            Skills I'm building for <em>IT support</em>
           </h2>
           <p class="sheet-tag">SHEET 01 / SERVICES</p>
         </div>
@@ -2058,8 +4272,7 @@
             <p class="service-title head">IT support &amp; troubleshooting</p>
             <p class="service-desc">
               Workstation setup, OS and driver installs, printer and peripheral
-              fixes, and day-to-day desktop support that keeps your team
-              working.
+              fixes — skills I practiced in school and during my internship.
             </p>
           </div>
           <div class="service-card">
@@ -2148,93 +4361,572 @@
           <p class="sheet-tag">SHEET 03 / PROJECTS</p>
         </div>
         <div class="work-list fade-up">
+          <!-- 01 Manggagawang Pinoy -->
           <a
             href="https://manggagawangpinoy.com/"
             target="_blank"
             rel="noopener noreferrer"
-            class="work-row"
+            class="work-card"
           >
-            <span class="work-num mono">01</span>
-            <div>
+            <div class="work-preview" data-gallery>
+              <span class="work-preview-badge live">Live</span>
+              <span class="work-preview-num">01</span>
+              <div class="work-slides">
+                <div class="work-slide active">
+                  <img
+                    src="project-manggagawang-1.jpg"
+                    alt="Manggagawang Pinoy 1"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <rect x="3" y="4" width="18" height="14" rx="2" />
+                        <path d="M3 9h18M8 14h3" /></svg></span
+                    ><span class="tpl-label">Overview 1 / 3</span>
+                  </div>
+                </div>
+                <div class="work-slide">
+                  <img
+                    src="project-manggagawang-2.jpg"
+                    alt="Manggagawang Pinoy 2"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <rect x="3" y="4" width="18" height="14" rx="2" />
+                        <path d="M3 9h18M8 14h3" /></svg></span
+                    ><span class="tpl-label">Overview 2 / 3</span>
+                  </div>
+                </div>
+                <div class="work-slide">
+                  <img
+                    src="project-manggagawang-3.jpg"
+                    alt="Manggagawang Pinoy 3"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <rect x="3" y="4" width="18" height="14" rx="2" />
+                        <path d="M3 9h18M8 14h3" /></svg></span
+                    ><span class="tpl-label">Overview 3 / 3</span>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="work-nav prev"
+                data-gallery-prev
+                aria-label="Previous picture"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                class="work-nav next"
+                data-gallery-next
+                aria-label="Next picture"
+              >
+                ›
+              </button>
+              <div class="work-dots" data-gallery-dots></div>
+              <span class="work-slide-count" data-gallery-count>1 / 3</span>
+            </div>
+            <div class="work-card-body">
               <div class="work-name">Manggagawang Pinoy</div>
               <p class="work-desc">
                 Job-matching platform connecting Filipino blue-collar workers
                 with employers.
               </p>
-              <div class="work-tags">
-                <span class="tag live">Live</span
-                ><span class="tag">Laravel</span>
+              <div class="work-card-meta">
+                <div class="work-tags">
+                  <span class="tag">Laravel</span>
+                  <span class="tag">PHP</span>
+                </div>
+                <span class="work-year">2025</span>
               </div>
+              <span class="work-card-cta">View project ↗</span>
             </div>
-            <span class="work-year mono">2025</span>
-            <span class="work-arrow">↗</span>
           </a>
+
+          <!-- 02 MDA Appointment -->
           <a
             href="http://request-appointment-mda-ph.gt.tc/"
             target="_blank"
             rel="noopener noreferrer"
-            class="work-row"
+            class="work-card"
           >
-            <span class="work-num mono">02</span>
-            <div>
+            <div class="work-preview" data-gallery>
+              <span class="work-preview-badge live">Live</span>
+              <span class="work-preview-num">02</span>
+              <div class="work-slides">
+                <div class="work-slide active">
+                  <img
+                    src="project-mda-booking-1.jpg"
+                    alt="MDA Booking 1"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <rect x="3" y="5" width="18" height="16" rx="2" />
+                        <path d="M8 3v4M16 3v4M3 10h18" /></svg></span
+                    ><span class="tpl-label">Overview 1 / 3</span>
+                  </div>
+                </div>
+                <div class="work-slide">
+                  <img
+                    src="project-mda-booking-2.jpg"
+                    alt="MDA Booking 2"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <rect x="3" y="5" width="18" height="16" rx="2" />
+                        <path d="M8 3v4M16 3v4M3 10h18" /></svg></span
+                    ><span class="tpl-label">Overview 2 / 3</span>
+                  </div>
+                </div>
+                <div class="work-slide">
+                  <img
+                    src="project-mda-booking-3.jpg"
+                    alt="MDA Booking 3"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <rect x="3" y="5" width="18" height="16" rx="2" />
+                        <path d="M8 3v4M16 3v4M3 10h18" /></svg></span
+                    ><span class="tpl-label">Overview 3 / 3</span>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="work-nav prev"
+                data-gallery-prev
+                aria-label="Previous picture"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                class="work-nav next"
+                data-gallery-next
+                aria-label="Next picture"
+              >
+                ›
+              </button>
+              <div class="work-dots" data-gallery-dots></div>
+              <span class="work-slide-count" data-gallery-count>1 / 3</span>
+            </div>
+            <div class="work-card-body">
               <div class="work-name">MDA Appointment Booking</div>
               <p class="work-desc">
                 Online scheduling system for Mater Dei Academy parents and
                 staff.
               </p>
-              <div class="work-tags">
-                <span class="tag live">Live</span
-                ><span class="tag">Laravel</span>
+              <div class="work-card-meta">
+                <div class="work-tags">
+                  <span class="tag">Laravel</span>
+                </div>
+                <span class="work-year">2026</span>
               </div>
+              <span class="work-card-cta">View project ↗</span>
             </div>
-            <span class="work-year mono">2026</span>
-            <span class="work-arrow">↗</span>
           </a>
-          <div class="work-row disabled">
-            <span class="work-num mono">03</span>
-            <div>
+
+          <!-- 03 Inventory MDA -->
+          <div class="work-card disabled">
+            <div class="work-preview" data-gallery>
+              <span class="work-preview-badge dev">In dev</span>
+              <span class="work-preview-num">03</span>
+              <div class="work-slides">
+                <div class="work-slide active">
+                  <img
+                    src="project-mda-inventory-1.jpg"
+                    alt="Inventory 1"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                        />
+                        <path d="M3.3 7 12 12l8.7-5M12 22V12" /></svg></span
+                    ><span class="tpl-label">Overview 1 / 3</span>
+                  </div>
+                </div>
+                <div class="work-slide">
+                  <img
+                    src="project-mda-inventory-2.jpg"
+                    alt="Inventory 2"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                        />
+                        <path d="M3.3 7 12 12l8.7-5M12 22V12" /></svg></span
+                    ><span class="tpl-label">Overview 2 / 3</span>
+                  </div>
+                </div>
+                <div class="work-slide">
+                  <img
+                    src="project-mda-inventory-3.jpg"
+                    alt="Inventory 3"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                        />
+                        <path d="M3.3 7 12 12l8.7-5M12 22V12" /></svg></span
+                    ><span class="tpl-label">Overview 3 / 3</span>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="work-nav prev"
+                data-gallery-prev
+                aria-label="Previous picture"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                class="work-nav next"
+                data-gallery-next
+                aria-label="Next picture"
+              >
+                ›
+              </button>
+              <div class="work-dots" data-gallery-dots></div>
+              <span class="work-slide-count" data-gallery-count>1 / 3</span>
+            </div>
+            <div class="work-card-body">
               <div class="work-name">Inventory Management — MDA</div>
               <p class="work-desc">
                 Web-based inventory system for tracking school assets and
                 supplies.
               </p>
-              <div class="work-tags">
-                <span class="tag dev">In dev</span
-                ><span class="tag">Laravel</span>
+              <div class="work-card-meta">
+                <div class="work-tags">
+                  <span class="tag">Laravel</span>
+                </div>
+                <span class="work-year">2026</span>
               </div>
+              <span class="work-card-cta">Coming soon ＋</span>
             </div>
-            <span class="work-year mono">2026</span>
-            <span class="work-arrow">＋</span>
           </div>
-          <div class="work-row disabled">
-            <span class="work-num mono">04</span>
-            <div>
+
+          <!-- 04 Tamsakay -->
+          <div class="work-card disabled">
+            <div class="work-preview" data-gallery>
+              <span class="work-preview-badge dev">In dev</span>
+              <span class="work-preview-num">04</span>
+              <div class="work-slides">
+                <div class="work-slide active">
+                  <img
+                    src="project-tamsakay-1.jpg"
+                    alt="Tamsakay 1"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          d="M5 17h14M5 17a2 2 0 0 1-2-2V9l2-4h14l2 4v6a2 2 0 0 1-2 2"
+                        />
+                        <circle cx="7.5" cy="17" r="1.5" />
+                        <circle cx="16.5" cy="17" r="1.5" /></svg></span
+                    ><span class="tpl-label">Overview 1 / 3</span>
+                  </div>
+                </div>
+                <div class="work-slide">
+                  <img
+                    src="project-tamsakay-2.jpg"
+                    alt="Tamsakay 2"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          d="M5 17h14M5 17a2 2 0 0 1-2-2V9l2-4h14l2 4v6a2 2 0 0 1-2 2"
+                        />
+                        <circle cx="7.5" cy="17" r="1.5" />
+                        <circle cx="16.5" cy="17" r="1.5" /></svg></span
+                    ><span class="tpl-label">Overview 2 / 3</span>
+                  </div>
+                </div>
+                <div class="work-slide">
+                  <img
+                    src="project-tamsakay-3.jpg"
+                    alt="Tamsakay 3"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          d="M5 17h14M5 17a2 2 0 0 1-2-2V9l2-4h14l2 4v6a2 2 0 0 1-2 2"
+                        />
+                        <circle cx="7.5" cy="17" r="1.5" />
+                        <circle cx="16.5" cy="17" r="1.5" /></svg></span
+                    ><span class="tpl-label">Overview 3 / 3</span>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="work-nav prev"
+                data-gallery-prev
+                aria-label="Previous picture"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                class="work-nav next"
+                data-gallery-next
+                aria-label="Next picture"
+              >
+                ›
+              </button>
+              <div class="work-dots" data-gallery-dots></div>
+              <span class="work-slide-count" data-gallery-count>1 / 3</span>
+            </div>
+            <div class="work-card-body">
               <div class="work-name">Tamsakay</div>
               <p class="work-desc">
                 Transportation platform connecting commuters with reliable
                 rides.
               </p>
-              <div class="work-tags">
-                <span class="tag dev">In dev</span><span class="tag">PHP</span>
+              <div class="work-card-meta">
+                <div class="work-tags">
+                  <span class="tag">PHP</span>
+                </div>
+                <span class="work-year">2026</span>
               </div>
+              <span class="work-card-cta">Coming soon ＋</span>
             </div>
-            <span class="work-year mono">2026</span>
-            <span class="work-arrow">＋</span>
           </div>
-          <div class="work-row disabled">
-            <span class="work-num mono">05</span>
-            <div>
+
+          <!-- 05 StayHub -->
+          <div class="work-card disabled">
+            <div class="work-preview" data-gallery>
+              <span class="work-preview-badge dev">In dev</span>
+              <span class="work-preview-num">05</span>
+              <div class="work-slides">
+                <div class="work-slide active">
+                  <img
+                    src="project-stayhub-1.jpg"
+                    alt="StayHub 1"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M3 11 12 4l9 7" />
+                        <path d="M5 10v10h14V10" />
+                        <path d="M10 20v-6h4v6" /></svg></span
+                    ><span class="tpl-label">Overview 1 / 3</span>
+                  </div>
+                </div>
+                <div class="work-slide">
+                  <img
+                    src="project-stayhub-2.jpg"
+                    alt="StayHub 2"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M3 11 12 4l9 7" />
+                        <path d="M5 10v10h14V10" />
+                        <path d="M10 20v-6h4v6" /></svg></span
+                    ><span class="tpl-label">Overview 2 / 3</span>
+                  </div>
+                </div>
+                <div class="work-slide">
+                  <img
+                    src="project-stayhub-3.jpg"
+                    alt="StayHub 3"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div class="work-preview-fallback" style="display: none">
+                    <span class="tpl-icon" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M3 11 12 4l9 7" />
+                        <path d="M5 10v10h14V10" />
+                        <path d="M10 20v-6h4v6" /></svg></span
+                    ><span class="tpl-label">Overview 3 / 3</span>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="work-nav prev"
+                data-gallery-prev
+                aria-label="Previous picture"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                class="work-nav next"
+                data-gallery-next
+                aria-label="Next picture"
+              >
+                ›
+              </button>
+              <div class="work-dots" data-gallery-dots></div>
+              <span class="work-slide-count" data-gallery-count>1 / 3</span>
+            </div>
+            <div class="work-card-body">
               <div class="work-name">StayHub Rental</div>
               <p class="work-desc">
                 Rental management system for landlords and tenants.
               </p>
-              <div class="work-tags">
-                <span class="tag dev">In dev</span
-                ><span class="tag">Laravel</span>
+              <div class="work-card-meta">
+                <div class="work-tags">
+                  <span class="tag">Laravel</span>
+                </div>
+                <span class="work-year">2026</span>
               </div>
+              <span class="work-card-cta">Coming soon ＋</span>
             </div>
-            <span class="work-year mono">2026</span>
-            <span class="work-arrow">＋</span>
           </div>
         </div>
       </div>
@@ -2244,32 +4936,30 @@
     <section id="about">
       <div class="wrap">
         <div class="sec-head fade-up">
-          <h2 class="sec-title head">About <em>Paw</em></h2>
+          <h2 class="sec-title head">About <em class="paw-mark">Paw</em></h2>
           <p class="sheet-tag">SHEET 04 / PROFILE</p>
         </div>
         <div class="about-grid">
           <div class="fade-up">
             <p class="about-quote">
               "No matter how hard or how impossible it is, never lose sight of
-              your goal." — a line I keep coming back to on long troubleshooting
-              nights.
+              your goal." — Monkey D. Luffy, One Piece
             </p>
             <p class="about-body">
-              I'm Paw — an IT student and support specialist who also builds web
-              systems on the side. LAN cabling, router setup, hardware
-              troubleshooting, and Laravel development, all learned hands-on
-              rather than just from a textbook.
+              I'm Paw — a fresh graduate planning to become an IT Support
+              Specialist. I'm building skills in LAN cabling, router setup,
+              hardware troubleshooting, and Laravel development.
             </p>
             <p class="about-body">
-              Through my internship I configured networks, deployed real web
-              systems for a working school, and kept records straight — the kind
-              of reliability a client can hand a problem to and stop worrying
-              about it.
+              Through my internship I configured networks, helped deploy web
+              systems for a school, and kept records straight — real experience
+              I'm carrying into my job search and future support roles.
             </p>
             <p class="about-body">
               I also build with AI coding assistants in the loop — for
-              scaffolding, debugging, and documentation — so projects move
-              faster without cutting corners on quality or testing.
+              scaffolding, debugging, and documentation — so I can learn faster
+              and ship cleaner practice projects while I work toward my career
+              goal.
             </p>
             <div class="about-stats">
               <div class="stat-box">
@@ -2291,8 +4981,8 @@
             <div class="about-panel-head mono">spec-sheet.txt</div>
             <ul class="spec-list">
               <li>
-                <span class="k">ROLE</span
-                ><span class="v">IT Support &amp; Network Engineer</span>
+                <span class="k">GOAL</span
+                ><span class="v">IT Support Specialist</span>
               </li>
               <li>
                 <span class="k">FOCUS</span
@@ -2304,7 +4994,9 @@
               </li>
               <li>
                 <span class="k">STATUS</span
-                ><span class="v">Open for freelance work</span>
+                ><span class="v"
+                  >Fresh graduate — open to work &amp; freelance</span
+                >
               </li>
               <li>
                 <span class="k">WORKFLOW</span
@@ -2511,19 +5203,59 @@
       </div>
     </section>
 
-    <!-- REPOS -->
+    <!-- REPOS + CONTRIBUTIONS -->
     <section id="repos">
       <div class="wrap">
         <div class="sec-head fade-up">
-          <h2 class="sec-title head">Repo<em>sitories</em></h2>
+          <h2 class="sec-title head">Git<em>Hub</em> 🐾</h2>
           <p class="sheet-tag" id="repoListHeading">
             live from github.com/Paws19
           </p>
         </div>
-        <div class="fade-up" id="ghReposList">
-          <div class="skel repo-skel-row"></div>
-          <div class="skel repo-skel-row"></div>
-          <div class="skel repo-skel-row"></div>
+        <div class="gh-panel fade-up">
+          <div class="gh-contrib-card">
+            <div class="gh-contrib-head">
+              <h3><span aria-hidden="true">🐾</span> Contribution activity</h3>
+              <a
+                href="https://github.com/Paws19"
+                target="_blank"
+                rel="noopener noreferrer"
+                >github.com/Paws19 ↗</a
+              >
+            </div>
+            <div class="gh-contrib-chart">
+              <img
+                id="ghContribChart"
+                src="https://ghchart.rshah.org/9fc157/Paws19"
+                alt="GitHub contribution graph for Paws19"
+                loading="lazy"
+                onerror="
+                  this.style.display = 'none';
+                  document.getElementById('ghContribFallback').style.display =
+                    'block';
+                "
+              />
+            </div>
+            <p
+              class="gh-contrib-fallback"
+              id="ghContribFallback"
+              style="display: none"
+            >
+              Contribution chart couldn’t load — view activity on
+              <a
+                href="https://github.com/Paws19"
+                target="_blank"
+                rel="noopener noreferrer"
+                >GitHub</a
+              >.
+            </p>
+          </div>
+          <div id="ghReposList" class="gh-repo-grid">
+            <div class="skel repo-skel-row"></div>
+            <div class="skel repo-skel-row"></div>
+            <div class="skel repo-skel-row"></div>
+            <div class="skel repo-skel-row"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -2561,15 +5293,90 @@
     <section id="contact">
       <div class="wrap">
         <p class="hero-eyebrow">
-          <span class="go-dot"></span> Currently available for freelance work
+          <span class="go-dot"></span> Fresh graduate — open to work &amp;
+          freelance
         </p>
-        <h2 class="cta-title head">Ready to start <em>your project?</em></h2>
+        <h2 class="cta-title head">Let's <em>connect.</em></h2>
         <p class="hero-sub" style="margin-top: 1rem">
-          IT support, network setup, or a Laravel web system — contract,
-          retainer, or one-off. Send a message and I'll usually reply within a
-          day, or use the chat assistant in the corner of this page for a quick
-          first answer.
+          I'm a fresh graduate looking to grow as an IT Support Specialist —
+          open to entry-level roles, freelance projects, or small jobs where I
+          can keep learning. Send a message below and it goes to my Gmail, or
+          use the chat assistant in the corner for a quick first answer.
         </p>
+
+        <div class="contact-form-wrap fade-up">
+          <h3>Send a message</h3>
+          <p class="form-hint">
+            Goes straight to my Gmail. I’ll usually reply within a day.
+          </p>
+          <form
+            class="contact-form"
+            id="contactForm"
+            action="https://formsubmit.co/ajax/pagawpawjemoyacerenado@gmail.com"
+            method="POST"
+          >
+            <input
+              type="hidden"
+              name="_subject"
+              value="New message from Paw portfolio"
+            />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input
+              type="text"
+              name="_honey"
+              style="display: none"
+              tabindex="-1"
+              autocomplete="off"
+            />
+            <div class="form-row">
+              <label>
+                Name
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="Your name"
+                  autocomplete="name"
+                />
+              </label>
+              <label>
+                Email
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="you@email.com"
+                  autocomplete="email"
+                />
+              </label>
+            </div>
+            <label>
+              Subject
+              <input
+                type="text"
+                name="subject"
+                placeholder="e.g. Freelance project / Job opportunity"
+              />
+            </label>
+            <label>
+              Message
+              <textarea
+                name="message"
+                required
+                placeholder="Write your message…"
+              ></textarea>
+            </label>
+            <button type="submit" id="contactSubmit">Send message</button>
+            <p
+              class="form-status"
+              id="contactStatus"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </form>
+        </div>
+
         <div class="cta-links">
           <a class="cta-link" href="mailto:pagawpawjemoyacerenado@gmail.com">
             <span class="cta-link-label">Email</span
@@ -2615,6 +5422,220 @@
       </footer>
     </div>
 
+    <!-- THANK YOU MODAL (after contact form submit) -->
+    <div
+      id="thanksModal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Thank you for your message"
+    >
+      <div class="thanks-backdrop" id="thanksBackdrop"></div>
+      <div class="thanks-box">
+        <button
+          type="button"
+          class="thanks-close"
+          id="thanksClose"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+        <div class="thanks-bubble">Thank you! 💋🐾</div>
+        <div class="thanks-dog-wrap">
+          <div class="thanks-hearts" aria-hidden="true">
+            <span>💕</span><span>💖</span><span>💗</span>
+          </div>
+          <div class="thanks-dog dog-hello-pup" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none">
+              <ellipse
+                cx="50"
+                cy="92"
+                rx="22"
+                ry="4.5"
+                fill="#000"
+                opacity="0.12"
+              />
+              <g class="tail">
+                <ellipse
+                  cx="82"
+                  cy="58"
+                  rx="12"
+                  ry="7"
+                  fill="#E8C59A"
+                  transform="rotate(-20 82 58)"
+                />
+                <ellipse
+                  cx="86"
+                  cy="56"
+                  rx="7"
+                  ry="4.5"
+                  fill="#F5D9B0"
+                  transform="rotate(-20 86 56)"
+                />
+              </g>
+              <ellipse cx="52" cy="68" rx="24" ry="20" fill="#F0D0A8" />
+              <ellipse cx="52" cy="72" rx="16" ry="12" fill="#F8E4C8" />
+              <ellipse cx="64" cy="84" rx="7" ry="9" fill="#E8C59A" />
+              <ellipse cx="64" cy="90" rx="8" ry="4" fill="#DDB888" />
+              <ellipse cx="40" cy="84" rx="7" ry="9" fill="#E8C59A" />
+              <ellipse cx="40" cy="90" rx="8" ry="4" fill="#DDB888" />
+              <g class="head-group">
+                <g class="ear-l">
+                  <ellipse
+                    cx="28"
+                    cy="22"
+                    rx="10"
+                    ry="16"
+                    fill="#D4A574"
+                    transform="rotate(-18 28 22)"
+                  />
+                  <ellipse
+                    cx="29"
+                    cy="24"
+                    rx="5.5"
+                    ry="10"
+                    fill="#F2B8A0"
+                    transform="rotate(-18 29 24)"
+                  />
+                </g>
+                <g class="ear-r">
+                  <ellipse
+                    cx="72"
+                    cy="22"
+                    rx="10"
+                    ry="16"
+                    fill="#D4A574"
+                    transform="rotate(18 72 22)"
+                  />
+                  <ellipse
+                    cx="71"
+                    cy="24"
+                    rx="5.5"
+                    ry="10"
+                    fill="#F2B8A0"
+                    transform="rotate(18 71 24)"
+                  />
+                </g>
+                <circle cx="50" cy="38" r="22" fill="#F0D0A8" />
+                <ellipse cx="50" cy="24" rx="10" ry="7" fill="#F8E4C8" />
+                <ellipse cx="50" cy="46" rx="12" ry="10" fill="#F8E4C8" />
+                <ellipse cx="50" cy="43" rx="4.2" ry="3.2" fill="#3A2A22" />
+                <ellipse
+                  cx="48.8"
+                  cy="42"
+                  rx="1.2"
+                  ry="0.9"
+                  fill="#fff"
+                  opacity="0.55"
+                />
+                <path
+                  d="M50 46.5 v5"
+                  stroke="#3A2A22"
+                  stroke-width="1.3"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M43 50 Q50 56 57 50"
+                  fill="none"
+                  stroke="#3A2A22"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+                <!-- kiss lips / tongue -->
+                <g class="kiss-lips">
+                  <ellipse cx="50" cy="55.5" rx="4.2" ry="3.2" fill="#F08080" />
+                  <ellipse
+                    cx="50"
+                    cy="54.2"
+                    rx="2.2"
+                    ry="1.4"
+                    fill="#ff9a9a"
+                    opacity="0.85"
+                  />
+                </g>
+                <circle cx="34" cy="44" r="5" fill="#F2B8A0" opacity="0.7" />
+                <circle cx="66" cy="44" r="5" fill="#F2B8A0" opacity="0.7" />
+                <ellipse cx="40" cy="36" rx="5.2" ry="5.8" fill="#2A1F18" />
+                <ellipse cx="60" cy="36" rx="5.2" ry="5.8" fill="#2A1F18" />
+                <circle cx="42" cy="34" r="2" fill="#fff" />
+                <circle cx="62" cy="34" r="2" fill="#fff" />
+                <circle cx="38.5" cy="37.5" r="0.9" fill="#fff" opacity="0.7" />
+                <circle cx="58.5" cy="37.5" r="0.9" fill="#fff" opacity="0.7" />
+                <path
+                  d="M34 29 Q40 26 45 29"
+                  fill="none"
+                  stroke="#C4956A"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M55 29 Q60 26 66 29"
+                  fill="none"
+                  stroke="#C4956A"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </g>
+              <g class="paw-wave">
+                <ellipse cx="16" cy="62" rx="9" ry="7" fill="#F0D0A8" />
+                <circle cx="11" cy="57" r="3" fill="#F0D0A8" />
+                <circle cx="16" cy="55.5" r="2.8" fill="#F0D0A8" />
+                <circle cx="21" cy="57.5" r="2.8" fill="#F0D0A8" />
+                <ellipse cx="16" cy="64" rx="5" ry="3.5" fill="#E8C59A" />
+              </g>
+              <g class="sparkle" transform="translate(12 18)">
+                <path
+                  d="M0 -4 L1 -1 L4 0 L1 1 L0 4 L-1 1 L-4 0 L-1 -1 Z"
+                  fill="#9fc157"
+                />
+              </g>
+              <g class="sparkle s2" transform="translate(88 30)">
+                <path
+                  d="M0 -3 L0.7 -0.7 L3 0 L0.7 0.7 L0 3 L-0.7 0.7 L-3 0 L-0.7 -0.7 Z"
+                  fill="#d7a94c"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <p class="thanks-kicker">Message received</p>
+        <h3 class="thanks-title">Thank you for reaching <span>out</span></h3>
+        <p class="thanks-msg">
+          I appreciate you taking the time to write. I’ve received your message
+          and will get back to you as soon as I can — usually within a day.
+          Looking forward to connecting with you.
+        </p>
+        <p class="thanks-note">
+          Paw · Silang, Cavite · Open to work &amp; freelance
+        </p>
+        <button type="button" class="thanks-ok" id="thanksOk">Close</button>
+      </div>
+    </div>
+
+    <!-- DOG GIF MODAL (click profile photo) -->
+    <div
+      id="dogGifModal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Paw says hello"
+    >
+      <div class="dog-gif-backdrop" id="dogGifBackdrop"></div>
+      <div class="dog-gif-box">
+        <button class="dog-gif-close" id="dogGifClose" aria-label="Close">
+          ✕
+        </button>
+        <p class="dog-gif-title">Paw says <span>hello!</span> 🐾</p>
+        <div class="dog-gif-frame">
+          <img
+            id="dogGifImg"
+            src="https://media.giphy.com/media/0Ip0O3eWnwiZeRZkuC/giphy.gif"
+            alt="Cute dog waving hello"
+            loading="lazy"
+          />
+        </div>
+        <p class="dog-gif-caption">Click outside or ✕ to close</p>
+      </div>
+    </div>
+
     <!-- CERT MODAL -->
     <div
       id="certModal"
@@ -2647,14 +5668,402 @@
     </div>
 
     <button
+      type="button"
+      id="soundBtn"
+      aria-pressed="false"
+      title="Enable sounds"
+    >
+      <span class="sound-ico" aria-hidden="true">🔊</span>
+      <span class="sound-label">Enable sound</span>
+    </button>
+
+    <button
       id="scrollBtn"
       onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
       title="Back to top"
+      aria-label="Back to top"
     >
-      ↑
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <!-- up chevron -->
+        <path
+          d="M8 4.5 L12 1.8 L16 4.5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <!-- cute dog face -->
+        <circle cx="12" cy="14.5" r="6.2" />
+        <ellipse cx="7.2" cy="9.2" rx="2.4" ry="3.4" />
+        <ellipse cx="16.8" cy="9.2" rx="2.4" ry="3.4" />
+        <ellipse cx="12" cy="16.2" rx="2.6" ry="2" opacity="0.35" />
+        <circle cx="9.8" cy="13.6" r="1.15" fill="#170c10" />
+        <circle cx="14.2" cy="13.6" r="1.15" fill="#170c10" />
+        <ellipse cx="12" cy="15.8" rx="1.1" ry="0.85" fill="#170c10" />
+      </svg>
     </button>
 
     <script>
+      /* CONTACT FORM → Gmail (FormSubmit API) + thank-you dog popup */
+      (function () {
+        const form = document.getElementById("contactForm");
+        if (!form) return;
+        const btn = document.getElementById("contactSubmit");
+        const status = document.getElementById("contactStatus");
+        const thanks = document.getElementById("thanksModal");
+        const thanksClose = document.getElementById("thanksClose");
+        const thanksOk = document.getElementById("thanksOk");
+        const thanksBackdrop = document.getElementById("thanksBackdrop");
+        const thanksBubble = thanks
+          ? thanks.querySelector(".thanks-bubble")
+          : null;
+
+        const THANK_LINES = [
+          "Thank you! 💋🐾",
+          "Mwah — thank you! 🐶",
+          "Appreciate you! 💕",
+          "Thanks for writing! ✨",
+        ];
+
+        function openThanks() {
+          if (!thanks) return;
+          if (thanksBubble) {
+            thanksBubble.textContent =
+              THANK_LINES[Math.floor(Math.random() * THANK_LINES.length)];
+          }
+          thanks.classList.add("open");
+          document.body.style.overflow = "hidden";
+          if (window.PawSFX) window.PawSFX.dog();
+        }
+        function closeThanks() {
+          if (!thanks) return;
+          thanks.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+        if (thanksClose) thanksClose.addEventListener("click", closeThanks);
+        if (thanksOk) thanksOk.addEventListener("click", closeThanks);
+        if (thanksBackdrop)
+          thanksBackdrop.addEventListener("click", closeThanks);
+        document.addEventListener("keydown", (e) => {
+          if (
+            e.key === "Escape" &&
+            thanks &&
+            thanks.classList.contains("open")
+          ) {
+            closeThanks();
+          }
+        });
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (btn) {
+            btn.disabled = true;
+            btn.textContent = "Sending…";
+          }
+          if (status) {
+            status.className = "form-status";
+            status.textContent = "Sending your message…";
+          }
+          try {
+            const data = new FormData(form);
+            const res = await fetch(form.action, {
+              method: "POST",
+              body: data,
+              headers: { Accept: "application/json" },
+            });
+            const json = await res.json().catch(() => ({}));
+            if (res.ok) {
+              if (status) {
+                status.className = "form-status ok";
+                status.textContent = "Message sent successfully.";
+              }
+              form.reset();
+              openThanks();
+            } else {
+              throw new Error(json.message || "Could not send");
+            }
+          } catch (err) {
+            if (status) {
+              status.className = "form-status err";
+              status.textContent =
+                "Couldn’t send right now. Please email me directly: pagawpawjemoyacerenado@gmail.com";
+            }
+          } finally {
+            if (btn) {
+              btn.disabled = false;
+              btn.textContent = "Send message";
+            }
+          }
+        });
+      })();
+
+      /* LOADING SCREEN — hide when ready */
+      (function () {
+        const loader = document.getElementById("pawLoader");
+        if (!loader) return;
+        const minMs = 3400; // longer so the dog animation can be appreciated
+        const start = Date.now();
+        let hidden = false;
+        function hide() {
+          if (hidden) return;
+          hidden = true;
+          const wait = Math.max(0, minMs - (Date.now() - start));
+          setTimeout(() => {
+            loader.classList.add("hide");
+            setTimeout(() => loader.remove(), 650);
+          }, wait);
+        }
+        if (document.readyState === "complete") hide();
+        else window.addEventListener("load", hide);
+        // safety max ~6s
+        setTimeout(hide, 6000);
+      })();
+
+      /* PROFILE PHOTO — multi-path + framing for Chrome/Edge/Safari/Firefox */
+      (function () {
+        const img = document.getElementById("badgeProfileImg");
+        const fallback = document.getElementById("badgeAvatarFallback");
+        if (!img) return;
+        const candidates = [
+          "gradpic2.png",
+          "./gradpic2.png",
+          "gradpic2.jpg",
+          "gradpic2.jpeg",
+          "./gradpic2.jpg",
+          "images/gradpic2.png",
+          "./images/gradpic2.png",
+          "images/gradpic2.jpg",
+          "assets/gradpic2.png",
+          "./assets/gradpic2.png",
+          "assets/gradpic2.jpg",
+          "gradpic2.PNG",
+          "Gradpic2.png",
+          "gradpic.png",
+          "./gradpic.png",
+        ];
+        let i = 0;
+        function framePhoto() {
+          // prefer upper-body framing so face + torso show
+          img.style.objectFit = "cover";
+          img.style.objectPosition = "center 18%";
+          img.style.width = "100%";
+          img.style.height = "100%";
+          img.style.display = "block";
+        }
+        function fail() {
+          i += 1;
+          if (i < candidates.length) {
+            img.src = candidates[i];
+          } else {
+            img.style.display = "none";
+            if (fallback) fallback.style.display = "flex";
+          }
+        }
+        img.addEventListener("load", framePhoto);
+        img.addEventListener("error", fail);
+        if (img.complete && img.naturalWidth > 0) framePhoto();
+        else if (img.complete && img.naturalWidth === 0) fail();
+      })();
+
+      /* UI SOUNDS — Web Audio, louder + auto-unlock on any click */
+      (function () {
+        let ctx = null;
+        let unlocked = false;
+
+        function getCtx() {
+          if (!ctx) {
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return null;
+            ctx = new AC();
+          }
+          return ctx;
+        }
+
+        function unlock() {
+          const c = getCtx();
+          if (!c) return Promise.resolve();
+          unlocked = true;
+          if (c.state === "suspended") return c.resume();
+          return Promise.resolve();
+        }
+
+        // unlock on any real user gesture (and keep trying)
+        ["pointerdown", "click", "touchstart", "keydown"].forEach((ev) => {
+          window.addEventListener(
+            ev,
+            () => {
+              unlock();
+            },
+            { passive: true },
+          );
+        });
+
+        function tone({
+          freq = 520,
+          freqEnd = null,
+          type = "sine",
+          dur = 0.1,
+          gain = 0.18,
+          delay = 0,
+        }) {
+          const c = getCtx();
+          if (!c) return;
+          // try resume every time — fixes silent suspended context
+          if (c.state === "suspended") {
+            c.resume().then(() => {
+              unlocked = true;
+            });
+          }
+          if (!unlocked && c.state !== "running") return;
+
+          try {
+            const t0 = c.currentTime + delay;
+            const osc = c.createOscillator();
+            const g = c.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, t0);
+            if (freqEnd != null) {
+              osc.frequency.linearRampToValueAtTime(freqEnd, t0 + dur);
+            }
+            g.gain.setValueAtTime(0.001, t0);
+            g.gain.linearRampToValueAtTime(gain, t0 + 0.015);
+            g.gain.linearRampToValueAtTime(0.001, t0 + dur);
+            osc.connect(g);
+            g.connect(c.destination);
+            osc.start(t0);
+            osc.stop(t0 + dur + 0.03);
+          } catch (e) {
+            /* ignore */
+          }
+        }
+
+        let muted = true; // start muted until user enables
+
+        function canPlay() {
+          return unlocked && !muted;
+        }
+
+        window.PawSFX = {
+          hover() {
+            if (!canPlay()) return;
+            tone({
+              freq: 700,
+              freqEnd: 860,
+              type: "sine",
+              dur: 0.07,
+              gain: 0.06,
+            });
+          },
+          click() {
+            if (!canPlay()) return;
+            tone({
+              freq: 400,
+              freqEnd: 260,
+              type: "sine",
+              dur: 0.08,
+              gain: 0.07,
+            });
+            tone({
+              freq: 620,
+              freqEnd: 500,
+              type: "sine",
+              dur: 0.07,
+              gain: 0.045,
+              delay: 0.02,
+            });
+          },
+          // soft cute "aw aw aw" (gentle puppy, not loud)
+          dog() {
+            if (!canPlay()) return;
+            const yaps = [
+              { f: 620, e: 480, d: 0 },
+              { f: 580, e: 450, d: 0.16 },
+              { f: 540, e: 420, d: 0.32 },
+            ];
+            yaps.forEach(({ f, e, d }) => {
+              // soft body of the "aw"
+              tone({
+                freq: f,
+                freqEnd: e,
+                type: "sine",
+                dur: 0.13,
+                gain: 0.09,
+                delay: d,
+              });
+              // tiny higher overtone so it feels cute, still quiet
+              tone({
+                freq: f * 1.35,
+                freqEnd: e * 1.2,
+                type: "triangle",
+                dur: 0.1,
+                gain: 0.035,
+                delay: d + 0.01,
+              });
+            });
+          },
+          whoosh() {
+            if (!canPlay()) return;
+            tone({
+              freq: 300,
+              freqEnd: 140,
+              type: "sine",
+              dur: 0.14,
+              gain: 0.08,
+            });
+          },
+          unlock,
+          enable() {
+            muted = false;
+            return unlock().then(() => {
+              unlocked = true;
+              // quiet test: same cute aw-aw-aw
+              window.PawSFX.dog();
+            });
+          },
+          disable() {
+            muted = true;
+          },
+          isOn() {
+            return !muted && unlocked;
+          },
+        };
+
+        // permanent button in the page
+        function bindSoundBtn() {
+          const btn = document.getElementById("soundBtn");
+          if (!btn) return;
+          const label = btn.querySelector(".sound-label");
+          const ico = btn.querySelector(".sound-ico");
+          function paint() {
+            const on = window.PawSFX.isOn();
+            btn.classList.toggle("on", on);
+            btn.setAttribute("aria-pressed", on ? "true" : "false");
+            if (label) label.textContent = on ? "Sound on" : "Enable sound";
+            if (ico) ico.textContent = on ? "🔊" : "🔇";
+            btn.title = on ? "Click to mute" : "Click to enable sounds";
+          }
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (window.PawSFX.isOn()) {
+              window.PawSFX.disable();
+              paint();
+            } else {
+              window.PawSFX.enable().then(paint);
+              // paint after a tick too
+              setTimeout(paint, 100);
+            }
+          });
+          paint();
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", bindSoundBtn);
+        } else {
+          bindSoundBtn();
+        }
+      })();
+
       /* THEME (LIGHT / DARK) */
       (function () {
         const root = document.documentElement;
@@ -2688,7 +6097,7 @@
         if (mbtn) mbtn.addEventListener("click", toggleTheme);
       })();
 
-      /* CUSTOM CURSOR */
+      /* CUSTOM CURSOR — solid paw locked to pointer, trail only (no lagging circle) */
       (function () {
         const isFine =
           window.matchMedia && window.matchMedia("(pointer: fine)").matches;
@@ -2699,17 +6108,14 @@
 
         document.body.classList.add("custom-cursor-on");
         const dot = document.getElementById("cursorDot");
-        const ring = document.getElementById("cursorRing");
-        if (!dot || !ring) return;
+        if (!dot) return;
 
-        let mouseX = window.innerWidth / 2,
-          mouseY = window.innerHeight / 2;
-        let ringX = mouseX,
-          ringY = mouseY;
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
         let visible = false;
         let lastPawTime = 0;
-        let lastPawX = mouseX,
-          lastPawY = mouseY;
+        let lastPawX = mouseX;
+        let lastPawY = mouseY;
         let stepLeft = true;
 
         const PAW_SVG = `<svg viewBox="0 0 24 24" fill="currentColor">
@@ -2724,63 +6130,66 @@
           const paw = document.createElement("div");
           paw.className = "cursor-paw";
           paw.innerHTML = PAW_SVG;
-          const rot = stepLeft ? -18 : 18;
-          const offset = stepLeft ? -8 : 8;
+          const rot = stepLeft ? -16 : 16;
+          const offset = stepLeft ? -7 : 7;
           stepLeft = !stepLeft;
           paw.style.left = x + offset + "px";
           paw.style.top = y + "px";
           paw.style.setProperty("--rot", rot + "deg");
           paw.style.transform = `translate3d(-50%, -50%, 0) rotate(${rot}deg)`;
           document.body.appendChild(paw);
-          setTimeout(() => paw.remove(), 700);
+          setTimeout(() => paw.remove(), 680);
         }
 
         window.addEventListener("mousemove", (e) => {
           mouseX = e.clientX;
           mouseY = e.clientY;
+          // paw snaps to mouse — zero lag
           dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
           if (!visible) {
             visible = true;
             dot.style.opacity = "1";
-            ring.style.opacity = "0.55";
           }
           const dist = Math.hypot(mouseX - lastPawX, mouseY - lastPawY);
           const now = performance.now();
-          if (dist > 46 && now - lastPawTime > 130) {
+          if (dist > 44 && now - lastPawTime > 120) {
             spawnPaw(mouseX, mouseY);
             lastPawX = mouseX;
             lastPawY = mouseY;
             lastPawTime = now;
           }
         });
+
         document.addEventListener("mouseleave", () => {
           visible = false;
           dot.style.opacity = "0";
-          ring.style.opacity = "0";
         });
-
-        function raf() {
-          ringX += (mouseX - ringX) * 0.18;
-          ringY += (mouseY - ringY) * 0.18;
-          ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-          requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
 
         const hoverSelector =
-          'a, button, [role="button"], input, textarea, .work-row, .cred-row, .badge-card';
+          'a, button, [role="button"], input, textarea, .work-row, .work-card, .gh-repo-card, .cred-row, .badge-card, .badge-stage';
+        let lastHoverSound = 0;
         document.addEventListener("mouseover", (e) => {
-          if (e.target.closest(hoverSelector)) ring.classList.add("is-hover");
+          if (e.target.closest(hoverSelector)) {
+            dot.classList.add("is-hover");
+            const now = performance.now();
+            // soft hover blip, throttled so it isn't noisy
+            if (now - lastHoverSound > 180 && window.PawSFX) {
+              window.PawSFX.hover();
+              lastHoverSound = now;
+            }
+          }
         });
         document.addEventListener("mouseout", (e) => {
-          if (e.target.closest(hoverSelector))
-            ring.classList.remove("is-hover");
+          if (e.target.closest(hoverSelector)) dot.classList.remove("is-hover");
         });
-        document.addEventListener("mousedown", () =>
-          ring.classList.add("is-down"),
-        );
+        document.addEventListener("mousedown", (e) => {
+          dot.classList.add("is-down");
+          if (window.PawSFX && e.target.closest(hoverSelector)) {
+            window.PawSFX.click();
+          }
+        });
         document.addEventListener("mouseup", () =>
-          ring.classList.remove("is-down"),
+          dot.classList.remove("is-down"),
         );
       })();
 
@@ -2823,12 +6232,111 @@
           a.addEventListener("click", () => toggleMobileNav(false)),
         );
 
-      /* ID BADGE FLIP */
+      /* ID BADGE FLIP + dog GIF on photo click */
       (function () {
         const card = document.getElementById("badgeCard");
-        card.addEventListener("click", () => {
+        const hello = document.querySelector(".dog-hello");
+        const gifModal = document.getElementById("dogGifModal");
+        const gifBackdrop = document.getElementById("dogGifBackdrop");
+        const gifClose = document.getElementById("dogGifClose");
+        const gifImg = document.getElementById("dogGifImg");
+        if (!card) return;
+
+        // rotate a few cute dog GIFs
+        const DOG_GIFS = [
+          "https://media.giphy.com/media/0Ip0O3eWnwiZeRZkuC/giphy.gif",
+          "https://media.giphy.com/media/JTMyWGwiRLeW3sA6nd/giphy.gif",
+          "https://media.giphy.com/media/V2T47HRjMsHGE5arqt/giphy.gif",
+          "https://media.giphy.com/media/iHNH0kt9mz4MXzsVBU/giphy.gif",
+        ];
+        let gifIndex = 0;
+
+        const stage = document.querySelector(".badge-stage");
+        const bubble = hello ? hello.querySelector(".dog-hello-bubble") : null;
+        const GREETINGS = [
+          "Hey, how are you feeling today? 🐶",
+          "Hi! Hope you're doing great! 🐾",
+          "I always miss you po 🐾",
+          "Hey there — how's your day? 😊",
+          "Woof! Need any help today? 🐕",
+          "I always miss you po 🐾",
+          "Hello! How's your day going? 🐾",
+          "Hi! How's your day going? 🐾",
+          "I always miss you po 🐾",
+        ];
+
+        let hideTimer = null;
+
+        function setBubble(text) {
+          if (bubble) bubble.textContent = text;
+        }
+
+        // Hover only — dog + dialogue + animation right away (no click, no wait)
+        function playHoverDialog() {
+          if (!hello) return;
+          hello.classList.remove("clicked");
+          void hello.offsetWidth;
+          hello.classList.add("show", "clicked");
+          setBubble(GREETINGS[Math.floor(Math.random() * GREETINGS.length)]);
+        }
+
+        function resetDog() {
+          clearTimeout(hideTimer);
+          if (!hello) return;
+          hello.classList.remove("show", "clicked");
+          setBubble("Hi there! 🐾");
+        }
+
+        if (stage && hello) {
+          stage.addEventListener("mouseenter", () => {
+            clearTimeout(hideTimer);
+            playHoverDialog();
+            if (window.PawSFX) {
+              window.PawSFX.unlock();
+              window.PawSFX.dog();
+            }
+          });
+          stage.addEventListener("mouseleave", () => {
+            hideTimer = setTimeout(() => {
+              if (!stage.matches(":hover")) resetDog();
+            }, 300);
+          });
+        }
+
+        function openDogGif() {
+          if (!gifModal) return;
+          gifIndex = (gifIndex + 1) % DOG_GIFS.length;
+          if (gifImg) gifImg.src = DOG_GIFS[gifIndex];
+          gifModal.classList.add("open");
+          document.body.style.overflow = "hidden";
+          playHoverDialog();
+        }
+        function closeDogGif() {
+          if (!gifModal) return;
+          gifModal.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+
+        card.addEventListener("click", (e) => {
+          if (e.target.closest(".badge-photo")) {
+            e.stopPropagation();
+            openDogGif();
+            return;
+          }
           const flipped = card.classList.toggle("flipped");
           card.setAttribute("aria-pressed", flipped);
+        });
+
+        if (gifBackdrop) gifBackdrop.addEventListener("click", closeDogGif);
+        if (gifClose) gifClose.addEventListener("click", closeDogGif);
+        document.addEventListener("keydown", (e) => {
+          if (
+            e.key === "Escape" &&
+            gifModal &&
+            gifModal.classList.contains("open")
+          ) {
+            closeDogGif();
+          }
         });
       })();
 
@@ -2854,12 +6362,18 @@
           .join("");
       })();
 
-      /* GITHUB LIVE DATA */
+      /* GITHUB LIVE DATA — repos + stats (paw cards) */
       (function () {
         const GH_USER = "Paws19";
         const sbStats = document.getElementById("sbStats");
         const reposList = document.getElementById("ghReposList");
         const reposHeading = document.getElementById("repoListHeading");
+        if (!reposList) return;
+
+        const headers = {
+          Accept: "application/vnd.github+json",
+        };
+
         function timeAgo(dateStr) {
           const diff = Date.now() - new Date(dateStr).getTime();
           const days = Math.floor(diff / 86400000);
@@ -2874,53 +6388,88 @@
         }
         function escapeHtml(str) {
           const d = document.createElement("div");
-          d.textContent = str == null ? "" : str;
+          d.textContent = str == null ? "" : String(str);
           return d.innerHTML;
         }
-        function repoRow(r) {
+        function repoCard(r) {
           const desc = r.description
             ? escapeHtml(r.description)
             : "No description yet.";
+          const lang = r.language
+            ? `<span class="tag">${escapeHtml(r.language)}</span>`
+            : "";
           return `
-          <a class="work-row" style="grid-template-columns: 1fr auto;" href="${r.html_url}" target="_blank" rel="noopener noreferrer">
-            <div>
-              <div class="work-name" style="font-size:1rem;">${escapeHtml(r.name)}</div>
-              <p class="work-desc">${desc}</p>
-              <div class="work-tags">
-                ${r.language ? `<span class="tag">${escapeHtml(r.language)}</span>` : ""}
-                <span class="tag">★ ${r.stargazers_count}</span>
-                <span class="tag">Updated ${timeAgo(r.pushed_at)}</span>
-              </div>
+          <a class="gh-repo-card" href="${escapeHtml(r.html_url)}" target="_blank" rel="noopener noreferrer">
+            <div class="gh-repo-top">
+              <div class="gh-repo-name"><span class="gh-paw" aria-hidden="true">🐾</span>${escapeHtml(r.name)}</div>
+              <span class="gh-repo-arrow">↗</span>
             </div>
-            <span class="work-arrow">↗</span>
+            <p class="gh-repo-desc">${desc}</p>
+            <div class="gh-repo-meta">
+              ${lang}
+              <span class="tag">★ ${r.stargazers_count ?? 0}</span>
+              <span class="tag">Updated ${timeAgo(r.pushed_at || r.updated_at)}</span>
+            </div>
           </a>`;
         }
-        fetch(`https://api.github.com/users/${GH_USER}`)
-          .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-          .then((data) => {
-            sbStats.innerHTML = `
-              <span class="stat"><strong>${data.public_repos ?? 0}</strong> repos</span>
-              <span class="stat"><strong>${data.followers ?? 0}</strong> followers</span>
-              <span class="stat"><strong>${data.following ?? 0}</strong> following</span>`;
-          })
-          .catch(() => {
-            sbStats.innerHTML = `<span class="stat" style="color:var(--faint);">Live stats unavailable</span>`;
-          });
-        fetch(
-          `https://api.github.com/users/${GH_USER}/repos?sort=updated&per_page=8`,
-        )
-          .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-          .then((repos) => {
-            if (!Array.isArray(repos) || repos.length === 0) {
-              reposList.innerHTML = `<p class="error-note">No public repositories yet — check back soon.</p>`;
-              return;
-            }
-            reposHeading.textContent = `${repos.length} public repositories — live from github.com/${GH_USER}`;
-            reposList.innerHTML = repos.map(repoRow).join("");
-          })
-          .catch(() => {
-            reposList.innerHTML = `<p class="error-note">Couldn't load live repos right now — <a href="https://github.com/${GH_USER}?tab=repositories" target="_blank" rel="noopener noreferrer">browse them on GitHub ↗</a></p>`;
-          });
+
+        function loadUser() {
+          return fetch(`https://api.github.com/users/${GH_USER}`, { headers })
+            .then((res) => {
+              if (!res.ok) throw new Error(String(res.status));
+              return res.json();
+            })
+            .then((data) => {
+              if (sbStats) {
+                sbStats.innerHTML = `
+                  <span class="stat"><strong>${data.public_repos ?? 0}</strong> repos</span>
+                  <span class="stat"><strong>${data.followers ?? 0}</strong> followers</span>
+                  <span class="stat"><strong>${data.following ?? 0}</strong> following</span>`;
+              }
+              return data;
+            })
+            .catch(() => {
+              if (sbStats) {
+                sbStats.innerHTML = `<span class="stat" style="color:var(--faint);">Live stats unavailable</span>`;
+              }
+            });
+        }
+
+        function loadRepos() {
+          const url = `https://api.github.com/users/${GH_USER}/repos?sort=updated&per_page=12&type=owner`;
+          return fetch(url, { headers })
+            .then((res) => {
+              if (!res.ok) throw new Error(String(res.status));
+              return res.json();
+            })
+            .then((repos) => {
+              if (!Array.isArray(repos) || repos.length === 0) {
+                reposList.className = "";
+                reposList.innerHTML = `<p class="error-note">No public repositories yet — check back soon. <a href="https://github.com/${GH_USER}?tab=repositories" target="_blank" rel="noopener noreferrer">Open GitHub ↗</a></p>`;
+                return;
+              }
+              // prefer non-forks first, keep order by updated
+              const sorted = [...repos].sort((a, b) => {
+                if (!!a.fork !== !!b.fork) return a.fork ? 1 : -1;
+                return (
+                  new Date(b.pushed_at || b.updated_at) -
+                  new Date(a.pushed_at || a.updated_at)
+                );
+              });
+              if (reposHeading) {
+                reposHeading.textContent = `${sorted.length} public repositories · github.com/${GH_USER}`;
+              }
+              reposList.className = "gh-repo-grid";
+              reposList.innerHTML = sorted.map(repoCard).join("");
+            })
+            .catch(() => {
+              reposList.className = "";
+              reposList.innerHTML = `<p class="error-note">Couldn't load live repos right now (API limit or network). <a href="https://github.com/${GH_USER}?tab=repositories" target="_blank" rel="noopener noreferrer">Browse them on GitHub ↗</a></p>`;
+            });
+        }
+
+        loadUser();
+        loadRepos();
       })();
 
       /* MILESTONES CAROUSEL */
@@ -3116,6 +6665,139 @@
           renderModal(++currentIdx);
       });
 
+      /* PROJECT CARD IMAGE GALLERIES (next / prev) */
+      (function () {
+        document.querySelectorAll("[data-gallery]").forEach((gallery) => {
+          const slides = Array.from(gallery.querySelectorAll(".work-slide"));
+          if (!slides.length) return;
+          let index = 0;
+          const dotsWrap = gallery.querySelector("[data-gallery-dots]");
+          const countEl = gallery.querySelector("[data-gallery-count]");
+          const prevBtn = gallery.querySelector("[data-gallery-prev]");
+          const nextBtn = gallery.querySelector("[data-gallery-next]");
+
+          if (dotsWrap) {
+            dotsWrap.innerHTML = slides
+              .map(
+                (_, i) =>
+                  `<button type="button" class="work-dot${i === 0 ? " active" : ""}" data-dot="${i}" aria-label="Picture ${i + 1}"></button>`,
+              )
+              .join("");
+          }
+
+          function go(i) {
+            index = (i + slides.length) % slides.length;
+            slides.forEach((s, n) => s.classList.toggle("active", n === index));
+            if (dotsWrap) {
+              dotsWrap.querySelectorAll(".work-dot").forEach((d, n) => {
+                d.classList.toggle("active", n === index);
+              });
+            }
+            if (countEl)
+              countEl.textContent = `${index + 1} / ${slides.length}`;
+          }
+
+          function stop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          if (prevBtn) {
+            prevBtn.addEventListener("click", (e) => {
+              stop(e);
+              go(index - 1);
+            });
+          }
+          if (nextBtn) {
+            nextBtn.addEventListener("click", (e) => {
+              stop(e);
+              go(index + 1);
+            });
+          }
+          if (dotsWrap) {
+            dotsWrap.addEventListener("click", (e) => {
+              const dot = e.target.closest("[data-dot]");
+              if (!dot) return;
+              stop(e);
+              go(+dot.dataset.dot);
+            });
+          }
+        });
+      })();
+
+      /* ALWAYS open at the top (hero) on load / reload */
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+      window.addEventListener("load", () => {
+        // clear any leftover hash that would jump to #work etc.
+        if (location.hash && location.hash !== "#top") {
+          history.replaceState(null, "", location.pathname + location.search);
+        }
+        window.scrollTo(0, 0);
+      });
+
+      /* TUQLAS — dog branding after widget mounts */
+      (function () {
+        const DOG_SVG = `<svg width="26" height="26" viewBox="0 0 24 24" fill="#170c10" aria-hidden="true">
+          <circle cx="12" cy="13.5" r="7"/>
+          <ellipse cx="5.8" cy="7.2" rx="3.1" ry="4.2"/>
+          <ellipse cx="18.2" cy="7.2" rx="3.1" ry="4.2"/>
+          <ellipse cx="12" cy="15.4" rx="3.2" ry="2.4" fill="#170c10" opacity="0.2"/>
+          <circle cx="9.4" cy="12.4" r="1.35" fill="#f2ede9"/>
+          <circle cx="14.6" cy="12.4" r="1.35" fill="#f2ede9"/>
+          <circle cx="9.6" cy="12.2" r="0.55" fill="#170c10"/>
+          <circle cx="14.8" cy="12.2" r="0.55" fill="#170c10"/>
+          <ellipse cx="12" cy="15.2" rx="1.35" ry="1.05" fill="#3a2a22"/>
+          <path d="M10.2 16.6 Q12 18.2 13.8 16.6" fill="none" stroke="#3a2a22" stroke-width="1.1" stroke-linecap="round"/>
+        </svg>`;
+        const DOG_TITLE_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="13.5" r="7"/><ellipse cx="5.8" cy="7.2" rx="3.1" ry="4.2"/><ellipse cx="18.2" cy="7.2" rx="3.1" ry="4.2"/><circle cx="9.4" cy="12.4" r="1.3" fill="#170c10"/><circle cx="14.6" cy="12.4" r="1.3" fill="#170c10"/><ellipse cx="12" cy="15.2" rx="1.3" ry="1" fill="#170c10"/></svg>`;
+        function brandTuqlas() {
+          const btn = document.getElementById("tuqlas-btn");
+          if (btn) {
+            btn.setAttribute("aria-label", "Chat with Paw's dog assistant");
+            btn.title = "Chat with Paw 🐶";
+            if (!btn.querySelector(".dog-launcher-icon")) {
+              const wrap = document.createElement("span");
+              wrap.className = "dog-launcher-icon";
+              wrap.style.cssText =
+                "display:flex;align-items:center;justify-content:center;width:100%;height:100%;";
+              wrap.innerHTML = DOG_SVG;
+              Array.from(btn.childNodes).forEach((n) => {
+                if (
+                  n.nodeType === 1 &&
+                  !n.classList.contains("dog-launcher-icon")
+                ) {
+                  n.style.display = "none";
+                }
+              });
+              btn.appendChild(wrap);
+            }
+          }
+          const title = document.getElementById("tuqlas-header-title");
+          if (title && !title.dataset.dogBranded) {
+            title.dataset.dogBranded = "1";
+            title.innerHTML =
+              '<span style="display:inline-flex;align-items:center;gap:6px;">' +
+              DOG_TITLE_SVG +
+              " Paw Assistant</span>";
+          }
+        }
+        let tries = 0;
+        const timer = setInterval(() => {
+          brandTuqlas();
+          tries += 1;
+          if (document.getElementById("tuqlas-btn") || tries > 40) {
+            clearInterval(timer);
+            brandTuqlas();
+          }
+        }, 250);
+        const mo = new MutationObserver(() => brandTuqlas());
+        mo.observe(document.body, { childList: true, subtree: true });
+        setTimeout(() => mo.disconnect(), 15000);
+      })();
+
       /* SMOOTH SCROLL FOR #top */
       document.querySelectorAll('a[href^="#"]').forEach((a) => {
         a.addEventListener("click", (e) => {
@@ -3125,6 +6807,33 @@
           }
         });
       });
+
+      /* FLOATING BACKGROUND PAWS */
+      (function () {
+        const reduceMotion =
+          window.matchMedia &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion) return;
+        const field = document.getElementById("pawField");
+        if (!field) return;
+        const PAW = `<svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16.2" rx="6.1" ry="4.9"/><circle cx="5.1" cy="8.6" r="2.35"/><circle cx="9.7" cy="4.6" r="2.05"/><circle cx="14.3" cy="4.6" r="2.05"/><circle cx="18.9" cy="8.6" r="2.35"/></svg>`;
+        const count = window.innerWidth < 700 ? 6 : 10;
+        for (let i = 0; i < count; i++) {
+          const el = document.createElement("div");
+          el.className = "float-paw";
+          const size = 18 + Math.random() * 28;
+          el.style.width = size + "px";
+          el.style.height = size + "px";
+          el.style.left = Math.random() * 96 + "%";
+          el.style.bottom = "-40px";
+          el.style.setProperty("--dur", 12 + Math.random() * 16 + "s");
+          el.style.setProperty("--delay", Math.random() * 12 + "s");
+          el.style.setProperty("--rot", Math.random() * 50 - 25 + "deg");
+          el.style.setProperty("--op", (0.1 + Math.random() * 0.16).toFixed(2));
+          el.innerHTML = PAW;
+          field.appendChild(el);
+        }
+      })();
     </script>
   </body>
 </html>
